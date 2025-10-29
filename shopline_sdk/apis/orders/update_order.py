@@ -1,0 +1,123 @@
+from typing import Any, Dict, List, Optional, Union
+import aiohttp
+from pydantic import BaseModel, ValidationError, Field
+from typing_extensions import Literal
+
+# 导入异常类
+from ...exceptions import ShoplineAPIError
+
+# 导入需要的模型
+from ...models.not_found_error import NotFoundError
+from ...models.order import Order
+from ...models.server_error import ServerError
+from ...models.translatable import Translatable
+
+
+class CustomDataItem(BaseModel):
+    """Item model for custom_data"""
+    value: Optional[str] = None
+    field_id: Optional[str] = None
+
+class Request(BaseModel):
+    """请求体模型"""
+    tracking_number: Optional[str] = None
+    """Delivery Tracking Number
+      物流追蹤號碼"""
+    tracking_url: Optional[str] = None
+    """Delivery Tracking url
+      物流追蹤url"""
+    delivery_provider_name: Optional[Translatable] = None
+    ref_order_id: Optional[str] = None
+    """For third party custom order id
+      可供儲存第三方訂單ID"""
+    custom_data: Optional[List[CustomDataItem]] = None
+    """Custom data
+      自定義資料"""
+    delivery_data: Optional[Dict[str, Any]] = None
+    """Delivery Data
+      運送資訊
+      
+      Able to update the fields below
+      可修改以下欄位
+      - location_code
+      - location_name
+      - store_address
+      - recipient_name
+      - recipient_phone"""
+    delivery_address: Optional[Dict[str, Any]] = None
+    """Delivery Address Information
+      運送地址資訊
+      
+      Able to update the fields below
+      可修改以下欄位
+      - country
+      - country_code
+      - address_1
+      - address_2
+      - city
+      - state
+      - postcode"""
+    force_update: Optional[Literal['delivery_data']] = None
+    """To skip filtering delivery_data fields if force_update = ['delivery_data'] is passed
+       略過delivery_data的篩選。"""
+    has_notes: Optional[bool] = None
+    """Order has notes or not
+       訂單是否有備註"""
+
+async def call(
+    session: aiohttp.ClientSession, id: str, request: Optional[Request] = None
+) -> Order:
+    """
+    Update Order
+    
+    To update an order with open API
+    透過open API更新一筆訂單
+    
+    Path: PATCH /orders/{id}
+    """
+    # 构建请求 URL
+    url = f"orders/{id}"
+
+    # 构建查询参数
+    params = {}
+    if request:
+        request_dict = request.model_dump(exclude_none=True)
+        for key, value in request_dict.items():
+            if value is not None:
+                params[key] = value
+
+    # 构建请求头
+    headers = {"Content-Type": "application/json"}
+
+    # 构建请求体
+    json_data = request.model_dump(exclude_none=True) if request else None
+
+    # 发起 HTTP 请求
+    async with session.patch(
+        url, params=params, json=json_data, headers=headers
+    ) as response:
+        if response.status >= 400:
+            error_data = await response.json()
+            if response.status == 404:
+                error_model = NotFoundError(**error_data)
+                raise ShoplineAPIError(
+                    status_code=404,
+                    error=error_model,
+                    **error_data
+                )
+            if response.status == 500:
+                error_model = ServerError(**error_data)
+                raise ShoplineAPIError(
+                    status_code=500,
+                    error=error_model,
+                    **error_data
+                )
+            # 默认错误处理
+            raise ShoplineAPIError(
+                status_code=response.status,
+                **error_data
+            )
+        response_data = await response.json()
+
+        # 验证并返回响应数据
+        return Order(**response_data)
