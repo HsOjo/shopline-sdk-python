@@ -30,7 +30,7 @@ class Theme(BaseModel):
     """Path of the Theme 主題的路徑"""
     rollout_keys: Optional[List[str]] = None
     """Rollout Keys of the Theme 主題的 Rollout Keys"""
-    status: Optional[Literal['active', 'draft', 'removed', 'hidden']] = None
+    status: Optional[Union[Literal['active', 'draft', 'removed', 'hidden'], str]] = None
     """Status of the Theme 主題狀態"""
     type: Optional[str] = None
     """Type of the Theme 主題類別"""

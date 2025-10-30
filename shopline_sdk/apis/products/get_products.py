@@ -18,7 +18,7 @@ class Params(BaseModel):
     """The last ID of the products in the previous request.
       前一筆商品的 ID 
       beta 測試中，僅開放部分店家使用，如無法使用功能請聯絡客服窗口"""
-    sort_by: Optional[Literal['asc', 'desc']] = None
+    sort_by: Optional[Union[Literal['asc', 'desc'], str]] = None
     """Setting sort by created time
       設定創建時間排序"""
     per_page: Optional[int] = None
@@ -36,7 +36,7 @@ class Params(BaseModel):
     id: Optional[str] = None
     """Only show specific products based on IDs
       結果只顯示哪些商品"""
-    include_fields: Optional[List[Literal['labels', 'metafields', 'bundle_set', 'type']]] = None
+    include_fields: Optional[List[Union[Literal['labels', 'metafields', 'bundle_set', 'type'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
     with_product_set: Optional[bool] = None

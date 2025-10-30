@@ -12,13 +12,13 @@ from .user_credit_rule import UserCreditRule
 
 class Line_LoginConfig(BaseModel):
     """Configuration model for line_login"""
-    status: Optional[Literal['active', 'inactive']] = None
+    status: Optional[Union[Literal['active', 'inactive'], str]] = None
     """line login active status"""
 
 
 class Facebook_LoginConfig(BaseModel):
     """Configuration model for facebook_login"""
-    status: Optional[Literal['active', 'inactive']] = None
+    status: Optional[Union[Literal['active', 'inactive'], str]] = None
     """facebook login enable status"""
     app_id: Optional[str] = None
     """facebook app id"""
@@ -54,9 +54,9 @@ class Sms_VerificationConfig(BaseModel):
     """mobile_phone support countries"""
 
 class UsersSetting(BaseModel):
-    birthday_format: Optional[Literal['YYYY/MM/DD', 'YYYY/MM', 'MM/DD']] = None
+    birthday_format: Optional[Union[Literal['YYYY/MM/DD', 'YYYY/MM', 'MM/DD'], str]] = None
     """The birthday format of the user (default: "YYYY/MM/DD")  會員生日格式（預設："YYYY/MM/DD"）"""
-    send_birthday_credit_period: Optional[Literal['monthly', 'daily']] = None
+    send_birthday_credit_period: Optional[Union[Literal['monthly', 'daily'], str]] = None
     """The birthday credit sending setting of the user (default: "daily")  會員生日點數發送時間（預設："daily"為當日, "monthly"為當月一號）"""
     line_login: Optional[Line_LoginConfig] = None
     facebook_login: Optional[Facebook_LoginConfig] = None
@@ -79,5 +79,5 @@ class UsersSetting(BaseModel):
     """Customer login requrie email verification 是否開啟顧客完成電郵驗證後才可能入"""
     sms_verification: Optional[Sms_VerificationConfig] = None
     """Require customer sms verification 是否開啟顧客手機驗證"""
-    signup_method: Optional[Literal['email', 'mobile', 'email_and_mobile']] = None
+    signup_method: Optional[Union[Literal['email', 'mobile', 'email_and_mobile'], str]] = None
     """Customer signup method 顧客註冊方式"""

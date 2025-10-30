@@ -10,7 +10,7 @@ from .individual_info import IndividualInfo
 
 
 class MerchantKyc(BaseModel):
-    type: Optional[Literal['individual', 'corporate']] = None
+    type: Optional[Union[Literal['individual', 'corporate'], str]] = None
     """entity type 實體類型"""
     bank_code: Optional[str] = None
     """Bank code 銀行代碼"""

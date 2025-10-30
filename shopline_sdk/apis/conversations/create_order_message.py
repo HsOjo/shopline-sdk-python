@@ -26,7 +26,7 @@ class Body(BaseModel):
        If false, the message can also be viewed by the customer.
        訂單通訊的類型。若為true，則該訂單通訊只能被網店管理查看。
        若為false，則顧客也可查看。"""
-    send_by: Optional[Literal['merchant', 'customer']] = None
+    send_by: Optional[Union[Literal['merchant', 'customer'], str]] = None
     """The message sender
       該訂單通訊的發送者"""
     trackable_type: Optional[str] = None

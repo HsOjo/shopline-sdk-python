@@ -31,7 +31,7 @@ class Object_DataConfig(BaseModel):
     supplier: Optional[Any] = None
     """Supplier  供應商  -  Only provided when include_fields contains 'supplier'  僅於include_fields傳入 'supplier' 時提供"""
     weight: Optional[float] = None
-    barcode_type: Optional[Literal['Code 128', 'Bookland EAN', 'ISBN']] = None
+    barcode_type: Optional[Union[Literal['Code 128', 'Bookland EAN', 'ISBN'], str]] = None
     location_id: Optional[str] = None
     max_order_quantity: Optional[int] = None
     gtin: Optional[str] = None
@@ -54,7 +54,7 @@ class Child_ProductsConfig(BaseModel):
 class OrderItem(BaseModel):
     id: Optional[str] = None
     """Order item's ID (ID of an order item's collection, including item_type, item_id..and so on)  系統自行創建訂單品項ID"""
-    item_type: Optional[Literal['Product', 'AddonProduct', 'Gift', 'CustomProduct']] = None
+    item_type: Optional[Union[Literal['Product', 'AddonProduct', 'Gift', 'CustomProduct'], str]] = None
     """Order item type: Product  商品  AddonProduct 加購品 Gift 贈品 CustomProduct 自訂商品"""
     item_data: Optional[Item_DataConfig] = None
     """CartItem snapshot 在第三方合作夥伴下單之前,在購物車內時的資訊快照"""

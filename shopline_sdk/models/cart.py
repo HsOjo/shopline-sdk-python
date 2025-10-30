@@ -52,7 +52,7 @@ class Cart(BaseModel):
     """Merchant ID 商家ID"""
     owner_id: Optional[str] = None
     """Owner ID 購物車擁有者ID，登入會員的購物車此值是 user_id; 訪客的購物車則是 public_session_id"""
-    owner_type: Optional[Literal['USER', 'GUEST']] = None
+    owner_type: Optional[Union[Literal['USER', 'GUEST'], str]] = None
     """Owner Type 購物車擁有者類型，登入會員的購物車此值是 User; 訪客的購物車則是 Guest"""
     page_id: Optional[str] = None
     """Page ID 一頁式商店 (express checkout)購物車的 page_id"""
@@ -86,7 +86,7 @@ class Cart(BaseModel):
     """Delivery Data 運送資料"""
     delivery_address: Optional[Dict[str, Any]] = None
     """Delivery Address 運送地址"""
-    payment_cod_type: Optional[Literal['COD', 'NCOD']] = None
+    payment_cod_type: Optional[Union[Literal['COD', 'NCOD'], str]] = None
     """Payment COD Type 貨到付款類型，COD是貨到付款; NCOD是非貨到付款"""
     total: Optional[Money] = None
     """Total 購物車合計"""

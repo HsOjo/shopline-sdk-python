@@ -26,10 +26,10 @@ class Params(BaseModel):
     per_page: Optional[int] = None
     """Numbers of items per Page
       每頁顯示 n 筆資料"""
-    sort_by: Optional[Literal['created_at', 'score']] = None
+    sort_by: Optional[Union[Literal['created_at', 'score'], str]] = None
     """Sorting by field
       以欄位排序"""
-    order_by: Optional[Literal['asc', 'desc']] = None
+    order_by: Optional[Union[Literal['asc', 'desc'], str]] = None
     """Setting sort by created time
       設定排序"""
     status: Optional[str] = None

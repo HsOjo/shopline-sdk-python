@@ -46,7 +46,7 @@ class Params(BaseModel):
        *Should use UTC time'"""
     customer_id: Optional[str] = None
     """用戶id"""
-    scope: Optional[Literal['valid', 'invalid']] = None
+    scope: Optional[Union[Literal['valid', 'invalid'], str]] = None
     """promotion是否失效 (搭配customer_id使用)"""
     promotion_ids: Optional[List[str]] = None
     """Filter promotions by IDs.

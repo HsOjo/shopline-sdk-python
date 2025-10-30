@@ -10,7 +10,7 @@ class MessageConfig(BaseModel):
     """Configuration model for message"""
     sender_id: Optional[str] = None
     """Sender ID 發送者 ID"""
-    sender_type: Optional[Literal['User', 'Merchant', 'Bot']] = None
+    sender_type: Optional[Union[Literal['User', 'Merchant', 'Bot'], str]] = None
     """Sender Type 發送者類型"""
     created_at: Optional[str] = None
     """Created At 訊息建立時間"""
@@ -25,6 +25,6 @@ class MessageConfig(BaseModel):
 class ShopConversationsMessage(BaseModel):
     id: Optional[str] = None
     """Message ID 訊息 ID"""
-    platform: Optional[Literal['shop_messages', 'order_messages']] = None
+    platform: Optional[Union[Literal['shop_messages', 'order_messages'], str]] = None
     """Conversation Type 訊息種類"""
     message: Optional[MessageConfig] = None

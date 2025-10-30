@@ -186,7 +186,7 @@ class Params(BaseModel):
        取得 updated_at 大於指定時間的訂單(包含指定時間)
       -
        *should use UTC time"""
-    status: Optional[Literal['pending', 'removed', 'confirmed', 'completed', 'cancelled']] = None
+    status: Optional[Union[Literal['pending', 'removed', 'confirmed', 'completed', 'cancelled'], str]] = None
     """Status
       訂單狀態
       -
@@ -196,7 +196,7 @@ class Params(BaseModel):
        confirmed 已確認
       completed 已完成
        cancelled 已取消"""
-    statuses: Optional[List[Literal['pending', 'removed', 'confirmed', 'completed', 'cancelled']]] = None
+    statuses: Optional[List[Union[Literal['pending', 'removed', 'confirmed', 'completed', 'cancelled'], str]]] = None
     """Statuses
       多個訂單狀態
       -
@@ -209,7 +209,7 @@ class Params(BaseModel):
     payment_id: Optional[str] = None
     """Payment Method ID
       付款方式ID"""
-    payment_status: Optional[Literal['pending', 'failed', 'expired', 'completed', 'refunding', 'refunded', 'partially_refunded']] = None
+    payment_status: Optional[Union[Literal['pending', 'failed', 'expired', 'completed', 'refunding', 'refunded', 'partially_refunded'], str]] = None
     """Payment Status
       付款狀態
       -
@@ -224,7 +224,7 @@ class Params(BaseModel):
     delivery_option_id: Optional[str] = None
     """Delivery Option ID
       物流方式ID"""
-    delivery_status: Optional[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning']] = None
+    delivery_status: Optional[Union[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning'], str]] = None
     """Delivery Status
       物流狀態 
       -
@@ -236,7 +236,7 @@ class Params(BaseModel):
        collected 已取貨
        returned 已退貨
        * returning 退貨中"""
-    delivery_statuses: Optional[List[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning']]] = None
+    delivery_statuses: Optional[List[Union[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning'], str]]] = None
     """Delivery Statuses
       多個物流狀態 
       -
@@ -265,16 +265,16 @@ class Params(BaseModel):
     created_by: Optional[str] = None
     """Filter orders by those created by specific channel.
        取得特定由渠道建立的訂單"""
-    order_by: Optional[Literal['asc', 'desc']] = None
+    order_by: Optional[Union[Literal['asc', 'desc'], str]] = None
     """Order responses items by created time in ascending/descending order.
        訂單按訂單創造日期順序或倒序排序。
        If sort_by is passed, Order the record by the sort_by value in asc/desc order.
        如果傳入sort_by，則按照sort_by的參數順序或倒序排序。"""
-    sort_by: Optional[Literal['created_at', 'total']] = None
+    sort_by: Optional[Union[Literal['created_at', 'total'], str]] = None
     """Sort responses items by created_at or total.
        訂單按訂單創造日期或商品總價排序。 If order_by is not passed, by default showing records in descending order.
        如果沒有傳入order_by, 則按倒序排序。"""
-    include_fields: Optional[List[Literal['affiliate_campaign']]] = None
+    include_fields: Optional[List[Union[Literal['affiliate_campaign'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
 

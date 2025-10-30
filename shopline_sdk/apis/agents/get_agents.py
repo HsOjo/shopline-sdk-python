@@ -18,7 +18,7 @@ class Params(BaseModel):
     per_page: Optional[int] = None
     """Numbers of Orders per Page
       每頁顯示 n 筆資料"""
-    sort_by: Optional[Literal['asc', 'desc']] = None
+    sort_by: Optional[Union[Literal['asc', 'desc'], str]] = None
     """Setting sorting direction
       設定時間排序"""
     excludes: Optional[List[str]] = None

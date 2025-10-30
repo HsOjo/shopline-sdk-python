@@ -21,7 +21,7 @@ class Config_DataConfig(BaseModel):
 
 class UpdateEventTrackerBody(BaseModel):
     """Payload for updating an event tracker"""
-    event_key: Literal['tiktok', 'facebook_standard_pixel']
+    event_key: Union[Literal['tiktok', 'facebook_standard_pixel'], str]
     """The platform of tracking services. The event key must match with the existing record  追蹤平台。event_key 必須與現在的一致"""
     config_data: Config_DataConfig
     """Config data, each event_key has its own config  設定，每個event_key都有各自的config"""

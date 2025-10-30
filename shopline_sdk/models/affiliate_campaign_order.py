@@ -23,7 +23,7 @@ class AffiliateCampaignOrder(BaseModel):
     """系统生成的訂單號"""
     merchant_order_number: Optional[str] = None
     """店家自定義訂單號 (會根據rollout_key選擇用哪個order_number)"""
-    status: Optional[Literal['temp', 'pending', 'removed', 'confirmed', 'completed', 'cancelled']] = None
+    status: Optional[Union[Literal['temp', 'pending', 'removed', 'confirmed', 'completed', 'cancelled'], str]] = None
     """Order Status 訂單狀態  -  Status allows:  temp 暫存狀態  pending 處理中  removed 已刪除  confirmed 已確認  completed 已完成  cancelled 已取消"""
     is_guest_checkout: Optional[bool] = None
     """是否為訪客結帳"""
@@ -65,7 +65,7 @@ class AffiliateCampaignOrder(BaseModel):
     created_at: Optional[str] = None
     """Order Created Time 訂單創造日期 *UTC Time"""
     utm_data: Optional[UtmData] = None
-    created_by: Optional[Literal['openapi', 'admin', 'shop', 'shop_crm', 'pos', 'sc', 'mc', 'import']] = None
+    created_by: Optional[Union[Literal['openapi', 'admin', 'shop', 'shop_crm', 'pos', 'sc', 'mc', 'import'], str]] = None
     """Channel that created the order 建立訂單的渠道"""
     affiliate_campaign: Optional[OrderCampaignItem] = None
     return_adjustment_amount: Optional[Money] = None

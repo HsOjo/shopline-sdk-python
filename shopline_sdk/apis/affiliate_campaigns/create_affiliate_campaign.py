@@ -12,6 +12,13 @@ from ...models.campaign_product import CampaignProduct
 from ...models.server_error import ServerError
 from ...models.unprocessable_entity_error import UnprocessableEntityError
 
+
+class CampaignProducts(BaseModel):
+    """Model for campaign_products"""
+    product_id: Optional[str] = None
+    affiliate_percentage: Optional[float] = None
+    affiliate_amount: Optional[Dict[str, Any]] = None
+
 class Body(BaseModel):
     """请求体模型"""
     name: str
@@ -39,10 +46,10 @@ class Body(BaseModel):
     remarks_translations: Optional[Dict[str, Any]] = None
     """Remarks translations
       顯示於 KOL Hub 的條款說明"""
-    apply_on: Optional[Literal['order', 'product']] = None
+    apply_on: Optional[Union[Literal['order', 'product'], str]] = None
     """Apply on order or product
       套用於訂單或商品"""
-    apply_method: Optional[Literal['all', 'product']] = None
+    apply_method: Optional[Union[Literal['all', 'product'], str]] = None
     """Apply method
        套用方式:
        - all: 全部
@@ -56,7 +63,7 @@ class Body(BaseModel):
     condition_min_amount: Optional[Dict[str, Any]] = None
     """The threshold amount (for order level)
       門檻金額 (for order level)"""
-    campaign_products: Optional[List[CampaignProduct]] = None
+    campaign_products: Optional[CampaignProducts] = None
 
 async def call(
     session: aiohttp.ClientSession, body: Optional[Body] = None

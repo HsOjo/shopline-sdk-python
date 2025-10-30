@@ -10,7 +10,7 @@ from .return_order import ReturnOrder
 
 class UpdateReturnOrderBody(BaseModel):
     """Payload for update return order"""
-    status: Optional[Literal['confirmed', 'completed', 'cancelled']] = None
+    status: Optional[Union[Literal['confirmed', 'completed', 'cancelled'], str]] = None
     user_credit_expired_at: Optional[str] = None
     """Credit expiry date, a null value means never expired   (After return_order_revamp feature key on)  購物金到期日期, null 表示不會到期 (啟用「return_order_revamp」功能後)"""
     member_point_expired_at: Optional[str] = None

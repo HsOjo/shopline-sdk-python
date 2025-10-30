@@ -19,7 +19,7 @@ class Body(BaseModel):
     urls: Optional[List[str]] = None
     """Urls of the Images
       新增圖片之url"""
-    image_type: Optional[Literal['main', 'detail']] = None
+    image_type: Optional[Union[Literal['main', 'detail'], str]] = None
     """Image Type
       圖片種類"""
     is_replcae: Optional[bool] = None

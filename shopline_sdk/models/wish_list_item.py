@@ -23,7 +23,7 @@ class ProductConfig(BaseModel):
     same_price: Optional[bool] = None
     lowest_price: Optional[Money] = None
     max_order_quantity: Optional[int] = None
-    status: Optional[Literal['active', 'draft', 'removed', 'hidden']] = None
+    status: Optional[Union[Literal['active', 'draft', 'removed', 'hidden'], str]] = None
     sku: Optional[str] = None
     flash_price_sets: Optional[List[Dict[str, Any]]] = None
     member_price: Optional[Money] = None

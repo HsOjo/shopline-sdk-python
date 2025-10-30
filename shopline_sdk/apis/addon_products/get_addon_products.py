@@ -23,7 +23,7 @@ class Params(BaseModel):
     per_page: Optional[int] = None
     """Numbers of Orders per Page
       每頁顯示 n 筆資料"""
-    include_fields: Optional[List[Literal['promotions']]] = None
+    include_fields: Optional[List[Union[Literal['promotions'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
     main_product_id: Optional[str] = None

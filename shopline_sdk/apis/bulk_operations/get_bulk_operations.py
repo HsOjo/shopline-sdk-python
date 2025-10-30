@@ -11,7 +11,7 @@ from ...models.jobs import Jobs
 
 class Params(BaseModel):
     """查询参数模型"""
-    status: Optional[Literal['all', 'pending', 'in_progress', 'done', 'failed', 'timeout']] = None
+    status: Optional[Union[Literal['all', 'pending', 'in_progress', 'done', 'failed', 'timeout'], str]] = None
     """Specify the status for bulk operations
        指定批量操作狀態的過濾"""
 

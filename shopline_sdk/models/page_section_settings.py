@@ -21,7 +21,7 @@ class Schema_SettingsConfig(BaseModel):
 class PageSectionSettings(BaseModel):
     id: Optional[str] = None
     """The ID of the section defined by developer 由開發人員定義的Section ID"""
-    type: Optional[Literal['text', 'gallery', 'image-with-text', 'product-list', 'slideshow', 'product-list-slider']] = None
+    type: Optional[Union[Literal['text', 'gallery', 'image-with-text', 'product-list', 'slideshow', 'product-list-slider'], str]] = None
     """The type of the section Section的類別"""
     schema_settings: Optional[Schema_SettingsConfig] = None
     """The schema of the section Section的結構"""

@@ -8,7 +8,7 @@ from typing_extensions import Literal
 class OrderSource(BaseModel):
     id: Optional[str] = None
     """ID of the order source 訂單來源ID"""
-    type: Optional[Literal['storefront', 'offline_store', 'offline_store_other', 'fb', 'fb_other', 'shopline_live', 'line', 'shopee', 'whatsapp', 'lazada', 'instagram', 'zalo', 'phone', 'email', 'other']] = None
+    type: Optional[Union[Literal['storefront', 'offline_store', 'offline_store_other', 'fb', 'fb_other', 'shopline_live', 'line', 'shopee', 'whatsapp', 'lazada', 'instagram', 'zalo', 'phone', 'email', 'other'], str]] = None
     """Type of the order source 訂單來源類型"""
     source_id: Optional[str] = None
     """ID of the external source 外部來源id  Might be fb_fan_page_id / channel_id 可能是 fb_fan_page_id / channel_id"""

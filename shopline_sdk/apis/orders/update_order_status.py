@@ -15,7 +15,7 @@ from ...models.unprocessable_entity_error import UnprocessableEntityError
 
 class Params(BaseModel):
     """查询参数模型"""
-    include_fields: Optional[List[Literal['affiliate_campaign']]] = None
+    include_fields: Optional[List[Union[Literal['affiliate_campaign'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
     fields: Optional[List[str]] = None
@@ -26,7 +26,7 @@ class Params(BaseModel):
 
 class Body(BaseModel):
     """请求体模型"""
-    status: Optional[Literal['temp', 'pending', 'removed', 'confirmed', 'completed', 'cancelled']] = None
+    status: Optional[Union[Literal['temp', 'pending', 'removed', 'confirmed', 'completed', 'cancelled'], str]] = None
     mail_notify: Optional[bool] = None
     """Do you want to notify the customer via email with the change?
       此更新是否要以email通知顧客？

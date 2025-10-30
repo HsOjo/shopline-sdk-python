@@ -49,7 +49,7 @@ class ProductVariation(BaseModel):
     """Manufacturer Part Number 製造編號"""
     gtin: Optional[str] = None
     """Barcode 商品條碼編號"""
-    barcode_type: Optional[Literal['Code 128', 'Bookland EAN', 'ISBN']] = None
+    barcode_type: Optional[Union[Literal['Code 128', 'Bookland EAN', 'ISBN'], str]] = None
     """Barcode type 商品條碼編號類別"""
     locked_inventory_count: Optional[float] = None
     weight: Optional[float] = None

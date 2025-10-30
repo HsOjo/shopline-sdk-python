@@ -44,9 +44,9 @@ class Merchant(BaseModel):
     supported_languages: Optional[List[str]] = None
     """Supported languages 支援的語言"""
     logo_media: Optional[Media] = None
-    kyc_status: Optional[Literal['not_yet_applied', 'basic_account_pending', 'basic_account_verified', 'basic_account_rejected', 'basic_account_reviewed', 'advanced_account_pending', 'advanced_account_verified', 'advanced_account_rejected', 'advanced_account_failed']] = None
+    kyc_status: Optional[Union[Literal['not_yet_applied', 'basic_account_pending', 'basic_account_verified', 'basic_account_rejected', 'basic_account_reviewed', 'advanced_account_pending', 'advanced_account_verified', 'advanced_account_rejected', 'advanced_account_failed'], str]] = None
     """KYC status KYC審核狀態"""
-    admin_status: Optional[Literal['normal', 'suspended']] = None
+    admin_status: Optional[Union[Literal['normal', 'suspended'], str]] = None
     """Admin status"""
     sl_payment_merchant_id: Optional[str] = None
     """sl_payment_merchant_id 支付中台merchant id"""

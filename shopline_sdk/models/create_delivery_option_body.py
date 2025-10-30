@@ -23,16 +23,16 @@ class Config_DataConfig(BaseModel):
 
 class CreateDeliveryOptionBody(BaseModel):
     """Payload for creating delivery option"""
-    status: Optional[Literal['active', 'draft']] = None
+    status: Optional[Union[Literal['active', 'draft'], str]] = None
     name_translations: Translatable
     description_translations: Optional[Translatable] = None
     show_description_on_checkout: Optional[bool] = None
     delivery_time_description_translations: Optional[Translatable] = None
     config_data: Optional[Config_DataConfig] = None
     requires_customer_address: Optional[bool] = None
-    fee_type: Literal['flat', 'flat_weight', 'subtotal', 'item_count', 'sl_logistic']
+    fee_type: Union[Literal['flat', 'flat_weight', 'subtotal', 'item_count', 'sl_logistic'], str]
     delivery_rates: List[Dict[str, Any]]
-    region_type: Optional[Literal['custom']] = None
+    region_type: Optional[Union[Literal['custom'], str]] = None
     """Delivery Option Code 送貨方式代碼  Only support creating "custom" region_type through open api"""
-    delivery_type: Optional[Literal['custom']] = None
+    delivery_type: Optional[Union[Literal['custom'], str]] = None
     """Only support creating "custom" delivery_type through open api"""

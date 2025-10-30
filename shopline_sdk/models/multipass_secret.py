@@ -12,7 +12,7 @@ class MultipassSecret(BaseModel):
     """App ID (nullable)"""
     secret: Optional[str] = None
     """Multipass Secret"""
-    status: Optional[Literal['active', 'draft']] = None
+    status: Optional[Union[Literal['active', 'draft'], str]] = None
     """Secret Status - active - draft (inactive)"""
     updated_at: Optional[str] = None
     """Secret last updated time"""

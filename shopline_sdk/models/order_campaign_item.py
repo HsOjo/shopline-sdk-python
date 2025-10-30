@@ -13,9 +13,9 @@ class OrderCampaignItem(BaseModel):
     id: Optional[str] = None
     """Order Campaign Item ID 訂單推薦活動ID"""
     name_translations: Optional[Translatable] = None
-    type: Optional[Literal['affiliate_referral', 'member_referral']] = None
+    type: Optional[Union[Literal['affiliate_referral', 'member_referral'], str]] = None
     """Campaign Type 推薦活動類型"""
-    reward_type: Optional[Literal['percentage', 'amount']] = None
+    reward_type: Optional[Union[Literal['percentage', 'amount'], str]] = None
     """Campaign Reward Type 推薦活動獎勵類型"""
     reward_value: Optional[Money] = None
     campaign_data: Optional[Dict[str, Any]] = None

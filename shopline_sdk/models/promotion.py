@@ -34,9 +34,9 @@ class Promotion(BaseModel):
     title_translations: Optional[Translatable] = None
     discountable_category_ids: Optional[List[str]] = None
     """Ids of Discounted category 指定商品分類ids"""
-    discount_on: Optional[Literal['order', 'item', 'category']] = None
+    discount_on: Optional[Union[Literal['order', 'item', 'category'], str]] = None
     """Promotion target 優惠套用對象 - order = Entire shop 全店 item = Specific item 指定商品 category = Specific category 指定分類"""
-    discount_type: Optional[Literal['percentage', 'amount', 'gift', 'addon', 'free_shipping', 'bundle_pricing', 'bundle_group', 'member_point_redeem_gift', 'subscription_gift']] = None
+    discount_type: Optional[Union[Literal['percentage', 'amount', 'gift', 'addon', 'free_shipping', 'bundle_pricing', 'bundle_group', 'member_point_redeem_gift', 'subscription_gift'], str]] = None
     """Discount type 折扣類型 - percentage: 折扣% amount: 固定金額 gift: 贈品 addon: 加購品 free_shipping: 免運 bundle_pricing: 任選優惠 bundle_group: A+B組合優惠（紅配綠） member_point_redeem_gift: 點數兌換贈品 subscription_gift"""
     is_accumulated: Optional[bool] = None
     """Is bundle pricing or bundle pricing accumulated? 任選優惠/A+B組合優惠是否累計"""
@@ -69,7 +69,7 @@ class Promotion(BaseModel):
     """Promotion start time 活動開始時間"""
     end_at: Optional[str] = None
     """Promotion end time 活動結束時間 - null = no end date 永不過期"""
-    status: Optional[Literal['active', 'draft', 'hidden']] = None
+    status: Optional[Union[Literal['active', 'draft', 'hidden'], str]] = None
     """Promotion status 活動狀態 - active: 上架 draft: 下架 hidden: 會員默認優惠/主商品加購品 removed: 刪除"""
     usable: Optional[bool] = None
     """Is promotion active 優惠是否進行中 - true: published and not expired上架且沒有過期 false: unpublished or published and expired上架已過期 或是 下架"""
@@ -87,7 +87,7 @@ class Promotion(BaseModel):
     available_platforms: Optional[List[str]] = None
     """指定平台（目前僅接受 "ec", "retail", "app" 值）"""
     is_partial_free_shipping: Optional[bool] = None
-    coupon_type: Optional[Literal['draw', 'single', 'multi']] = None
+    coupon_type: Optional[Union[Literal['draw', 'single', 'multi'], str]] = None
     extended_promotion_id: Optional[str] = None
     """Parent promotion id 母層活動id - *applicable when this is a child promotion"""
     extend_promotions: Optional[List[ExtendPromotion]] = None

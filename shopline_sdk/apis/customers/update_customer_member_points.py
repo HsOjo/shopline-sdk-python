@@ -45,7 +45,7 @@ class Body(BaseModel):
     performer_id: Optional[str] = None
     """Performer ID
       操作者ID"""
-    performer_type: Optional[Literal['User', 'Agent']] = None
+    performer_type: Optional[Union[Literal['User', 'Agent'], str]] = None
     """Performer Type
       操作者類型"""
 

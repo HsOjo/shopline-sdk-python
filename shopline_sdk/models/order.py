@@ -25,27 +25,27 @@ class InvoicesItem(BaseModel):
     """Item model for invoices"""
     tax_id: Optional[str] = None
     mailing_address: Optional[str] = None
-    invoice_type: Optional[Literal['0', '1', '2']] = None
+    invoice_type: Optional[Union[Literal['0', '1', '2'], str]] = None
     buyer_name: Optional[str] = None
-    carrier_type: Optional[Literal['0', '1', '2']] = None
+    carrier_type: Optional[Union[Literal['0', '1', '2'], str]] = None
     carrier_number: Optional[str] = None
     n_p_o_b_a_n: Optional[str] = None
-    invoice_tax_type: Optional[Literal['1', '2', '5']] = None
+    invoice_tax_type: Optional[Union[Literal['1', '2', '5'], str]] = None
     invoice_number: Optional[str] = None
-    invoice_status: Optional[Literal['active', 'cancel']] = None
+    invoice_status: Optional[Union[Literal['active', 'cancel'], str]] = None
     invoice_date: Optional[str] = None
 
 
 class Order_CommentsItem(BaseModel):
     """Item model for order_comments"""
-    owner_type: Optional[Literal['Merchant', 'User']] = None
+    owner_type: Optional[Union[Literal['Merchant', 'User'], str]] = None
     value: Optional[str] = None
     time: Optional[str] = None
 
 
 class Order_NotesItem(BaseModel):
     """Item model for order_notes"""
-    owner_type: Optional[Literal['Merchant', 'User']] = None
+    owner_type: Optional[Union[Literal['Merchant', 'User'], str]] = None
     value: Optional[str] = None
     time: Optional[str] = None
 
@@ -102,7 +102,7 @@ class Order_Items_Stock_TagItem(BaseModel):
     """ID of the SKU"""
     order_item_id: Optional[str] = None
     """ID of the order item"""
-    stock_tag: Optional[Literal['REDUCE_FAILED', 'INCREASE_FAILED']] = None
+    stock_tag: Optional[Union[Literal['REDUCE_FAILED', 'INCREASE_FAILED'], str]] = None
     """Stock tag for the order item"""
 
 class Order(BaseModel):
@@ -114,7 +114,7 @@ class Order(BaseModel):
     """系统生成的訂單號"""
     merchant_order_number: Optional[str] = None
     """店家自定義訂單號 (會根據rollout_key選擇用哪個order_number)"""
-    status: Optional[Literal['temp', 'pending', 'removed', 'confirmed', 'completed', 'cancelled']] = None
+    status: Optional[Union[Literal['temp', 'pending', 'removed', 'confirmed', 'completed', 'cancelled'], str]] = None
     """Order Status 訂單狀態  -  網店訂單 Status allows:  temp 暫存狀態  pending 處理中  removed 已刪除  confirmed 已確認  completed 已完成  cancelled 已取消    POS 訂單 Status allows:  confirmed 已確認  completed 已完成  cancelled 已取消"""
     is_guest_checkout: Optional[bool] = None
     """是否為訪客結帳"""
@@ -184,7 +184,7 @@ class Order(BaseModel):
     """Customer Comments 顧客通訊內容"""
     order_notes: Optional[List[Order_NotesItem]] = None
     """Order Notes 訂單備註"""
-    created_by: Optional[Literal['openapi', 'admin', 'shop', 'shop_crm', 'pos', 'sc', 'mc', 'import']] = None
+    created_by: Optional[Union[Literal['openapi', 'admin', 'shop', 'shop_crm', 'pos', 'sc', 'mc', 'import'], str]] = None
     """Channel that created the order 建立訂單的渠道"""
     agent_id: Optional[str] = None
     """Agent ID that created the order 代理建立訂單的操作者 ID  Only provided when include_fields contains 'agent_id'  僅於include_fields傳入 'agent_id' 時提供"""
@@ -202,7 +202,7 @@ class Order(BaseModel):
     """訂單回饋點數資訊"""
     payment_slips: Optional[List[Payment_SlipsItem]] = None
     """Payment Slips 付款單"""
-    type: Optional[Literal['general', 'preorder', 'return', 'exchange']] = None
+    type: Optional[Union[Literal['general', 'preorder', 'return', 'exchange'], str]] = None
     """Order type 訂單類型  The field is only available for POS orders (created_by: pos)  此欄位僅適用於POS訂單 (created_by: pos) - general: 一般訂單  - preorder: 預訂單  - return: 退貨單  - exchange: 換貨單"""
     affiliate_campaign: Optional[OrderCampaignItem] = None
     order_source: Optional[OrderSource] = None

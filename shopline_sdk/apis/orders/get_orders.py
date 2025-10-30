@@ -47,13 +47,13 @@ class Params(BaseModel):
     per_page: Optional[int] = None
     """Numbers of Orders per Page
       每頁顯示 n 筆資料"""
-    sort_by: Optional[Literal['asc', 'desc']] = None
+    sort_by: Optional[Union[Literal['asc', 'desc'], str]] = None
     """Setting sort by created time
       設定創建時間排序"""
     customer_id: Optional[str] = None
     """filter by customer ID
       篩選顧客 ID"""
-    include_fields: Optional[List[Literal['affiliate_campaign']]] = None
+    include_fields: Optional[List[Union[Literal['affiliate_campaign'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
 

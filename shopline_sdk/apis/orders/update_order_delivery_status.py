@@ -14,7 +14,7 @@ from ...models.unprocessable_entity_error import UnprocessableEntityError
 
 class Params(BaseModel):
     """查询参数模型"""
-    include_fields: Optional[List[Literal['affiliate_campaign']]] = None
+    include_fields: Optional[List[Union[Literal['affiliate_campaign'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
     fields: Optional[List[str]] = None
@@ -25,19 +25,19 @@ class Params(BaseModel):
 
 class Body(BaseModel):
     """请求体模型"""
-    status: Optional[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning']] = None
+    status: Optional[Union[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning'], str]] = None
     mail_notify: Optional[bool] = None
     """Do you want to notify the customer via email with the change?
       此更新是否要以email通知顧客？
       (Default: false)"""
-    force_update: Optional[Literal['status']] = None
+    force_update: Optional[Union[Literal['status'], str]] = None
     """To force update delivery status for third party delivery providers
        強制更新第三方物流服務供應商訂單運送狀態"""
 
 class Response(BaseModel):
     """响应体模型"""
     order_id: Optional[str] = None
-    status: Optional[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning']] = None
+    status: Optional[Union[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning'], str]] = None
     updated_at: Optional[str] = None
 
 async def call(

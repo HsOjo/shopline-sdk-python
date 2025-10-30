@@ -18,7 +18,7 @@ class Review_Reward_ConditionConfig(BaseModel):
 class ProductReviewSetting(BaseModel):
     hide_review: Optional[bool] = None
     """Hide Review 是否隱藏評價"""
-    hide: Optional[List[Literal['1', '2', '3', '4', '5']]] = None
+    hide: Optional[List[Union[Literal['1', '2', '3', '4', '5'], str]]] = None
     """Hide Reviews of Given Stars 隱藏評價星等"""
     show_media: Optional[bool] = None
     """Show Media 是否顯示圖片"""
@@ -26,7 +26,7 @@ class ProductReviewSetting(BaseModel):
     """Allow Upload Media 評價是否可以上傳圖片"""
     enable_reward: Optional[bool] = None
     """Enable Reward 是否開啟評價獎賞"""
-    reward_type: Optional[Literal['user_credit', 'member_point']] = None
+    reward_type: Optional[Union[Literal['user_credit', 'member_point'], str]] = None
     """Reward Type 評價獎賞類別"""
     review_reward_condition: Optional[Review_Reward_ConditionConfig] = None
     """Reward Condition 評價獎賞條件"""

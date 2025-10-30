@@ -52,7 +52,7 @@ class ProductConfig(BaseModel):
     blacklisted_delivery_option_ids: Optional[List[str]] = None
     blacklisted_payment_ids: Optional[List[str]] = None
     max_order_quantity: Optional[int] = None
-    created_by: Optional[Literal['catcher', 'pos', 'sc']] = None
+    created_by: Optional[Union[Literal['catcher', 'pos', 'sc'], str]] = None
     supplier_id: Optional[str] = None
     available_start_time: Optional[str] = None
     available_end_time: Optional[str] = None
@@ -61,7 +61,7 @@ class ProductConfig(BaseModel):
     """Tax type 國內稅項"""
     oversea_tax_type: Optional[str] = None
     """Oversea tax type 海外稅項"""
-    status: Optional[Literal['active', 'draft', 'removed', 'hidden']] = None
+    status: Optional[Union[Literal['active', 'draft', 'removed', 'hidden'], str]] = None
     images: Optional[List[str]] = None
     """Product Main Photos. If the images field is null, the system will upload a default image.  商品主圖片，如images為空，將會帶入系統預設圖片"""
     detail_images: Optional[List[str]] = None

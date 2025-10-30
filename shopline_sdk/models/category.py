@@ -29,7 +29,7 @@ class Category(BaseModel):
     """Special category 特殊分類鍵"""
     sort_setting: Optional[str] = None
     """sort setting 排序設定"""
-    status: Optional[Literal['active', 'removed']] = None
+    status: Optional[Union[Literal['active', 'removed'], str]] = None
     """Status 狀態"""
     banner_medias: Optional[List[Banner_MediasItem]] = None
     """Banner Medias 分類橫圖"""
@@ -37,7 +37,7 @@ class Category(BaseModel):
     """Parent Category ID 母分類ID"""
     priority: Optional[float] = None
     """Weight to control sorting 分類權重"""
-    created_by: Optional[Literal['admin', 'pos']] = None
+    created_by: Optional[Union[Literal['admin', 'pos'], str]] = None
     """Created By 創造來自"""
     children: Optional[List[Dict[str, Any]]] = None
     """Array of Sub Categories Information 子分類資訊序列"""

@@ -12,5 +12,5 @@ class OrderAgent(BaseModel):
     """Name of the agent 員工名稱"""
     phone: Optional[str] = None
     """Phone of the agent 員工電話號碼"""
-    status: Optional[Literal['active', 'removed']] = None
+    status: Optional[Union[Literal['active', 'removed'], str]] = None
     """Status of the agent 員工狀態"""

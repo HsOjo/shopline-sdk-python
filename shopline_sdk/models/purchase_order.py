@@ -17,20 +17,20 @@ class Group_Purchase_OrdersItem(BaseModel):
     """Item model for group_purchase_orders"""
     id: Optional[str] = None
     purchase_number: Optional[str] = None
-    status: Optional[Literal['pending', 'received', 'completed', 'cancelled', 'removed']] = None
+    status: Optional[Union[Literal['pending', 'received', 'completed', 'cancelled', 'removed'], str]] = None
 
 class PurchaseOrder(BaseModel):
     id: Optional[str] = None
     """Purchase Order ID 進貨單 ID"""
-    type: Optional[Literal['purchase', 'return']] = None
+    type: Optional[Union[Literal['purchase', 'return'], str]] = None
     """Type  類型"""
     number: Optional[str] = None
     """PurchaseOrder Number 單號"""
     custom_number: Optional[str] = None
     """Custom Number 自訂單號"""
-    status: Optional[Literal['pending', 'received', 'completed', 'cancelled', 'removed']] = None
+    status: Optional[Union[Literal['pending', 'received', 'completed', 'cancelled', 'removed'], str]] = None
     """Status 貨單狀態"""
-    arrival_status: Optional[Literal['pending_to_receive', 'partial', 'all_received', 'all_returned']] = None
+    arrival_status: Optional[Union[Literal['pending_to_receive', 'partial', 'all_received', 'all_returned'], str]] = None
     """Arrival Status 到貨狀態"""
     scheduled_time: Optional[str] = None
     """Time scheduled to arrive at<br預定到貨日期"""

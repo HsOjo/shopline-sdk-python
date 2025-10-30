@@ -11,7 +11,7 @@ from .price_detail import PriceDetail
 
 class PriceSet(BaseModel):
     id: Optional[str] = None
-    type: Optional[Literal['pos', 'flash_price']] = None
+    type: Optional[Union[Literal['pos', 'flash_price'], str]] = None
     """price set type"""
     price: Optional[Money] = None
     status: Optional[str] = None

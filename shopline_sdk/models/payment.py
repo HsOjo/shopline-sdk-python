@@ -12,7 +12,7 @@ from .translatable import Translatable
 class Payment(BaseModel):
     id: Optional[str] = None
     """Payment Method ID 付款方式ID"""
-    status: Optional[Literal['active', 'draft']] = None
+    status: Optional[Union[Literal['active', 'draft'], str]] = None
     """Payment Method Status 付款方式狀態 - Status allows: active 啟用中  draft 隱藏"""
     fee_percent: Optional[float] = None
     """Percentage of Payment Fee 附加費之百分比"""

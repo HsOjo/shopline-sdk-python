@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 
 class MembershipTierActionLog(BaseModel):
-    key: Optional[Literal['updated_user_membership_tier', 'extended_user_membership_tier']] = None
+    key: Optional[Union[Literal['updated_user_membership_tier', 'extended_user_membership_tier'], str]] = None
     data: Optional[Dict[str, Any]] = None
     """data have mutiple ways to be presented according to its action log key.   根據key的不同，data的格式表達也會完全不一樣。"""
     merchant_id: Optional[str] = None

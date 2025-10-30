@@ -18,7 +18,7 @@ class Job(BaseModel):
     """Name of job"""
     type: Optional[str] = None
     """Related resource of the job"""
-    status: Optional[Literal['pending', 'in_progress', 'done', 'failed']] = None
+    status: Optional[Union[Literal['pending', 'in_progress', 'done', 'failed'], str]] = None
     """Job status"""
     created_at: Optional[str] = None
     """Job created time"""

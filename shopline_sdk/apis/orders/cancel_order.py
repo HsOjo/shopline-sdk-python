@@ -6,16 +6,38 @@ from typing_extensions import Literal
 # 导入异常类
 from ...exceptions import ShoplineAPIError
 
+
+class CancelledReason(BaseModel):
+    """Model for cancelled_reason"""
+    key: Optional[str] = None
+    message: Optional[str] = None
+
+
+class RevertCredits(BaseModel):
+    """revert credits information
+    回補購物金資訊"""
+    strategy: Optional[Union[Literal['none', 'revert'], str]] = None
+    """determine revert credits or not, default do not revert
+      是否回補購物金，預設不回補"""
+
+
+class RevertMemberPoints(BaseModel):
+    """revert member points information
+    回補點數資訊"""
+    strategy: Optional[Union[Literal['none', 'revert'], str]] = None
+    """determine revert member points or not, default do not revert
+      是否回補點數，預設不回補"""
+
 class Body(BaseModel):
     """请求体模型"""
-    cancelled_reason: Optional[Dict[str, Any]] = None
-    revert_credits: Optional[Dict[str, Any]] = None
+    cancelled_reason: Optional[CancelledReason] = None
+    revert_credits: Optional[RevertCredits] = None
     """revert credits information
       回補購物金資訊"""
-    revert_member_points: Optional[Dict[str, Any]] = None
+    revert_member_points: Optional[RevertMemberPoints] = None
     """revert member points information
       回補點數資訊"""
-    operated_by: Optional[Literal['merchant', 'customer']] = None
+    operated_by: Optional[Union[Literal['merchant', 'customer'], str]] = None
     """where to cancel the order, the default is customer
       從哪裡取消訂單，預設是 customer"""
     refund_order: Optional[bool] = None

@@ -28,7 +28,7 @@ class Params(BaseModel):
     product_ids: Optional[List[str]] = None
     """Product IDs
       指定商品ID"""
-    order_by: Optional[Literal['desc', 'asc']] = None
+    order_by: Optional[Union[Literal['desc', 'asc'], str]] = None
     """Specify the sorting order based on the created_at field as either asc or desc.
        依照 created_at 欄位指定排序方式為升冪或降冪"""
 

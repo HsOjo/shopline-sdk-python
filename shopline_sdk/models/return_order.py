@@ -35,13 +35,13 @@ class ReturnOrder(BaseModel):
     """Return order created time 退貨單創建日期"""
     updated_at: Optional[str] = None
     """Return order updated time 退貨單更新時間"""
-    status: Optional[Literal['confirmed', 'completed', 'cancelled']] = None
+    status: Optional[Union[Literal['confirmed', 'completed', 'cancelled'], str]] = None
     """status 退貨訂單狀態"""
     total: Optional[Money] = None
     order_id: Optional[str] = None
     """Order ID"""
     delivery_address: Optional[ReturnOrderDeliveryAddress] = None
-    inspect_status: Optional[Literal['pending', 'inspected']] = None
+    inspect_status: Optional[Union[Literal['pending', 'inspected'], str]] = None
     """Inspect status 驗貨狀態"""
     customer_id: Optional[str] = None
     """Customer ID 顧客ID"""
@@ -54,9 +54,9 @@ class ReturnOrder(BaseModel):
     order_delivery: Optional[ReturnOrderDelivery] = None
     delivery_data: Optional[ReturnOrderDeliveryData] = None
     order_payment: Optional[ReturnOrderPayment] = None
-    order_payment_status: Optional[Literal['pending', 'refunded']] = None
+    order_payment_status: Optional[Union[Literal['pending', 'refunded'], str]] = None
     """order payment status 訂單退款狀態"""
-    order_delivery_status: Optional[Literal['return_collected', 'returning']] = None
+    order_delivery_status: Optional[Union[Literal['return_collected', 'returning'], str]] = None
     """order delivery status 訂單退貨狀態"""
     items: Optional[ReturnOrderItem] = None
     promotion_items: Optional[OrderPromotionItem] = None

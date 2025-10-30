@@ -27,10 +27,10 @@ class Params(BaseModel):
     per_page: Optional[int] = None
     """Numbers of Gifts per page
       每頁顯示 n 筆資料"""
-    status: Optional[Literal['active', 'draft']] = None
+    status: Optional[Union[Literal['active', 'draft'], str]] = None
     """Status
       商品狀態"""
-    sort_by: Optional[Literal['desc', 'asc']] = None
+    sort_by: Optional[Union[Literal['desc', 'asc'], str]] = None
     """Sort by created_at"""
     sku: Optional[str] = None
     """SKU

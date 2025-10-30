@@ -20,19 +20,19 @@ class AddressPreference(BaseModel):
     """The definition of address format.For more information, please refer <a href=https://shopline.atlassian.net/wiki/spaces/EN/pages/3136521533/Address+module+->here</a> 地址格式定義，詳細請參考<a href=https://shopline.atlassian.net/wiki/spaces/EN/pages/3136521533/Address+module+->文件</a>"""
     id: Optional[str] = None
     """Address preference ID 地址格式ID"""
-    country_code: Optional[Literal['TW', 'US', 'VN', 'JP', 'MY', 'PH', 'SG', 'TH', 'CA', 'DE', 'FR', 'GB', 'HK', 'ID', 'DEFAULT']] = None
+    country_code: Optional[Union[Literal['TW', 'US', 'VN', 'JP', 'MY', 'PH', 'SG', 'TH', 'CA', 'DE', 'FR', 'GB', 'HK', 'ID', 'DEFAULT'], str]] = None
     """Country code 國碼"""
     priority: Optional[int] = None
     """The order in which address information is filled in 地址資料填寫的順序"""
     level: Optional[int] = None
     """The level of address nodes. 地址節點的等級"""
-    field_name: Optional[Literal['address_1', 'address_2', 'city', 'country', 'district', 'postcode', 'state']] = None
+    field_name: Optional[Union[Literal['address_1', 'address_2', 'city', 'country', 'district', 'postcode', 'state'], str]] = None
     """Field name 欄位名稱"""
     display: Optional[bool] = None
     """Display or not 是否需要顯示"""
     required: Optional[bool] = None
     """Address preference is required or not 欄位是否為必填"""
-    type: Optional[Literal['dropdown', 'input']] = None
+    type: Optional[Union[Literal['dropdown', 'input'], str]] = None
     """Input type for UI 資料填寫表單介面顯示該欄位的模式"""
     layout: Optional[LayoutConfig] = None
     """The definition of address display in different size of device 在各種裝置大小下的地址顯示定義"""

@@ -22,10 +22,10 @@ class Config_DataConfig(BaseModel):
 class EventTracker(BaseModel):
     id: Optional[str] = None
     """ID"""
-    event_type: Optional[Literal['loaded_home_page', 'added_product_to_cart', 'loaded_checkout_page', 'placed_an_order', 'loaded_any_page']] = None
-    event_key: Optional[Literal['tiktok', 'facebook_standard_pixel']] = None
+    event_type: Optional[Union[Literal['loaded_home_page', 'added_product_to_cart', 'loaded_checkout_page', 'placed_an_order', 'loaded_any_page'], str]] = None
+    event_key: Optional[Union[Literal['tiktok', 'facebook_standard_pixel'], str]] = None
     """The platform of tracking services"""
-    status: Optional[Literal['active']] = None
+    status: Optional[Union[Literal['active'], str]] = None
     """The status of the event tracker"""
     created_at: Optional[str] = None
     """created time"""

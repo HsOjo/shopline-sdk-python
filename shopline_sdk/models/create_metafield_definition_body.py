@@ -15,4 +15,4 @@ class CreateMetafieldDefinitionBody(BaseModel):
     key: Optional[str] = None
     name: Optional[str] = None
     description: Optional[str] = None
-    field_type: Optional[Literal['single_line_text_field', 'multi_line_text_field', 'number_integer', 'number_decimal', 'json', 'boolean', 'url']] = None
+    field_type: Optional[Union[Literal['single_line_text_field', 'multi_line_text_field', 'number_integer', 'number_decimal', 'json', 'boolean', 'url'], str]] = None

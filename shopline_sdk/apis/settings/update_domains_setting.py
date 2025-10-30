@@ -13,9 +13,25 @@ from ...models.server_error import ServerError
 from ...models.unauthorized_error import UnauthorizedError
 from ...models.unprocessable_entity_error import UnprocessableEntityError
 
+
+class Webmasters(BaseModel):
+    """Model for webmasters"""
+    google: Optional[str] = None
+    """Google Search Console verification code"""
+    bing: Optional[str] = None
+    """Bing Webmaster Tools verification code"""
+    facebook_domain_verification: Optional[str] = None
+    """Facebook domain verification code"""
+    pinterest_domain_verification: Optional[str] = None
+    """Pinterest domain verification code"""
+    google_merchant_center: Optional[str] = None
+    """Google Merchant Center verification code"""
+    google_merchant_id: Optional[str] = None
+    """Google Merchant Center ID"""
+
 class Body(BaseModel):
     """请求体模型"""
-    webmasters: Dict[str, Any]
+    webmasters: Webmasters
 
 async def call(
     session: aiohttp.ClientSession, body: Body

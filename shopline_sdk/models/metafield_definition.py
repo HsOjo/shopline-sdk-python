@@ -17,12 +17,12 @@ class MetafieldDefinition(BaseModel):
     """Name"""
     description: Optional[str] = None
     """description"""
-    field_type: Optional[Literal['single_line_text_field', 'multi_line_text_field', 'number_integer', 'number_decimal', 'json', 'boolean', 'url']] = None
+    field_type: Optional[Union[Literal['single_line_text_field', 'multi_line_text_field', 'number_integer', 'number_decimal', 'json', 'boolean', 'url'], str]] = None
     merchant_id: Optional[str] = None
     """Merchant ID"""
-    resource_type: Optional[Literal['product', 'merchant', 'customer', 'order', 'order_item', 'cart_item']] = None
+    resource_type: Optional[Union[Literal['product', 'merchant', 'customer', 'order', 'order_item', 'cart_item'], str]] = None
     """Resource type of the metafield definition"""
-    metafield_type: Optional[Literal['merchant', 'app']] = None
+    metafield_type: Optional[Union[Literal['merchant', 'app'], str]] = None
     """Type of metafield definition"""
     created_at: Optional[str] = None
     updated_at: Optional[str] = None

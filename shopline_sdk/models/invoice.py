@@ -8,7 +8,7 @@ from typing_extensions import Literal
 class Invoice(BaseModel):
     id: Optional[str] = None
     """Invocie ID 發票ID"""
-    invoice_status: Optional[Literal['active', 'cancel']] = None
+    invoice_status: Optional[Union[Literal['active', 'cancel'], str]] = None
     """Invoice status 發票狀態 -  active 已開立  cancel 已作廢"""
     invoice_tax_type: Optional[str] = None
     invoice_number: Optional[str] = None

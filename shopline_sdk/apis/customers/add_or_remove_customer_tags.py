@@ -15,7 +15,7 @@ from ...models.unprocessable_entity_error import UnprocessableEntityError
 class Body(BaseModel):
     """请求体模型"""
     tags: Taggable
-    update_mode: Literal['add', 'remove']
+    update_mode: Union[Literal['add', 'remove'], str]
     """Update Mode
       更新模式"""
 

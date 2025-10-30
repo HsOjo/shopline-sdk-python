@@ -19,7 +19,7 @@ class Params(BaseModel):
     excludes: Optional[List[str]] = None
     """Could exclude certain parameters in the response
       結果要排除哪些參數"""
-    include_fields: Optional[List[Literal['labels']]] = None
+    include_fields: Optional[List[Union[Literal['labels'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
 

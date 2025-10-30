@@ -13,7 +13,7 @@ from ...models.server_error import ServerError
 
 class Params(BaseModel):
     """查询参数模型"""
-    include_fields: Optional[List[Literal['affiliate_campaign', 'agent_id', 'auto_reward_credit_summary', 'member_point_summary']]] = None
+    include_fields: Optional[List[Union[Literal['affiliate_campaign', 'agent_id', 'auto_reward_credit_summary', 'member_point_summary'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
     fields: Optional[List[str]] = None

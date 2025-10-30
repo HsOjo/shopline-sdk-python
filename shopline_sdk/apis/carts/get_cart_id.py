@@ -11,7 +11,7 @@ class Params(BaseModel):
     owner_id: str
     """owner id of the cart, could be user_id or public session id.
        購物車擁有者ID，登入會員的購物車此值是 user_id; 訪客的購物車則是 public_session_id"""
-    owner_type: Literal['User', 'Guest']
+    owner_type: Union[Literal['User', 'Guest'], str]
     """owner type of the cart, could be User or Guest only.
        購物車擁有者類型，登入會員的購物車此值是 User; 訪客的購物車則是 Guest"""
     shop_session_id: Optional[str] = None

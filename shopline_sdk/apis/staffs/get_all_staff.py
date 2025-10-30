@@ -13,7 +13,7 @@ from ...models.staff import Staff
 
 class Params(BaseModel):
     """查询参数模型"""
-    permission_scopes: Optional[List[Literal['open_api', 'admin', 'shop_crm', 'pos', 'one', 'shoplytics', 'sc', 'dash', 'ads', 'payment_center', 'mc', 'form_builder']]] = None
+    permission_scopes: Optional[List[Union[Literal['open_api', 'admin', 'shop_crm', 'pos', 'one', 'shoplytics', 'sc', 'dash', 'ads', 'payment_center', 'mc', 'form_builder'], str]]] = None
     """The permissions scopes
        獲取權限的範圍(可以多個)。"""
 

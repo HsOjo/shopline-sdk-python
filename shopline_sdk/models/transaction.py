@@ -43,7 +43,7 @@ class Transaction(BaseModel):
     """Transaction Agent   操作人員"""
     order_number: Optional[str] = None
     """Order Number"""
-    order_status: Optional[Literal['removed', 'confirmed', 'completed', 'cancelled']] = None
+    order_status: Optional[Union[Literal['removed', 'confirmed', 'completed', 'cancelled'], str]] = None
     """Order Status"""
     tax_id: Optional[str] = None
     """統一編號"""

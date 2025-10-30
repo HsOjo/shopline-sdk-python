@@ -16,8 +16,8 @@ from .translatable import Translatable
 
 class PromotionConfig(BaseModel):
     """Configuration model for promotion"""
-    discount_on: Optional[Literal['order', 'item', 'category']] = None
-    discount_type: Optional[Literal['percentage', 'amount', 'gift', 'addon', 'free_shipping', 'bundle_pricing', 'bundle_group', 'member_point_redeem_gift', 'subscription_gift']] = None
+    discount_on: Optional[Union[Literal['order', 'item', 'category'], str]] = None
+    discount_type: Optional[Union[Literal['percentage', 'amount', 'gift', 'addon', 'free_shipping', 'bundle_pricing', 'bundle_group', 'member_point_redeem_gift', 'subscription_gift'], str]] = None
     title_translations: Optional[Translatable] = None
     discount_percentage: Optional[float] = None
     discount_amount: Optional[Money] = None
@@ -41,10 +41,10 @@ class PromotionConfig(BaseModel):
     first_purchase_only: Optional[bool] = None
     first_purchase_all_platform: Optional[bool] = None
     discounted_price: Optional[Money] = None
-    status: Optional[Literal['active', 'draft', 'hidden']] = None
+    status: Optional[Union[Literal['active', 'draft', 'hidden'], str]] = None
     available_platforms: Optional[List[str]] = None
     available_channel_ids: Optional[List[str]] = None
-    coupon_type: Optional[Literal['draw']] = None
+    coupon_type: Optional[Union[Literal['draw'], str]] = None
     benefit_tiers: Optional[List[Dict[str, Any]]] = None
     addon_products: Optional[List[Dict[str, Any]]] = None
     banner_media_ids: Optional[List[str]] = None

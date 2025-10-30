@@ -12,7 +12,7 @@ from ...models.unprocessable_entity_error import UnprocessableEntityError
 
 class Body(BaseModel):
     """请求体模型"""
-    status: Literal['INTRODUCING', 'DISPLAYING', 'HIDDEN']
+    status: Union[Literal['INTRODUCING', 'DISPLAYING', 'HIDDEN'], str]
     """Product status in live room
       商品在直播間中的狀態"""
 

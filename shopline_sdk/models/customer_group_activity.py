@@ -12,9 +12,9 @@ class CustomerGroupActivity(BaseModel):
     id: Optional[str] = None
     name_translations: Optional[Translatable] = None
     """Activity Name 活動名稱"""
-    activity_status: Optional[Literal['draft', 'pending', 'cancelled', 'sending', 'sent', 'failed', 'partially_sent', 'removed']] = None
+    activity_status: Optional[Union[Literal['draft', 'pending', 'cancelled', 'sending', 'sent', 'failed', 'partially_sent', 'removed'], str]] = None
     """The activity status of the customer group. 此活動目前的狀態"""
-    status: Optional[Literal['active', 'removed']] = None
+    status: Optional[Union[Literal['active', 'removed'], str]] = None
     """The status of the customer group. 此筆紀錄的狀態"""
     ref_id: Optional[str] = None
     """Reference ID of the activity. 關聯此活動的外部ID"""

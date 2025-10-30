@@ -37,7 +37,7 @@ class Params(BaseModel):
     per_page: Optional[int] = None
     """Numbers of records per Page
       每頁顯示 n 筆資料"""
-    sort_by: Optional[Literal['asc', 'desc']] = None
+    sort_by: Optional[Union[Literal['asc', 'desc'], str]] = None
     """Setting sort by created time
       設定創建時間排序"""
     previous_id: Optional[str] = None
@@ -45,7 +45,7 @@ class Params(BaseModel):
        目標資料的第一個顧客的前一個顧客ID，同作分頁標記。
        * If "previous_id" is provided, this operation will ignore "page" param. 
        * 如果使用param "previous_id"，這次操作會忽略param "page" """
-    include_fields: Optional[List[Literal['metafields']]] = None
+    include_fields: Optional[List[Union[Literal['metafields'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
     fields: Optional[List[str]] = None

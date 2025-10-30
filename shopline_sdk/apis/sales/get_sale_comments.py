@@ -13,7 +13,7 @@ from ...models.server_error import ServerError
 
 class Params(BaseModel):
     """查询参数模型"""
-    platform: Optional[List[Literal['FB_GROUP', 'FACEBOOK', 'INSTAGRAM', 'SHOPLINE', 'LINE']]] = None
+    platform: Optional[List[Union[Literal['FB_GROUP', 'FACEBOOK', 'INSTAGRAM', 'SHOPLINE', 'LINE'], str]]] = None
     """Get comments of the specified platform
       獲取指定渠道的留言，不填則默認所有渠道"""
     per_page: Optional[int] = None

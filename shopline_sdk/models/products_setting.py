@@ -12,7 +12,7 @@ class ProductsSetting(BaseModel):
     """Enable product review. 啟用商品評價"""
     price_range_enabled: Optional[bool] = None
     """Show Price Range in the Store 前台顯示「價格區間」"""
-    variation_display: Optional[Literal['dropdown', 'swatches']] = None
+    variation_display: Optional[Union[Literal['dropdown', 'swatches'], str]] = None
     """Display style for product variations in the store (Dropdown selection or Label swatches).  商品規格於商店的顯示方式為「下拉選單」或「文字選項」"""
     addon_limit_enabled: Optional[bool] = None
     """Addon Limit Enabled 加購品數量上限"""

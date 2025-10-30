@@ -17,13 +17,13 @@ class Page(BaseModel):
     """Created Time 頁面創造時間"""
     updated_at: Optional[str] = None
     """Updated Time 頁面更新時間"""
-    status: Optional[Literal['active', 'draft', 'removed', 'hidden']] = None
+    status: Optional[Union[Literal['active', 'draft', 'removed', 'hidden'], str]] = None
     """Status of the Page 頁面狀態"""
     type: Optional[str] = None
     """Type of the Page 頁面類別"""
     title_translations: Optional[Translatable] = None
     content_translations: Optional[Translatable] = None
-    key: Optional[Literal['about', 'terms', 'policy', 'others']] = None
+    key: Optional[Union[Literal['about', 'terms', 'policy', 'others'], str]] = None
     """Key of the page"""
     seo_title_translations: Optional[Translatable] = None
     seo_description_translations: Optional[Translatable] = None

@@ -11,7 +11,7 @@ from ...models.flash_price_campaigns import FlashPriceCampaigns
 
 class Params(BaseModel):
     """查询参数模型"""
-    filter_action: Optional[Literal['overlap']] = None
+    filter_action: Optional[Union[Literal['overlap'], str]] = None
     """Specify the filter action for flash price campaigns by the start time or/and end time
        指定商品限時促銷價活動的過濾動作，此動作依據start_at或/及end_at進行過濾"""
     start_at: Optional[str] = None

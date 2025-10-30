@@ -12,7 +12,7 @@ from .order_inspect_item import OrderInspectItem
 class ReturnOrderItem(BaseModel):
     id: Optional[str] = None
     """Order item's ID (ID of an order item's collection, including item_type, item_id..and so on)  系統自行創建訂單品項ID"""
-    item_type: Optional[Literal['Product', 'AddonProduct', 'Gift', 'CustomProduct']] = None
+    item_type: Optional[Union[Literal['Product', 'AddonProduct', 'Gift', 'CustomProduct'], str]] = None
     """Order item type: Product  商品  AddonProduct 加購品 Gift 贈品 CustomProduct 自訂商品"""
     item_data: Optional[Dict[str, Any]] = None
     """CartItem snapshot 在第三方合作夥伴下單之前,在購物車內時的資訊快照"""

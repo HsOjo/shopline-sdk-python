@@ -44,17 +44,17 @@ class Params(BaseModel):
     """Filter data by those updated before specific time.
        取得 end_at 小於指定時間的優惠活動(包含指定時間)
        *Should use UTC time'"""
-    apply_method: Optional[Literal['auto_apply', 'coupon', 'affiliate_campaign']] = None
+    apply_method: Optional[Union[Literal['auto_apply', 'coupon', 'affiliate_campaign'], str]] = None
     """使用方式"""
-    coupon_type: Optional[List[Literal['draw', 'single', 'multi']]] = None
+    coupon_type: Optional[List[Union[Literal['draw', 'single', 'multi'], str]]] = None
     """優惠券類別"""
-    status: Optional[Literal['active', 'draft', 'hidden']] = None
+    status: Optional[Union[Literal['active', 'draft', 'hidden'], str]] = None
     """狀態"""
     available_count: Optional[str] = None
     """剩餘可抽取量"""
-    discount_on: Optional[Literal['order', 'item', 'category']] = None
+    discount_on: Optional[Union[Literal['order', 'item', 'category'], str]] = None
     """優惠作用範圍"""
-    discount_type: Optional[List[Literal['percentage', 'amount', 'free_shipping', 'gift', 'addon', 'bundle_pricing', 'bundle_group', 'bundle_percentage', 'bundle_amount', 'bundle_gift', 'bundle_group_percentage', 'bundle_group_amount', 'bundle_group_gift', 'buyandget_free', 'buyandget_pricing', 'buyandget_percentage', 'subscription_gift', 'subscription_percentage', 'subscription_amount', 'member_point_redeem_gift', 'credit_reward', 'point_reward', 'earn_purchase_points']]] = None
+    discount_type: Optional[List[Union[Literal['percentage', 'amount', 'free_shipping', 'gift', 'addon', 'bundle_pricing', 'bundle_group', 'bundle_percentage', 'bundle_amount', 'bundle_gift', 'bundle_group_percentage', 'bundle_group_amount', 'bundle_group_gift', 'buyandget_free', 'buyandget_pricing', 'buyandget_percentage', 'subscription_gift', 'subscription_percentage', 'subscription_amount', 'member_point_redeem_gift', 'credit_reward', 'point_reward', 'earn_purchase_points'], str]]] = None
     """優惠類別"""
     page: Optional[int] = None
     """Page Number

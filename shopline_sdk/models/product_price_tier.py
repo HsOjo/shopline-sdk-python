@@ -20,7 +20,7 @@ class ProductPriceTier(BaseModel):
     """Membership tier's ID 會員等級ID"""
     product_id: Optional[str] = None
     """Product's ID 商品ID"""
-    status: Optional[Literal['active']] = None
+    status: Optional[Union[Literal['active'], str]] = None
     """Product price tier's status 產品價格分級的狀態"""
     variation_key: Optional[str] = None
     """Product variation's ID 產品規格的ID"""

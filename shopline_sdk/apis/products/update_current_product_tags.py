@@ -12,7 +12,7 @@ from ...models.unprocessable_entity_error import UnprocessableEntityError
 
 class Body(BaseModel):
     """请求体模型"""
-    update_mode: Literal['add', 'remove']
+    update_mode: Union[Literal['add', 'remove'], str]
     """Update mode of this opearation, allow "add" or "remove"
        更新商品標簽的方式，可選"add"或"remove"。"""
     tags: List[str]

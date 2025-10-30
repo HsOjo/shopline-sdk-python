@@ -10,7 +10,7 @@ class FacebookBusinessExtensionDomainsEntity(BaseModel):
     """The ID of the owned domain object"""
     domain_name: Optional[str] = None
     """The domain name"""
-    status: Optional[Literal['verified', 'unverified']] = None
+    status: Optional[Union[Literal['verified', 'unverified'], str]] = None
     """indicating whether a domain is verified"""
     verfication_code: Optional[str] = None
     """The string token used to confirm domain"""

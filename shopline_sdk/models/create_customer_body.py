@@ -20,7 +20,7 @@ class CreateCustomerBody(BaseModel):
     """Country Code of Mobile Phone. It has to be used with mobile_phone  It has to be comply with the "Mobile sign up country" in customer setting 手機號碼國碼, 需與mobile_phone一同使用  號碼所屬國家需符合後台設定的「手機註冊支援國家」"""
     send_notification: Optional[bool] = None
     """Will send welcome email/sms if True 是否發出歡迎電郵/短訊 -- Default: true"""
-    notification_types: Optional[List[Literal['email', 'sms']]] = None
+    notification_types: Optional[List[Union[Literal['email', 'sms'], str]]] = None
     """Email and/or SMS.  SMS can be sent only after enabling feature.  System will try to send both email and SMS if this field is not specified.  電郵 及/或 短訊。  需開通功能後才能發出短訊。  如漏空，系統會嘗試所有通知方法"""
     phones: Optional[str] = None
     """Customer's Phones 顧客電話 - *Not verified mobile phone number 請注意，非客戶手機驗證電話"""
@@ -28,7 +28,7 @@ class CreateCustomerBody(BaseModel):
     """Customer's Phone 顧客電話 - *Not verified mobile phone number 請注意，非客戶手機驗證電話"""
     phone_country_code: Optional[str] = None
     """Customer Phone Country Code.<br />顧客電話國碼"""
-    gender: Optional[Literal['male', 'female', 'other']] = None
+    gender: Optional[Union[Literal['male', 'female', 'other'], str]] = None
     birthday: Optional[str] = None
     birth_year: Optional[int] = None
     """Customer's birth year 顧客出生年份 -  *Could not be used with the birthday parameter at the same time."""
@@ -48,11 +48,11 @@ class CreateCustomerBody(BaseModel):
     """Customer's Delivery Address 顧客送貨地址 - *Maximum for 5 delivery address groups 最多五組"""
     is_allow_welcome_credit: Optional[bool] = None
     """Set as True for sending welcome credit. 是否發送入會購物金  *If welcome credit is enabled at admin panel, welcome credit and notification will be sent when creating customer. 若後台啟用入會購物金功能，建立顧客時會發送入會購物金與通知  Default: false"""
-    created_by: Optional[Literal['shop', 'admin', 'openapi', 'shop_crm', 'pos']] = None
+    created_by: Optional[Union[Literal['shop', 'admin', 'openapi', 'shop_crm', 'pos'], str]] = None
     """Creation source 記錄創建來源"""
     created_by_channel_id: Optional[str] = None
     """Creation source id 記錄創建來源的id"""
-    registered_by: Optional[Literal['shop', 'admin', 'openapi', 'shop_crm', 'pos']] = None
+    registered_by: Optional[Union[Literal['shop', 'admin', 'openapi', 'shop_crm', 'pos'], str]] = None
     """Registration source 會員註冊來源"""
     registered_by_channel_id: Optional[str] = None
     """Registration source id 會員註冊來源的id"""

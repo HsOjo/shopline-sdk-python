@@ -13,9 +13,9 @@ class ReturnOrderPayment(BaseModel):
     """Order Payment ID"""
     payment_method_id: Optional[str] = None
     """Payment Method ID 付款方式ID"""
-    payment_type: Optional[Literal['ecpay', 'bank_transfer', 'cash_on_delivery', 'custom', 'tw_711_b2c_pay', 'tw_711_pay', 'sl_logistics_ninjavan_cod', 'sl_logistics_kerry_th_cod', 'sl_logistics_ghtk_cod', 'sl_logistics_janio_cod', 'sl_logistics_poslaju_cod']] = None
+    payment_type: Optional[Union[Literal['ecpay', 'bank_transfer', 'cash_on_delivery', 'custom', 'tw_711_b2c_pay', 'tw_711_pay', 'sl_logistics_ninjavan_cod', 'sl_logistics_kerry_th_cod', 'sl_logistics_ghtk_cod', 'sl_logistics_janio_cod', 'sl_logistics_poslaju_cod'], str]] = None
     """Payment Method 付款方式"""
-    status: Optional[Literal['pending', 'failed', 'expired', 'completed', 'refunding', 'refunded']] = None
+    status: Optional[Union[Literal['pending', 'failed', 'expired', 'completed', 'refunding', 'refunded'], str]] = None
     """Payment Status 付款狀態   Payment status allows:  pending 未付款  failed 付款失敗  expired 超過付款時間  completed 已付款  refunding 退款中  refunded 已退款"""
     updated_at: Optional[str] = None
     """Updated Time related to change of payment 付款更新時間 (UTC +0)"""

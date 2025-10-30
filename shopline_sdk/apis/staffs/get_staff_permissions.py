@@ -11,7 +11,7 @@ from ...models.channel import Channel
 
 class Params(BaseModel):
     """查询参数模型"""
-    scope: Optional[Literal['open_api', 'admin', 'shop_crm', 'pos', 'one', 'shoplytics', 'sc', 'dash', 'ads', 'payment_center', 'mc', 'form_builder']] = None
+    scope: Optional[Union[Literal['open_api', 'admin', 'shop_crm', 'pos', 'one', 'shoplytics', 'sc', 'dash', 'ads', 'payment_center', 'mc', 'form_builder'], str]] = None
     """The permissions scope
        獲取權限的範圍。
        If scope is not provided and the staff is the current merchant owner, no permissions will be returned. 

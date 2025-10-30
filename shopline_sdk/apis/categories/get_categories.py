@@ -37,7 +37,7 @@ class Params(BaseModel):
     fields: Optional[List[str]] = None
     """Could only show certain parameters in the response
       結果只顯示哪些參數"""
-    created_by_filter: Optional[Literal['admin', 'pos']] = None
+    created_by_filter: Optional[Union[Literal['admin', 'pos'], str]] = None
     """Filter categories by those created by. Default 'admin'. 
       取得指定 created_by 的分類。預設為'admin'。"""
     with_product_set: Optional[bool] = None

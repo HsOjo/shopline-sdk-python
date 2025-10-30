@@ -11,11 +11,11 @@ from ...models.customer_promotion import CustomerPromotion
 
 class Params(BaseModel):
     """查询参数模型"""
-    coupon_status: Optional[Literal['valid', 'invalid', 'comingSoon']] = None
+    coupon_status: Optional[Union[Literal['valid', 'invalid', 'comingSoon'], str]] = None
     """優惠券狀態"""
-    available_platforms: Optional[List[Literal['ec', 'retail']]] = None
+    available_platforms: Optional[List[Union[Literal['ec', 'retail'], str]]] = None
     """優惠券適用渠道"""
-    coupon_type: Optional[List[Literal['draw', 'single', 'multi']]] = None
+    coupon_type: Optional[List[Union[Literal['draw', 'single', 'multi'], str]]] = None
     """優惠券形式"""
 
 class Response(BaseModel):

@@ -12,19 +12,19 @@ from ...models.server_error import ServerError
 
 class Params(BaseModel):
     """查询参数模型"""
-    belongs_to: Optional[Literal['staff', 'merchant']] = None
+    belongs_to: Optional[Union[Literal['staff', 'merchant'], str]] = None
     """Channels belongs to staff or merchant. Default is staff
       網店通路或是 Staff 的通路，預設為 staff"""
-    platform: Optional[Literal['Shopee', 'shop_crm', 'online', 'pos', 'sc']] = None
+    platform: Optional[Union[Literal['Shopee', 'shop_crm', 'online', 'pos', 'sc'], str]] = None
     """Filter channels by platform. It can only filter channel by sc or shop_crm if belogs_to is staff.
        過濾通路屬於哪個平台，如果 belongs_to 為 staff 則只能過濾 sc 或是 shop_crm 通路。"""
-    platforms: Optional[List[Literal['Shopee', 'shop_crm', 'online', 'pos', 'sc']]] = None
+    platforms: Optional[List[Union[Literal['Shopee', 'shop_crm', 'online', 'pos', 'sc'], str]]] = None
     """Filter multiple channels by platforms. It can only filter channel by sc or shop_crm if belogs_to is staff.
        過濾通路屬於哪些平台，如果 belongs_to 為 staff 則只能過濾 sc 或是 shop_crm 通路。"""
-    include_fields: Optional[List[Literal['e_invoice_setting', 'pin_codes']]] = None
+    include_fields: Optional[List[Union[Literal['e_invoice_setting', 'pin_codes'], str]]] = None
     """Some fields need to be specified in this parameter. Otherwise, it will not be returned.
        有些欄位需要定義在此參數內，否則將不會返回這些欄位的值。"""
-    fields: Optional[List[Literal['items.mobile_logo_media_url']]] = None
+    fields: Optional[List[Union[Literal['items.mobile_logo_media_url'], str]]] = None
     """For mobile logo media, need to add items.mobile_logo_media_url to this field.
        mobile logo media 必須加入 items.mobile_logo_media_url 到此欄位。"""
     page: Optional[int] = None

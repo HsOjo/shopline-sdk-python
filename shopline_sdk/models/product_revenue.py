@@ -23,4 +23,4 @@ class ProductRevenue(BaseModel):
     """目標銷售額"""
     start_at: Optional[str] = None
     end_at: Optional[str] = None
-    status: Optional[Literal['active', 'removed']] = None
+    status: Optional[Union[Literal['active', 'removed'], str]] = None

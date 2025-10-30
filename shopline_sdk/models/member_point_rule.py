@@ -11,7 +11,7 @@ from .translatable import Translatable
 class MemberPointRule(BaseModel):
     id: Optional[str] = None
     """Member Point Rule ID<br />會員點數ID"""
-    status: Optional[Literal['active', 'inactive']] = None
+    status: Optional[Union[Literal['active', 'inactive'], str]] = None
     """Whether the rules is applying<br />規則是否正在生效"""
     unit_price: Optional[int] = None
     """The amount of purchase to earn a unit of points.<br /> This field will be null if the rule_type is not "earn_from_order."<br /> 賺取一個單位的點數所需的購買金額<br /> 如rule_type不是"earn_from_order"，此欄會是null"""
@@ -23,7 +23,7 @@ class MemberPointRule(BaseModel):
     """The expiry month of points, null if there is no expiry date.<br /> This field will be null if the rule_type is not "earn_from_order".<br /> 點數的到期月份，如規則並沒有設置點數會到期，此欄會是null 如rule_type不是"earn_from_order"，此欄會是null"""
     pending_days: Optional[int] = None
     """The number of days after delivery received (Arrived/ Collected) will the system automatically assign the point to customer.<br /> This field will be null if the rule_type is not "earn_from_order".＜br /> 顧客訂單轉變為 已取貨 / 已到達(宅配) 後幾天自動發送點數<br /> 如rule_type不是"earn_from_order"，此欄會是null"""
-    rule_type: Optional[Literal['earn_from_order', 'max_percentage_per_order', 'max_amount_per_order']] = None
+    rule_type: Optional[Union[Literal['earn_from_order', 'max_percentage_per_order', 'max_amount_per_order'], str]] = None
     """Define the types of rules that the current object is representing.<br /> 定義這個物件正在表示的規則類別"""
     remarks_translations: Optional[Translatable] = None
     membership_tier_id: Optional[str] = None

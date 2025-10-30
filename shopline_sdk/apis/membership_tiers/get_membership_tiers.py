@@ -12,7 +12,7 @@ from ...models.server_error import ServerError
 
 class Params(BaseModel):
     """查询参数模型"""
-    include_fields: Optional[List[Literal['membership_tier_rules', 'member_point_rules', 'user_credit_rules', 'promotions']]] = None
+    include_fields: Optional[List[Union[Literal['membership_tier_rules', 'member_point_rules', 'user_credit_rules', 'promotions'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
 

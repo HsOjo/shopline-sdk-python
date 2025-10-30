@@ -13,7 +13,7 @@ from ...models.shop_conversations_messages import ShopConversationsMessages
 
 class Params(BaseModel):
     """查询参数模型"""
-    platform: Literal['shop_messages', 'order_messages', 'return_order_messages']
+    platform: Union[Literal['shop_messages', 'order_messages', 'return_order_messages'], str]
     """Conversation from shop or order
       網店訊息或是訂單訊息
       return_order_messages 尚未開放"""

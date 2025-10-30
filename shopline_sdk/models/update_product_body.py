@@ -48,12 +48,12 @@ class UpdateProductBody(BaseModel):
     """Tax type 國內稅項"""
     oversea_tax_type: Optional[str] = None
     """Oversea tax type 海外稅項"""
-    status: Optional[Literal['active', 'draft', 'removed', 'hidden']] = None
+    status: Optional[Union[Literal['active', 'draft', 'removed', 'hidden'], str]] = None
     images: Optional[List[str]] = None
     detail_images: Optional[List[str]] = None
     """Additional Product Photos 更多商品圖片"""
     gtin: Optional[str] = None
-    barcode_type: Optional[Literal['Code 128', 'Bookland EAN', 'ISBN']] = None
+    barcode_type: Optional[Union[Literal['Code 128', 'Bookland EAN', 'ISBN'], str]] = None
     variant_custom_type_translations: Optional[List[Variant_Custom_Type_TranslationsItem]] = None
     variant_options: Optional[List[Dict[str, Any]]] = None
     is_replace_variations: Optional[bool] = None

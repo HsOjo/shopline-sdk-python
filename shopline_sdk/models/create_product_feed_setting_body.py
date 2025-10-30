@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 class CreateProductFeedSettingBody(BaseModel):
     """Payload for creating an product feed setting"""
-    kind: Literal['GOOGLE', 'MAJORITY']
+    kind: Union[Literal['GOOGLE', 'MAJORITY'], str]
     """The kind of the product feed setting product feed setting的類型"""
     path: str
     """The url path of the product feed setting"""

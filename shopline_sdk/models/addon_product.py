@@ -26,7 +26,7 @@ class PromotionsItem(BaseModel):
 class AddonProduct(BaseModel):
     id: Optional[str] = None
     """Add-on Product‘s ID 加購品ID"""
-    status: Optional[Literal['active', 'draft']] = None
+    status: Optional[Union[Literal['active', 'draft'], str]] = None
     """Add-on Product's Status 加購品狀態 - Status: active上架 draft 下架"""
     title_translations: Optional[Translatable] = None
     price: Optional[float] = None

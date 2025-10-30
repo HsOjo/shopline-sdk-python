@@ -24,7 +24,7 @@ class Config_DataConfig(BaseModel):
     delivery_time_required: Optional[bool] = None
     """Specified Timeslot (Enabled: Customers can set up estimated delivery arrival time in case no receiver at home.)  出貨訂單需指定時段 (啟用功能：可以設定商品到貨的時間，避免無人收貨的情況。)"""
     specific_delivery_time_translations: Optional[Translatable] = None
-    delivery_target_area: Optional[Literal['localOnly', 'outlyingIslandOnly', 'all']] = None
+    delivery_target_area: Optional[Union[Literal['localOnly', 'outlyingIslandOnly', 'all'], str]] = None
     """For Taiwan only. You can set whether Main area or Outlying Island delivery service  台灣地區可進階設定本島/外島的配送區域    localOnly: Main Area delivery service 提供本島配送  outlyingIslandOnly: Outlying Island delivery service 提供外島配送  all: all of the above 以上皆是"""
 
 
@@ -39,7 +39,7 @@ class Delivery_RatesItem(BaseModel):
 class DeliveryOption(BaseModel):
     id: Optional[str] = None
     """Delivery Option ID 送貨方式ID"""
-    status: Optional[Literal['active', 'draft']] = None
+    status: Optional[Union[Literal['active', 'draft'], str]] = None
     """Delivery Option Status 送貨方式狀態 - Status allows: active 啟用中 draft 隱藏"""
     name_translations: Optional[Translatable] = None
     requires_customer_address: Optional[bool] = None
@@ -48,7 +48,7 @@ class DeliveryOption(BaseModel):
     """Display description on the checkout page 在結帳頁面上顯示送貨方式簡介"""
     description_translations: Optional[Translatable] = None
     delivery_time_description_translations: Optional[Translatable] = None
-    fee_type: Optional[Literal['flat', 'flat_weight', 'subtotal', 'item_count', 'sl_logistic']] = None
+    fee_type: Optional[Union[Literal['flat', 'flat_weight', 'subtotal', 'item_count', 'sl_logistic'], str]] = None
     """Fee Type 收費模式 - Fee type allow: flat  flat_weight  subtotal  item_count * sl_logistic"""
     form_fields: Optional[List[Dict[str, Any]]] = None
     region_type: Optional[str] = None

@@ -14,12 +14,12 @@ from ...models.unprocessable_entity_error import UnprocessableEntityError
 
 class Params(BaseModel):
     """查询参数模型"""
-    event_type: Optional[Literal['loaded_home_page', 'added_product_to_cart', 'loaded_checkout_page', 'placed_an_order', 'loaded_any_page', 'all']] = None
+    event_type: Optional[Union[Literal['loaded_home_page', 'added_product_to_cart', 'loaded_checkout_page', 'placed_an_order', 'loaded_any_page', 'all'], str]] = None
     """Filter event trackers by their event_type.
        Default: all
        按 event_type 過濾事件追踪資料
        預設: all"""
-    tracker_types: Optional[List[Literal['tiktok', 'facebook_standard_pixel']]] = None
+    tracker_types: Optional[List[Union[Literal['tiktok', 'facebook_standard_pixel'], str]]] = None
     """Filter event trackers by their event_keys.
        Default: []
        按 event_key 過濾事件追踪資料

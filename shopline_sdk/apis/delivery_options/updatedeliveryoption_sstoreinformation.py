@@ -11,6 +11,11 @@ from ...models.delivery_option import DeliveryOption
 from ...models.translatable import Translatable
 
 
+class StorePickupOption(BaseModel):
+    """Model for store_pickup_option"""
+    config_fields: Optional[Dict[str, Dict[str, Any]]] = None
+
+
 class AddressesItem(BaseModel):
     """Item model for addresses"""
     level_1_translations: Optional[Translatable] = None
@@ -22,7 +27,7 @@ class AddressesItem(BaseModel):
 
 class Body(BaseModel):
     """请求体模型"""
-    store_pickup_option: Optional[Dict[str, Any]] = None
+    store_pickup_option: Optional[StorePickupOption] = None
     addresses: Optional[List[AddressesItem]] = None
 
 class Response(BaseModel):

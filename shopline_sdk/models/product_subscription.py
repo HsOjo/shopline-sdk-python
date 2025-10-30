@@ -15,11 +15,11 @@ class ProductSubscription(BaseModel):
     """Subscription Term 定期購訂單期數"""
     duration: Optional[int] = None
     """Number of subscription cycle intervals 定期購週期長度"""
-    duration_type: Optional[Literal['year', 'month', 'day']] = None
+    duration_type: Optional[Union[Literal['year', 'month', 'day'], str]] = None
     """Unit of subscription cycle interval 定期購週期單位"""
     next_billing_at: Optional[str] = None
     """Next billing date 下次產單日期"""
-    status: Optional[Literal['active', 'inactive']] = None
+    status: Optional[Union[Literal['active', 'inactive'], str]] = None
     """Status 狀態"""
     customer_name: Optional[str] = None
     """Customer's Name 顧客姓名"""

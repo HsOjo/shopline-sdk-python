@@ -70,7 +70,7 @@ class Params(BaseModel):
       -
       Support equal or not equal.
       支援 等於 或 不等於."""
-    gender: Optional[Literal['male', 'female', 'other']] = None
+    gender: Optional[Union[Literal['male', 'female', 'other'], str]] = None
     """Customer's Gender
       顧客性別
       -

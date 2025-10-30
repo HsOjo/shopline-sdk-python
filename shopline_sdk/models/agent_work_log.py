@@ -10,7 +10,7 @@ class In_LogConfig(BaseModel):
     """Configuration model for in_log"""
     id: Optional[int] = None
     agent_id: Optional[int] = None
-    clock_type: Optional[Literal['in', 'out']] = None
+    clock_type: Optional[Union[Literal['in', 'out'], str]] = None
     clocked_at: Optional[str] = None
     created_at: Optional[str] = None
 
@@ -19,7 +19,7 @@ class Out_LogConfig(BaseModel):
     """Configuration model for out_log"""
     id: Optional[int] = None
     agent_id: Optional[int] = None
-    clock_type: Optional[Literal['in', 'out']] = None
+    clock_type: Optional[Union[Literal['in', 'out'], str]] = None
     clocked_at: Optional[str] = None
     created_at: Optional[str] = None
 

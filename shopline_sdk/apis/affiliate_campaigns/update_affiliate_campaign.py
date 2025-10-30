@@ -12,6 +12,17 @@ from ...models.campaign_product import CampaignProduct
 from ...models.server_error import ServerError
 from ...models.unprocessable_entity_error import UnprocessableEntityError
 
+
+class PartnerInfo(BaseModel):
+    """Partner info
+    合作夥伴資訊"""
+    name: Optional[str] = None
+    """Partner name
+      合作夥伴名稱"""
+    email: Optional[str] = None
+    """Partner email
+      合作夥伴 Email"""
+
 class Body(BaseModel):
     """请求体模型"""
     name: Optional[str] = None
@@ -33,7 +44,7 @@ class Body(BaseModel):
     remarks_translations: Optional[Dict[str, Any]] = None
     """Remarks translations
       顯示於 KOL Hub 的條款說明"""
-    partner_info: Optional[Dict[str, Any]] = None
+    partner_info: Optional[PartnerInfo] = None
     """Partner info
       合作夥伴資訊"""
     campaign_products: Optional[List[CampaignProduct]] = None

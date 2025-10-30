@@ -16,12 +16,12 @@ class CustomerGroup(BaseModel):
     """Mobile phone count of the customer group. 分群中有手機的人數"""
     updated_at: Optional[str] = None
     created_at: Optional[str] = None
-    status: Optional[Literal['active', 'expired']] = None
-    update_type: Optional[Literal['manual', 'auto']] = None
+    status: Optional[Union[Literal['active', 'expired'], str]] = None
+    update_type: Optional[Union[Literal['manual', 'auto'], str]] = None
     """The updated way. 更新方式"""
     update_cycle: Optional[float] = None
     """The updated cycle in days. 更新週期（天數）"""
-    created_by: Optional[Literal['manual', 'auto']] = None
+    created_by: Optional[Union[Literal['manual', 'auto'], str]] = None
     """The updated way only for child customer group. 子分群更新方式"""
     parent_id: Optional[str] = None
     """ID of parent customer group. 母分群的ID"""

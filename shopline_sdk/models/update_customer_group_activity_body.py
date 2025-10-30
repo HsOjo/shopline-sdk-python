@@ -14,7 +14,7 @@ class Customer_Group_ActivityConfig(BaseModel):
     """Configuration model for customer_group_activity"""
     activity_time: Optional[str] = None
     submitted_at: Optional[str] = None
-    activity_status: Optional[Literal['draft', 'pending', 'cancelled', 'sending', 'sent', 'failed', 'partially_sent', 'removed']] = None
+    activity_status: Optional[Union[Literal['draft', 'pending', 'cancelled', 'sending', 'sent', 'failed', 'partially_sent', 'removed'], str]] = None
     name_translations: Optional[Translatable] = None
 
 class UpdateCustomerGroupActivityBody(BaseModel):

@@ -35,7 +35,7 @@ class PaymentSettlement(BaseModel):
     """Channel ID  Channel ID"""
     terminal_id: Optional[str] = None
     """Terminal ID 刷卡機 ID"""
-    status: Optional[Literal['pending', 'completed', 'failed']] = None
+    status: Optional[Union[Literal['pending', 'completed', 'failed'], str]] = None
     """Status 結帳狀態"""
     created_at: Optional[str] = None
     """Created at 建立時間"""

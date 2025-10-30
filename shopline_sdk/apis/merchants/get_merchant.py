@@ -11,7 +11,7 @@ from ...models.merchant import Merchant
 
 class Params(BaseModel):
     """查询参数模型"""
-    include_fields: Optional[List[Literal['current_theme_key', 'instagram_username', 'admin_status']]] = None
+    include_fields: Optional[List[Union[Literal['current_theme_key', 'instagram_username', 'admin_status'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
 

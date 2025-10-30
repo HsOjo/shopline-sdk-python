@@ -10,9 +10,19 @@ from ...exceptions import ShoplineAPIError
 from ...models.server_error import ServerError
 from ...models.unprocessable_entity_error import UnprocessableEntityError
 
+
+class Filters(BaseModel):
+    """Model for filters"""
+    start_date: Optional[str] = None
+    """Start time to filter archived orders.
+       匯出冷區報表開始時間"""
+    end_date: Optional[str] = None
+    """End time to filter archived orders.
+       匯出冷區報表結束時間"""
+
 class Body(BaseModel):
     """请求体模型"""
-    filters: Optional[List[Dict[str, Any]]] = None
+    filters: Optional[Filters] = None
     callback_url: Optional[str] = None
     """merchant's callback url
       店家提供 callback url"""

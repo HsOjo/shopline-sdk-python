@@ -22,7 +22,7 @@ class Pin_CodesItem(BaseModel):
 
 class E_Invoice_SettingConfig(BaseModel):
     """Configuration model for e_invoice_setting"""
-    invoice_type: Optional[Literal['none', 'tradevan', 'cetustek']] = None
+    invoice_type: Optional[Union[Literal['none', 'tradevan', 'cetustek'], str]] = None
     """invoice setting type"""
     invoice: Optional[Dict[str, Any]] = None
     """only show this object when invoice_type is cetustek"""
@@ -32,7 +32,7 @@ class E_Invoice_SettingConfig(BaseModel):
 class Channel(BaseModel):
     id: Optional[str] = None
     name: Optional[Translatable] = None
-    platform: Optional[Literal['Shopee', 'shop_crm', 'online', 'pos', 'sc']] = None
+    platform: Optional[Union[Literal['Shopee', 'shop_crm', 'online', 'pos', 'sc'], str]] = None
     """Shopee  shop_crm  online  pos  sc"""
     merchant_id: Optional[str] = None
     updated_at: Optional[str] = None

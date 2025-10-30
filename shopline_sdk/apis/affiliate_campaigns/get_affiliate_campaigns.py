@@ -13,7 +13,7 @@ from ...models.unprocessable_entity_error import UnprocessableEntityError
 
 class Params(BaseModel):
     """查询参数模型"""
-    active_status: Optional[Literal['expired', 'ongoing']] = None
+    active_status: Optional[Union[Literal['expired', 'ongoing'], str]] = None
     """The active status of affiliate campaign (expired or ongoing).
        推薦活動的狀態 (已過期或進行中)。"""
     partner_email: Optional[str] = None

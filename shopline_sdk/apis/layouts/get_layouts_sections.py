@@ -13,7 +13,7 @@ from ...models.unauthorized_error import UnauthorizedError
 
 class Params(BaseModel):
     """查询参数模型"""
-    types: List[Literal['announcement', 'header', 'footer']]
+    types: List[Union[Literal['announcement', 'header', 'footer'], str]]
     """Types of layouts sections
       佈局元件的種類"""
 

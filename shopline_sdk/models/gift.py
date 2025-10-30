@@ -22,14 +22,14 @@ class Variant_OptionsItem(BaseModel):
     """Item model for variant_options"""
     id: Optional[str] = None
     name_translations: Optional[Translatable] = None
-    type: Optional[Literal['color', 'size', 'custom_1', 'custom_2', 'custom_3']] = None
+    type: Optional[Union[Literal['color', 'size', 'custom_1', 'custom_2', 'custom_3'], str]] = None
     media: Optional[Dict[str, Any]] = None
     index: Optional[int] = None
 
 class Gift(BaseModel):
     id: Optional[str] = None
     """Gift ID 贈品ID"""
-    status: Optional[Literal['active', 'draft']] = None
+    status: Optional[Union[Literal['active', 'draft'], str]] = None
     """Gift's Status 贈品狀態"""
     title_translations: Optional[Translatable] = None
     sku: Optional[str] = None

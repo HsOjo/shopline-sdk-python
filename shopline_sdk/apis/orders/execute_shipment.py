@@ -12,7 +12,7 @@ from ...models.unprocessable_entity_error import UnprocessableEntityError
 
 class Response(BaseModel):
     """响应体模型"""
-    delivery_status: Optional[Literal['request_accepted', 'request_authorized', 'request_submitted']] = None
+    delivery_status: Optional[Union[Literal['request_accepted', 'request_authorized', 'request_submitted'], str]] = None
     tracking_number: Optional[str] = None
 
 async def call(

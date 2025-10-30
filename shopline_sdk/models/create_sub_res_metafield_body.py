@@ -12,6 +12,6 @@ class CreateSubResMetafieldBody(BaseModel):
     """Payload for creating metafield"""
     namespace: Optional[str] = None
     key: Optional[str] = None
-    field_type: Optional[Literal['single_line_text_field', 'multi_line_text_field', 'number_integer', 'number_decimal', 'json', 'boolean', 'url']] = None
+    field_type: Optional[Union[Literal['single_line_text_field', 'multi_line_text_field', 'number_integer', 'number_decimal', 'json', 'boolean', 'url'], str]] = None
     field_value: Optional[Union[str, float, bool, Dict[str, Any]]] = None
     resource_id: Optional[str] = None

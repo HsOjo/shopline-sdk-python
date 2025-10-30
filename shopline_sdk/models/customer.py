@@ -97,7 +97,7 @@ class Customer(BaseModel):
     """Customer Name 顧客姓名"""
     email: Optional[str] = None
     """Customer Email 顧客電子郵件"""
-    gender: Optional[Literal['male', 'female', 'other']] = None
+    gender: Optional[Union[Literal['male', 'female', 'other'], str]] = None
     """Customer Gender 顧客性別"""
     birthday: Optional[str] = None
     """Customer Birthday 顧客生日  Please use birth_year, birth_month, birth_day instead.  The field is compatible with the old version.  請使用 birth_year, birth_month, birth_day 代替  此欄位為舊版相容用   If birth_year is null, then the default year is 1904.  如果 birth_year 為 null, 則預設為 1904 年   If birth_month is null, then the default month is 1.  如果 birth_month 為 null, 則預設為 1 月   If birth_day is null, then the default day is 1.  如果 birth_day 為 null, 則預設為 1 日"""
@@ -162,7 +162,7 @@ class Customer(BaseModel):
     registered_at: Optional[str] = None
     """Customer register's Date and time 顧客註冊時間"""
     registered_from_channel: Optional[Channel] = None
-    created_by: Optional[Literal['shop', 'admin', 'openapi', 'shop_crm', 'pos']] = None
+    created_by: Optional[Union[Literal['shop', 'admin', 'openapi', 'shop_crm', 'pos'], str]] = None
     """顧客建立來源 "shop" 來自前台網站  "admin" 來自後台 "openapi" 由open api創建  "shop_crm" 來自 kiosk "pos"來自 POS"""
     created_by_channel: Optional[str] = None
     """顧客建立店家來源"""

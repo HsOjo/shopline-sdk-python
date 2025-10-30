@@ -17,11 +17,11 @@ class SearchProductsBody(BaseModel):
     """商品 ID，支援等於、不等於、in 多筆查詢"""
     category_id: Optional[str] = None
     """商品分類 ID，支援以逗號分隔多筆"""
-    status: Optional[Literal['active', 'draft', 'removed', 'hidden']] = None
+    status: Optional[Union[Literal['active', 'draft', 'removed', 'hidden'], str]] = None
     """商品狀態"""
-    sort_type: Optional[Literal['created_at', 'lowest_price', 'quantity_sold', 'custom_sorting']] = None
+    sort_type: Optional[Union[Literal['created_at', 'lowest_price', 'quantity_sold', 'custom_sorting'], str]] = None
     """排序類型，預設為 created_at"""
-    sort_by: Optional[Literal['asc', 'desc']] = None
+    sort_by: Optional[Union[Literal['asc', 'desc'], str]] = None
     """排序方向，預設為 desc。當 sort_type 為 quantity_sold 時只能為 desc。"""
     sku: Optional[str] = None
     """商品貨號，支援等於、不等於、in 多筆查詢"""
@@ -49,9 +49,9 @@ class SearchProductsBody(BaseModel):
     """要排除的欄位"""
     fields: Optional[List[str]] = None
     """僅顯示的欄位"""
-    include_fields: Optional[List[Literal['labels']]] = None
+    include_fields: Optional[List[Union[Literal['labels'], str]]] = None
     """要額外包含的欄位"""
-    retail_status: Optional[Literal['active', 'draft']] = None
+    retail_status: Optional[Union[Literal['active', 'draft'], str]] = None
     """POS 商品上架狀態"""
     with_product_set: Optional[bool] = None
     """是否包含組合商品"""

@@ -59,7 +59,7 @@ class Body(BaseModel):
     replace: Optional[bool] = None
     """To replace all store credits with the current value
       以此金額替代之前所有購物金"""
-    type: Optional[Literal['manual_credit', 'welcome_credit', 'birthday_credit', 'auto_reward', 'applied_credit', 'user_credit_expired', 'welcome_member_referral_credit', 'member_referral_credit', 'member_info_quick_completion_credit', 'order_split_revert', 'product_review_reward', 'return_order_revert', 'order_edit_revert']] = None
+    type: Optional[Union[Literal['manual_credit', 'welcome_credit', 'birthday_credit', 'auto_reward', 'applied_credit', 'user_credit_expired', 'welcome_member_referral_credit', 'member_referral_credit', 'member_info_quick_completion_credit', 'order_split_revert', 'product_review_reward', 'return_order_revert', 'order_edit_revert'], str]] = None
     """Store credit type
        購物金類型
        * `manual_credit`
@@ -104,7 +104,7 @@ class Body(BaseModel):
     performer_id: Optional[str] = None
     """Performer ID
       操作者ID"""
-    performer_type: Optional[Literal['User', 'Agent']] = None
+    performer_type: Optional[Union[Literal['User', 'Agent'], str]] = None
     """Performer Type
       操作者類型"""
 

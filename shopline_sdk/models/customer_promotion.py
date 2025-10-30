@@ -18,7 +18,7 @@ class CustomerPromotion(BaseModel):
     id: Optional[str] = None
     """Promotion ID 優惠活動ID"""
     title_translations: Optional[Translatable] = None
-    discount_on: Optional[Literal['order', 'item', 'category']] = None
+    discount_on: Optional[Union[Literal['order', 'item', 'category'], str]] = None
     """Promotion target 優惠套用對象 - order = Entire shop 全店 item = Specific item 指定商品 category = Specific category 指定分類"""
     first_purchase_only: Optional[bool] = None
     """For first purchase only 創建自動套用—每位會員限用優惠一次的任選優惠"""
@@ -39,12 +39,12 @@ class CustomerPromotion(BaseModel):
     end_at: Optional[str] = None
     """Promotion end time 活動結束時間 - null = no end date 永不過期"""
     available_platforms: Optional[List[str]] = None
-    coupon_type: Optional[Literal['draw', 'single', 'multi']] = None
+    coupon_type: Optional[Union[Literal['draw', 'single', 'multi'], str]] = None
     drew_coupon_count: Optional[int] = None
     """How many times did this promotion been drew? 活動被領取次數"""
     discount_type: Optional[str] = None
     """discount type of the promotion  優惠券的折扣類型"""
-    user_coupon_status: Optional[Literal['active', 'used', 'inactive']] = None
+    user_coupon_status: Optional[Union[Literal['active', 'used', 'inactive'], str]] = None
     """User Coupon Status, Only expose when coupon_type is draw  優惠卷領取狀態，只在領取型優惠卷顯示此欄位  active = 已領取  used = 已使用  inactive = 未領取"""
     available_channel_ids: Optional[List[str]] = None
     """Ids of available channel 指定通路ids"""

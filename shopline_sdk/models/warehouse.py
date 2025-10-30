@@ -10,5 +10,5 @@ class Warehouse(BaseModel):
     """Warehouse’s id 倉庫 id"""
     name: Optional[str] = None
     """Warehouse’s name 倉庫名稱"""
-    status: Optional[Literal['active', 'transferring']] = None
+    status: Optional[Union[Literal['active', 'transferring'], str]] = None
     """Warehouse’s status 倉庫狀態"""

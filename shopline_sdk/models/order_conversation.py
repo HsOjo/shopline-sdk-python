@@ -18,13 +18,13 @@ class Last_MessageConfig(BaseModel):
     """Created At 建立時間"""
     value: Optional[str] = None
     """Content 對話內容"""
-    type: Optional[Literal['text', 'image']] = None
+    type: Optional[Union[Literal['text', 'image'], str]] = None
     """Conversation Type 對話類別"""
 
 class OrderConversation(BaseModel):
     id: Optional[str] = None
     """Conversation ID 訊息 ID"""
-    type: Optional[Literal['shop_messages', 'order_messages']] = None
+    type: Optional[Union[Literal['shop_messages', 'order_messages'], str]] = None
     """Conversation Type 訊息平台"""
     customer_id: Optional[str] = None
     """Customer ID 客戶 ID"""

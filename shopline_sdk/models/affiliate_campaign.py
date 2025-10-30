@@ -17,7 +17,7 @@ class AffiliateCampaign(BaseModel):
     """Affiliate Campaign Name 推薦活動名稱"""
     condition_value: Optional[int] = None
     """Condition for total order over how much money to get the reward 全單超過多少錢可以獲得回饋"""
-    reward_type: Optional[Literal[None, 'amount', 'percentage']] = None
+    reward_type: Optional[Union[Literal[None, 'amount', 'percentage'], str]] = None
     """Reward type 訂單回饋類型"""
     reward_value: Optional[int] = None
     """Reward value 訂單回饋值"""
@@ -29,9 +29,9 @@ class AffiliateCampaign(BaseModel):
     """Referral link 推薦連結"""
     partner_info: Optional[Dict[str, Any]] = None
     """Partner Info 合作夥伴資訊"""
-    apply_on: Optional[Literal['order', 'product']] = None
+    apply_on: Optional[Union[Literal['order', 'product'], str]] = None
     """Apply on order or product 套用於訂單或商品"""
-    apply_method: Optional[Literal['all', 'product']] = None
+    apply_method: Optional[Union[Literal['all', 'product'], str]] = None
     """Apply method  套用方式:  - all: 全部  - item: 逐筆設定"""
     use_count: Optional[int] = None
     """Use count 使用次數"""

@@ -27,10 +27,10 @@ class Params(BaseModel):
     """Numbers of Orders per page
       每頁顯示 n 筆資料
       (Default: 24, Max: 999)"""
-    status: Optional[Literal['active', 'draft']] = None
+    status: Optional[Union[Literal['active', 'draft'], str]] = None
     """Status
       商品狀態"""
-    sort_by: Optional[Literal['desc', 'asc']] = None
+    sort_by: Optional[Union[Literal['desc', 'asc'], str]] = None
     """Sort by created_at"""
     sku: Optional[str] = None
     """SKU
@@ -63,7 +63,7 @@ class Params(BaseModel):
       
       Please fill in to the second level. Default value is 00:00:00 if only fill in dates.
       請輸入至秒數，若只輸入日期，則會自動帶入當天00:00:00"""
-    include_fields: Optional[List[Literal['promotions']]] = None
+    include_fields: Optional[List[Union[Literal['promotions'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
 

@@ -8,9 +8,9 @@ from typing_extensions import Literal
 
 class Condition_IntervalConfig(BaseModel):
     """Configuration model for condition_interval"""
-    type: Optional[Literal['within_interval', 'single_purchase']] = None
+    type: Optional[Union[Literal['within_interval', 'single_purchase'], str]] = None
     """Membership Upgrade Condition Type<br /> 會員升級條件類別<br /> - within_interval: 指定期限內購物<br /> - single_purchase: 單次購物"""
-    time_unit: Optional[Literal['month']] = None
+    time_unit: Optional[Union[Literal['month'], str]] = None
     """Membership Upgrade Condition Time Unit<br /> 會員升級條件時間單位"""
     time_value: Optional[int] = None
     """Valid Period of the conditional interval if the type is "within_interval"<br /> 如類別是"within_interval"，升級條件時間的值"""
@@ -18,9 +18,9 @@ class Condition_IntervalConfig(BaseModel):
 
 class Effect_IntervalConfig(BaseModel):
     """Configuration model for effect_interval"""
-    type: Optional[Literal['within_interval', 'unlimited']] = None
+    type: Optional[Union[Literal['within_interval', 'unlimited'], str]] = None
     """Membership Valid Period<br /> 會員有效期限"""
-    time_unit: Optional[Literal['month']] = None
+    time_unit: Optional[Union[Literal['month'], str]] = None
     """Unit of Valid Period<br /> 有效期限單位"""
     time_value: Optional[int] = None
     """Valid Period of the effect interval if the type is "within_interval"<br /> 如類別是"within_interval"，有效期間的值"""
@@ -42,7 +42,7 @@ class Total_SpendingConfig(BaseModel):
 class MembershipTierRule(BaseModel):
     id: Optional[str] = None
     """Membership tier rule's ID<br />會員等級規則ID"""
-    effect_type: Optional[Literal['upgrade', 'extend']] = None
+    effect_type: Optional[Union[Literal['upgrade', 'extend'], str]] = None
     """Type of the membership_tier_rule<br /> 會員級別規則的類別"""
     condition_interval: Optional[Condition_IntervalConfig] = None
     effect_interval: Optional[Effect_IntervalConfig] = None

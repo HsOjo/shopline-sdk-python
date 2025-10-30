@@ -11,6 +11,12 @@ from ...models.server_error import ServerError
 from ...models.shop_conversation import ShopConversation
 from ...models.unprocessable_entity_error import UnprocessableEntityError
 
+
+class RefData(BaseModel):
+    """Model for ref_data"""
+    path: Optional[str] = None
+    full_path: Optional[str] = None
+
 class Body(BaseModel):
     """请求体模型"""
     text: Optional[str] = None
@@ -28,7 +34,7 @@ class Body(BaseModel):
     recipient_id: Optional[str] = None
     """The message recipient ID
       訊息接收者ID"""
-    ref_data: Optional[Dict[str, Any]] = None
+    ref_data: Optional[RefData] = None
 
 async def call(
     session: aiohttp.ClientSession, body: Optional[Body] = None

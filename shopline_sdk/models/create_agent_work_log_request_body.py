@@ -8,7 +8,7 @@ from typing_extensions import Literal
 
 class Work_LogConfig(BaseModel):
     """Configuration model for work_log"""
-    clock_type: Literal['in', 'out']
+    clock_type: Union[Literal['in', 'out'], str]
     """The type of clock action (in or out)"""
     clocked_at: str
     """The timestamp of the clock action"""

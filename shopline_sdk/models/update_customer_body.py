@@ -18,7 +18,7 @@ class UpdateCustomerBody(BaseModel):
     """Customer's Phone 顧客電話 - *Not verified mobile phone number 請注意，非客戶手機驗證電話"""
     phone_country_code: Optional[str] = None
     """Customer Phone Country Code If phone is input, this field should not be blank  顧客電話國碼 手機號碼國碼, 如已輸入phone，此欄不能是空白"""
-    gender: Optional[Literal['male', 'female', 'other']] = None
+    gender: Optional[Union[Literal['male', 'female', 'other'], str]] = None
     birthday: Optional[str] = None
     birth_year: Optional[int] = None
     """Customer's birth year 顧客出生年份 -  *Could not be used with the birthday parameter at the same time."""

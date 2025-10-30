@@ -36,7 +36,7 @@ class Variant_OptionsItem(BaseModel):
     """Item model for variant_options"""
     id: Optional[str] = None
     name_translations: Optional[Translatable] = None
-    type: Optional[Literal['color', 'size', 'custom_1', 'custom_2', 'custom_3']] = None
+    type: Optional[Union[Literal['color', 'size', 'custom_1', 'custom_2', 'custom_3'], str]] = None
     media: Optional[Dict[str, Any]] = None
     index: Optional[int] = None
 
@@ -51,7 +51,7 @@ class Feed_CategoryConfig(BaseModel):
 class Bundle_SetConfig(BaseModel):
     """Configuration model for bundle_set"""
     id: Optional[str] = Field(default=None, alias="_id")
-    price_type: Optional[Literal['fixed_amount discount_percentage discount_amount']] = None
+    price_type: Optional[Union[Literal['fixed_amount discount_percentage discount_amount'], str]] = None
     """Price Type 組合售價類型"""
     discount_value: Optional[float] = None
     """Discount Value 金額折扣  When price_type is 'fixed_amount', example: 20 means price_sale $20  If discount_value is null, its value is taken from the price_sale  當組合售價類型是固定組合價時，20代表组合售價为 $20. 如果該值為空, 金額折扣值取自特價  When price_type is 'discount_percentage', example: 20 for 80% off; 70 for 30% off  當組合售價類型是折扣比例時，20代表八折; 70代表三折  When price_type is 'discount_amount', example: 20 means minus $20; 70 means minus $70  當組合售價類型是金額折扣時，20代表減$20; 70代表減$70"""
@@ -60,9 +60,9 @@ class Bundle_SetConfig(BaseModel):
 class Product(BaseModel):
     id: Optional[str] = None
     """Product's ID 商品ID"""
-    status: Optional[Literal['active', 'draft', 'removed', 'hidden']] = None
+    status: Optional[Union[Literal['active', 'draft', 'removed', 'hidden'], str]] = None
     """Product's status 商品狀態 - true: Published 上架  false: Unpublished 下架 "active": Published 上架 "draft": Unpublished 下架  "hidden": hidden 隱藏  Default: false"""
-    retail_status: Optional[Literal['active', 'draft']] = None
+    retail_status: Optional[Union[Literal['active', 'draft'], str]] = None
     """POS product's status POS商品狀態 -  "active": Published 上架  "draft": Unpublished 下架   Default: active"""
     title_translations: Optional[Translatable] = None
     summary_translations: Optional[Translatable] = None
@@ -107,7 +107,7 @@ class Product(BaseModel):
     """Product's Barcode 商品條碼編號"""
     quantity_sold: Optional[int] = None
     """Product's Quantity Sold 商品銷售數量"""
-    barcode_type: Optional[Literal['Code 128', 'Bookland EAN', 'ISBN']] = None
+    barcode_type: Optional[Union[Literal['Code 128', 'Bookland EAN', 'ISBN'], str]] = None
     """Barcode type 商品條碼編號類別"""
     field_titles: Optional[List[Field_TitlesItem]] = None
     """Field Title Data 規格名稱"""

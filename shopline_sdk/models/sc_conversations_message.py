@@ -25,6 +25,6 @@ class MessageConfig(BaseModel):
 class SCConversationsMessage(BaseModel):
     id: Optional[str] = None
     """Message ID 訊息 ID"""
-    platform: Optional[Literal['shop_messages', 'order_messages']] = None
+    platform: Optional[Union[Literal['shop_messages', 'order_messages'], str]] = None
     """Conversation Type 訊息種類"""
     message: Optional[MessageConfig] = None

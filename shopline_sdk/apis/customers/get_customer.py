@@ -17,7 +17,7 @@ class Params(BaseModel):
     excludes: Optional[List[str]] = None
     """Exclude certain parameters in the response
       結果要排除哪些參數"""
-    fields: Optional[List[Literal['membership_tier_gap']]] = None
+    fields: Optional[List[Union[Literal['membership_tier_gap'], str]]] = None
     """Only show certain parameters in the response
        This field will have conflicts to the include_fields[]
        To avoid the conflicts
@@ -27,7 +27,7 @@ class Params(BaseModel):
        這個欄位會跟include_fields[]的欄位有衝突
        要避免衝突的話，請輸入所有也包括在include_fields[]內的項目
        否則那些項目將不能被顯示"""
-    include_fields: Optional[List[Literal['metafields']]] = None
+    include_fields: Optional[List[Union[Literal['metafields'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
 

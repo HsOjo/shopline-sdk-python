@@ -15,9 +15,9 @@ class Config_DataConfig(BaseModel):
 
 class CreateEventTrackerBody(BaseModel):
     """Payload for creating an event tracker"""
-    event_key: Literal['tiktok', 'facebook_standard_pixel']
+    event_key: Union[Literal['tiktok', 'facebook_standard_pixel'], str]
     """The platform of tracking services 追蹤平台"""
-    event_type: Literal['loaded_home_page', 'added_product_to_cart', 'loaded_checkout_page', 'placed_an_order', 'loaded_any_page']
+    event_type: Union[Literal['loaded_home_page', 'added_product_to_cart', 'loaded_checkout_page', 'placed_an_order', 'loaded_any_page'], str]
     """The event to be tracked 需要追蹤的事件"""
     config_data: Config_DataConfig
     """Config data, each event_key has its own config  設定，每個event_key都有各自的config"""

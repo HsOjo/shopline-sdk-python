@@ -12,7 +12,7 @@ from ...models.users_setting import UsersSetting
 
 class Params(BaseModel):
     """查询参数模型"""
-    include_fields: Optional[List[Literal['user_credit_rules', 'membership_tier_rules']]] = None
+    include_fields: Optional[List[Union[Literal['user_credit_rules', 'membership_tier_rules'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
 

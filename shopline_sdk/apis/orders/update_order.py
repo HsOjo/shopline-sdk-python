@@ -14,7 +14,7 @@ from ...models.translatable import Translatable
 
 class Params(BaseModel):
     """查询参数模型"""
-    include_fields: Optional[List[Literal['affiliate_campaign']]] = None
+    include_fields: Optional[List[Union[Literal['affiliate_campaign'], str]]] = None
     """Provide additional attributes in the response
       結果添加哪些參數"""
     fields: Optional[List[str]] = None
@@ -28,6 +28,25 @@ class CustomDataItem(BaseModel):
     """Item model for custom_data"""
     value: Optional[str] = None
     field_id: Optional[str] = None
+
+
+class DeliveryData(BaseModel):
+    """Delivery Data
+    運送資訊
+    
+    Able to update the fields below
+    可修改以下欄位
+    - location_code
+    - location_name
+    - store_address
+    - recipient_name
+    - recipient_phone"""
+    location_code: Optional[str] = None
+    location_name: Optional[str] = None
+    store_address: Optional[str] = None
+    recipient_name: Optional[str] = None
+    recipient_phone: Optional[str] = None
+    recipient_phone_country_code: Optional[str] = None
 
 class Body(BaseModel):
     """请求体模型"""
@@ -44,7 +63,7 @@ class Body(BaseModel):
     custom_data: Optional[List[CustomDataItem]] = None
     """Custom data
       自定義資料"""
-    delivery_data: Optional[Dict[str, Any]] = None
+    delivery_data: Optional[DeliveryData] = None
     """Delivery Data
       運送資訊
       
@@ -68,7 +87,7 @@ class Body(BaseModel):
       - city
       - state
       - postcode"""
-    force_update: Optional[Literal['delivery_data']] = None
+    force_update: Optional[Union[Literal['delivery_data'], str]] = None
     """To skip filtering delivery_data fields if force_update = ['delivery_data'] is passed
        略過delivery_data的篩選。"""
     has_notes: Optional[bool] = None

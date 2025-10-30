@@ -11,9 +11,15 @@ from ...models.not_found_error import NotFoundError
 from ...models.purchase_order import PurchaseOrder
 from ...models.server_error import ServerError
 
+
+class PurchaseOrder(BaseModel):
+    """Model for purchase_order"""
+    scheduled_time: Optional[str] = None
+    issuer_id: str
+
 class Body(BaseModel):
     """请求体模型"""
-    purchase_order: Optional[Dict[str, Any]] = None
+    purchase_order: Optional[PurchaseOrder] = None
 
 async def call(
     session: aiohttp.ClientSession, PurchaseOrderId: str, body: Optional[Body] = None

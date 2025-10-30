@@ -15,7 +15,7 @@ class Customer_Group_ActivityConfig(BaseModel):
     name_translations: Translatable
     ref_id: str
     type: str
-    activity_status: Literal['draft', 'pending', 'cancelled', 'sending', 'sent', 'failed', 'partially_sent', 'removed']
+    activity_status: Union[Literal['draft', 'pending', 'cancelled', 'sending', 'sent', 'failed', 'partially_sent', 'removed'], str]
     activity_time: Optional[str] = None
     submitted_at: Optional[str] = None
 

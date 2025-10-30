@@ -15,7 +15,7 @@ class PromotionCondition(BaseModel):
     """滿件數量"""
     min_price: Optional[Money] = None
     """滿額"""
-    type: Optional[Literal['red', 'green']] = None
+    type: Optional[Union[Literal['red', 'green'], str]] = None
     """A組(紅標)或B組(綠標) -  Applicable when discount_type is bundle_group"""
     whitelisted_product_ids: Optional[List[str]] = None
     """指定商品條件id"""

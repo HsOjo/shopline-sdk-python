@@ -38,7 +38,7 @@ class Params(BaseModel):
       -
        Please fill in to the second level. Default value is 00:00:00 if only fill in dates.
       請輸入至秒數，若只輸入日期，則會自動帶入當天00:00:00"""
-    status: Optional[Literal['active', 'expired']] = None
+    status: Optional[Union[Literal['active', 'expired'], str]] = None
     """Filter the customer group is active or expired.
        篩選已過期或未過期的顧客分群
       -

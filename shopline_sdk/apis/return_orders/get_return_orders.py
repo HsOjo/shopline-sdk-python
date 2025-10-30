@@ -30,16 +30,16 @@ class Params(BaseModel):
     """Filter data by those created before specific time.
        取得 created_at 小於指定時間的退貨單(包含指定時間)
        *Should use UTC time'"""
-    status_filter: Optional[Literal['pending', 'confirmed', 'completed', 'cancelled']] = None
+    status_filter: Optional[Union[Literal['pending', 'confirmed', 'completed', 'cancelled'], str]] = None
     """Order Status
       退货訂單狀態"""
-    payment_status_filter: Optional[Literal['pending', 'refunded']] = None
+    payment_status_filter: Optional[Union[Literal['pending', 'refunded'], str]] = None
     """Order payment status
       訂單退款狀態"""
-    delivery_status_filter: Optional[Literal['return_collected', 'returning']] = None
+    delivery_status_filter: Optional[Union[Literal['return_collected', 'returning'], str]] = None
     """Order delivery status
       訂單退貨狀態"""
-    inspect_status_filter: Optional[Literal['pending', 'inspected']] = None
+    inspect_status_filter: Optional[Union[Literal['pending', 'inspected'], str]] = None
     """Order inspect status
       驗貨狀態"""
     query: Optional[str] = None

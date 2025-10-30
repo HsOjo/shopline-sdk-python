@@ -29,7 +29,7 @@ class CartItem(BaseModel):
     """Variation ID 購物車內的商品規格品ID"""
     quantity: Optional[float] = None
     """Quantity 購物車內的物品數量"""
-    type: Optional[Literal['product', 'product_set', 'subscription_product', 'manual_gift', 'custom_product', 'custom_discount', 'redeem_gift']] = None
+    type: Optional[Union[Literal['product', 'product_set', 'subscription_product', 'manual_gift', 'custom_product', 'custom_discount', 'redeem_gift'], str]] = None
     """Type 購物車內的物品類型"""
     created_by: Optional[str] = None
     """The Source of Item  購物車物品加入的來源"""
