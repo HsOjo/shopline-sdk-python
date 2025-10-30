@@ -55,15 +55,13 @@ async def call(
                 error_model = UnauthorizedError(**error_data)
                 raise ShoplineAPIError(
                     status_code=401,
-                    error=error_model,
-                    **error_data
+                    error=error_model
                 )
             if response.status == 500:
                 error_model = ServerError(**error_data)
                 raise ShoplineAPIError(
                     status_code=500,
-                    error=error_model,
-                    **error_data
+                    error=error_model
                 )
             # 默认错误处理
             raise ShoplineAPIError(

@@ -48,15 +48,13 @@ async def call(
                 error_model = NotFoundError(**error_data)
                 raise ShoplineAPIError(
                     status_code=404,
-                    error=error_model,
-                    **error_data
+                    error=error_model
                 )
             if response.status == 422:
                 error_model = UnprocessableEntityError(**error_data)
                 raise ShoplineAPIError(
                     status_code=422,
-                    error=error_model,
-                    **error_data
+                    error=error_model
                 )
             # 默认错误处理
             raise ShoplineAPIError(
