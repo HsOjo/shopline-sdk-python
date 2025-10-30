@@ -19,7 +19,7 @@ class ProductsItem(BaseModel):
     custom_keys: Optional[List[str]] = None
     variations: Optional[List[Dict[str, Any]]] = None
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     products: List[ProductsItem]
 
@@ -28,7 +28,7 @@ class Response(BaseModel):
     items: Optional[List[SaleProduct]] = None
 
 async def call(
-    session: aiohttp.ClientSession, saleId: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, saleId: str, body: Optional[Body] = None
 ) -> Response:
     """
     Create sale products
@@ -45,7 +45,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.post(

@@ -16,7 +16,7 @@ class ProductsItem(BaseModel):
     """Variation Id
       款式 ID"""
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     affiliate_campaign_id: Optional[str] = None
     """Campaign Id
@@ -30,7 +30,7 @@ class Response(BaseModel):
     link: Optional[str] = None
 
 async def call(
-    session: aiohttp.ClientSession, request: Optional[Request] = None
+    session: aiohttp.ClientSession, body: Optional[Body] = None
 ) -> Response:
     """
     Generate Merchant's express cart link
@@ -47,7 +47,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.post(

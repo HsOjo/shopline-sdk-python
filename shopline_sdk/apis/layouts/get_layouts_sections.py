@@ -11,7 +11,7 @@ from ...models.page_sections import PageSections
 from ...models.server_error import ServerError
 from ...models.unauthorized_error import UnauthorizedError
 
-class Request(BaseModel):
+class Params(BaseModel):
     """查询参数模型"""
     types: List[Literal['announcement', 'header', 'footer']]
     """Types of layouts sections
@@ -22,7 +22,7 @@ class Response(BaseModel):
     items: Optional[PageSections] = None
 
 async def call(
-    session: aiohttp.ClientSession, theme_key: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, theme_key: str, params: Optional[Params] = None
 ) -> Response:
     """
     Get Layouts Sections
@@ -36,19 +36,19 @@ async def call(
     url = f"themes/{theme_key}/layouts/sections"
 
     # 构建查询参数
-    params = {}
-    if request:
-        request_dict = request.model_dump(exclude_none=True)
-        for key, value in request_dict.items():
+    query_params = {}
+    if params:
+        params_dict = params.model_dump(exclude_none=True)
+        for key, value in params_dict.items():
             if value is not None:
-                params[key] = value
+                query_params[key] = value
 
     # 构建请求头
     headers = {"Content-Type": "application/json"}
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=params, headers=headers
+        url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

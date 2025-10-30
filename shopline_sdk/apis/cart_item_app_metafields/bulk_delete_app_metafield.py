@@ -18,7 +18,7 @@ class ItemsItem(BaseModel):
     field_type: Optional[Literal['single_line_text_field', 'multi_line_text_field', 'number_integer', 'number_decimal', 'json', 'boolean', 'url']] = None
     field_value: Optional[Union[str, float, bool, Dict[str, Any]]] = None
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     items: Optional[List[ItemsItem]] = None
 
@@ -27,7 +27,7 @@ class Response(BaseModel):
     result: Optional[str] = None
 
 async def call(
-    session: aiohttp.ClientSession, cart_id: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, cart_id: str, body: Optional[Body] = None
 ) -> Response:
     """
     bulk delete app metafield
@@ -43,7 +43,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.delete(

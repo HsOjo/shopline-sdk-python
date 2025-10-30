@@ -9,9 +9,10 @@ from ...exceptions import ShoplineAPIError
 # 导入需要的模型
 from ...models.addon_product import AddonProduct
 from ...models.server_error import ServerError
+from ...models.update_addon_product_body import UpdateAddonProductBody as Body
 
 async def call(
-    session: aiohttp.ClientSession, id: str, data: Optional[Dict[str, Any]] = None
+    session: aiohttp.ClientSession, id: str, body: Optional[Body] = None
 ) -> AddonProduct:
     """
     Update Addon Product
@@ -28,7 +29,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = data if data else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.put(

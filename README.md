@@ -43,7 +43,7 @@ async def main():
     # 使用客户端会话
     async with client.new_session() as session:
         # 调用 API
-        response = await get_customers.call(session, get_customers.Request())
+        response = await get_customers.call(session)
         print(f"获取到 {len(response.items)} 个客户")
 
 # 运行异步函数
@@ -61,8 +61,8 @@ async def get_recent_customers():
     client = ShoplineAPIClient(os.getenv('SHOPLINE_ACCESS_TOKEN'))
     
     async with client.new_session() as session:
-        # 创建请求参数
-        request = get_customers.Request(
+        # 创建查询参数
+        params = get_customers.Params(
             page=1,
             per_page=10,
             sort_by='desc',
@@ -70,7 +70,7 @@ async def get_recent_customers():
         )
         
         # 调用 API
-        response = await get_customers.call(session, request)
+        response = await get_customers.call(session, params=params)
         
         for customer in response.items:
             print(f"客户: {customer.email}")
@@ -91,8 +91,8 @@ async def create_addon():
     client = ShoplineAPIClient(os.getenv('SHOPLINE_ACCESS_TOKEN'))
     
     async with client.new_session() as session:
-        # 创建加购品请求
-        request = create_addon_product.Request(
+        # 创建加购品请求体
+        body = create_addon_product.Body(
             title_translations=Translatable(
                 zh_tw="加購商品",
                 en="Addon Product"
@@ -103,10 +103,47 @@ async def create_addon():
         )
         
         # 调用 API
-        addon_product = await create_addon_product.call(session, request)
+        addon_product = await create_addon_product.call(session, body=body)
         print(f"创建的加购品 ID: {addon_product.id}")
 
 asyncio.run(create_addon())
+```
+
+### 更新资源示例
+
+```python
+import asyncio
+from shopline_sdk.client import ShoplineAPIClient
+from shopline_sdk.apis.customers import update_customer
+
+async def update_customer_info():
+    client = ShoplineAPIClient(os.getenv('SHOPLINE_ACCESS_TOKEN'))
+    
+    async with client.new_session() as session:
+        customer_id = "5a55b3c973746f507e120000"
+        
+        # 创建查询参数（可选字段）
+        params = update_customer.Params(
+            fields=["id", "email", "name"]  # 只返回指定字段
+        )
+        
+        # 创建请求体（要更新的数据）
+        body = update_customer.Body(
+            name="张三",
+            email="zhangsan@example.com",
+            is_accept_marketing=True
+        )
+        
+        # 调用 API
+        updated_customer = await update_customer.call(
+            session,
+            id=customer_id,
+            params=params,
+            body=body
+        )
+        print(f"更新的客户: {updated_customer.name} ({updated_customer.email})")
+
+asyncio.run(update_customer_info())
 ```
 
 ## API 覆盖

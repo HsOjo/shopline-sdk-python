@@ -11,9 +11,10 @@ from ...models.not_found_error import NotFoundError
 from ...models.return_order import ReturnOrder
 from ...models.server_error import ServerError
 from ...models.unprocessable_entity_error import UnprocessableEntityError
+from ...models.update_return_order_body import UpdateReturnOrderBody as Body
 
 async def call(
-    session: aiohttp.ClientSession, id: str, data: Optional[Dict[str, Any]] = None
+    session: aiohttp.ClientSession, id: str, body: Optional[Body] = None
 ) -> ReturnOrder:
     """
     Update return order
@@ -30,7 +31,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = data if data else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.put(

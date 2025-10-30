@@ -9,7 +9,7 @@ from ...exceptions import ShoplineAPIError
 # 导入需要的模型
 from ...models.promotion import Promotion
 
-class Request(BaseModel):
+class Params(BaseModel):
     """查询参数模型"""
     show_whitelisted_membership_tier: Optional[bool] = None
     """Response whitelisted MembershipTier Data
@@ -19,7 +19,7 @@ class Request(BaseModel):
       回傳優惠活動概覽"""
 
 async def call(
-    session: aiohttp.ClientSession, id: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, id: str, params: Optional[Params] = None
 ) -> Promotion:
     """
     Get Promotion
@@ -33,19 +33,19 @@ async def call(
     url = f"promotions/{id}"
 
     # 构建查询参数
-    params = {}
-    if request:
-        request_dict = request.model_dump(exclude_none=True)
-        for key, value in request_dict.items():
+    query_params = {}
+    if params:
+        params_dict = params.model_dump(exclude_none=True)
+        for key, value in params_dict.items():
             if value is not None:
-                params[key] = value
+                query_params[key] = value
 
     # 构建请求头
     headers = {"Content-Type": "application/json"}
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=params, headers=headers
+        url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

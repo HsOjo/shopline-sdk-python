@@ -10,7 +10,7 @@ from ...exceptions import ShoplineAPIError
 from ...models.server_error import ServerError
 from ...models.unprocessable_entity_error import UnprocessableEntityError
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     update_mode: Literal['add', 'remove']
     """Update mode of this opearation, allow "add" or "remove"
@@ -24,7 +24,7 @@ class Response(BaseModel):
     tags: Optional[List[str]] = None
 
 async def call(
-    session: aiohttp.ClientSession, productId: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, productId: str, body: Optional[Body] = None
 ) -> Response:
     """
     Update (add/remove) current product tags
@@ -47,7 +47,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.patch(

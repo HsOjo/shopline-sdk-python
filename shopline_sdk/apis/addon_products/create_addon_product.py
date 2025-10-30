@@ -17,7 +17,7 @@ class MainProductsItem(BaseModel):
     id: Optional[str] = Field(default=None, alias="_id")
     addon_price: Optional[Money] = None
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     title_translations: Optional[Translatable] = None
     unlimited_quantity: Optional[bool] = None
@@ -34,7 +34,7 @@ class Request(BaseModel):
     main_products: Optional[List[MainProductsItem]] = None
 
 async def call(
-    session: aiohttp.ClientSession, request: Optional[Request] = None
+    session: aiohttp.ClientSession, body: Optional[Body] = None
 ) -> AddonProduct:
     """
     Create Addon Product
@@ -51,7 +51,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.post(

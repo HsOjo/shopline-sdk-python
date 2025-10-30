@@ -11,14 +11,14 @@ from ...models.layouts_setting import LayoutsSetting
 from ...models.not_found_error import NotFoundError
 from ...models.server_error import ServerError
 
-class Request(BaseModel):
+class Params(BaseModel):
     """查询参数模型"""
     exclude: Optional[List[str]] = None
     """Exclude the section to be published
       把此定元件從出版除外"""
 
 async def call(
-    session: aiohttp.ClientSession, request: Optional[Request] = None
+    session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> LayoutsSetting:
     """
     Publish Layouts Setting
@@ -32,19 +32,19 @@ async def call(
     url = "settings/layouts/publish"
 
     # 构建查询参数
-    params = {}
-    if request:
-        request_dict = request.model_dump(exclude_none=True)
-        for key, value in request_dict.items():
+    query_params = {}
+    if params:
+        params_dict = params.model_dump(exclude_none=True)
+        for key, value in params_dict.items():
             if value is not None:
-                params[key] = value
+                query_params[key] = value
 
     # 构建请求头
     headers = {"Content-Type": "application/json"}
 
     # 发起 HTTP 请求
     async with session.post(
-        url, params=params, headers=headers
+        url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

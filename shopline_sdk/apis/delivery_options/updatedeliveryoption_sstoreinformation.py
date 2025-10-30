@@ -20,7 +20,7 @@ class AddressesItem(BaseModel):
     store_address_translations: Optional[Translatable] = None
     instruction_translations: Optional[Translatable] = None
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     store_pickup_option: Optional[Dict[str, Any]] = None
     addresses: Optional[List[AddressesItem]] = None
@@ -31,7 +31,7 @@ class Response(BaseModel):
     errors: Optional[List[str]] = None
 
 async def call(
-    session: aiohttp.ClientSession, id: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, id: str, body: Optional[Body] = None
 ) -> Response:
     """
     Update Delivery Option(Store Pickup)'s Store Information
@@ -48,7 +48,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.put(

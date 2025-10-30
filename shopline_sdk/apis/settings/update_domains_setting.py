@@ -13,12 +13,12 @@ from ...models.server_error import ServerError
 from ...models.unauthorized_error import UnauthorizedError
 from ...models.unprocessable_entity_error import UnprocessableEntityError
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     webmasters: Dict[str, Any]
 
 async def call(
-    session: aiohttp.ClientSession, request: Optional[Request] = None
+    session: aiohttp.ClientSession, body: Body
 ) -> DomainsSetting:
     """
     Update Domains Setting
@@ -38,7 +38,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.put(

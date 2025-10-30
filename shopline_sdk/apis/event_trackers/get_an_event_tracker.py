@@ -10,13 +10,13 @@ from ...exceptions import ShoplineAPIError
 from ...models.event_trackers import EventTrackers
 from ...models.not_found_error import NotFoundError
 
-class Request(BaseModel):
+class Params(BaseModel):
     """查询参数模型"""
     version: Optional[str] = None
     """控制 api version"""
 
 async def call(
-    session: aiohttp.ClientSession, id: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, id: str, params: Optional[Params] = None
 ) -> EventTrackers:
     """
     Get an Event Tracker
@@ -30,19 +30,19 @@ async def call(
     url = f"event_trackers/{id}"
 
     # 构建查询参数
-    params = {}
-    if request:
-        request_dict = request.model_dump(exclude_none=True)
-        for key, value in request_dict.items():
+    query_params = {}
+    if params:
+        params_dict = params.model_dump(exclude_none=True)
+        for key, value in params_dict.items():
             if value is not None:
-                params[key] = value
+                query_params[key] = value
 
     # 构建请求头
     headers = {"Content-Type": "application/json"}
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=params, headers=headers
+        url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

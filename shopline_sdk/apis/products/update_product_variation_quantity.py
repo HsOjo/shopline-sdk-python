@@ -13,7 +13,7 @@ from ...models.product_variation import ProductVariation
 from ...models.server_error import ServerError
 from ...models.unprocessable_entity_error import UnprocessableEntityError
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     quantity: float
     """Quantity
@@ -40,7 +40,7 @@ class Response(BaseModel):
     product_id: Optional[str] = None
 
 async def call(
-    session: aiohttp.ClientSession, product_id: str, id: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, product_id: str, id: str, body: Optional[Body] = None
 ) -> Response:
     """
     Update Product Variation Quantity
@@ -57,7 +57,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.put(

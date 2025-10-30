@@ -11,7 +11,7 @@ from ...models.channel import Channel
 from ...models.merchant import Merchant
 from ...models.staff import Staff
 
-class Request(BaseModel):
+class Params(BaseModel):
     """查询参数模型"""
     permission_scopes: Optional[List[Literal['open_api', 'admin', 'shop_crm', 'pos', 'one', 'shoplytics', 'sc', 'dash', 'ads', 'payment_center', 'mc', 'form_builder']]] = None
     """The permissions scopes
@@ -22,7 +22,7 @@ class Response(BaseModel):
     items: Optional[List[Dict[str, Any]]] = None
 
 async def call(
-    session: aiohttp.ClientSession, request: Optional[Request] = None
+    session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> Response:
     """
     Get all staff
@@ -36,19 +36,19 @@ async def call(
     url = "staffs"
 
     # 构建查询参数
-    params = {}
-    if request:
-        request_dict = request.model_dump(exclude_none=True)
-        for key, value in request_dict.items():
+    query_params = {}
+    if params:
+        params_dict = params.model_dump(exclude_none=True)
+        for key, value in params_dict.items():
             if value is not None:
-                params[key] = value
+                query_params[key] = value
 
     # 构建请求头
     headers = {"Content-Type": "application/json"}
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=params, headers=headers
+        url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

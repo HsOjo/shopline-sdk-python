@@ -11,7 +11,7 @@ from ...models.channel import Channel
 from ...models.not_found_error import NotFoundError
 from ...models.server_error import ServerError
 
-class Request(BaseModel):
+class Params(BaseModel):
     """查询参数模型"""
     include_fields: Optional[List[Literal['e_invoice_setting', 'pin_codes']]] = None
     """Some fields need to be specified in this parameter. Otherwise, it will not be returned.
@@ -21,7 +21,7 @@ class Request(BaseModel):
        mobile logo media 必須加入 items.mobile_logo_media_url 到此欄位。"""
 
 async def call(
-    session: aiohttp.ClientSession, id: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, id: str, params: Optional[Params] = None
 ) -> Channel:
     """
     Get Channel
@@ -35,19 +35,19 @@ async def call(
     url = f"channels/{id}"
 
     # 构建查询参数
-    params = {}
-    if request:
-        request_dict = request.model_dump(exclude_none=True)
-        for key, value in request_dict.items():
+    query_params = {}
+    if params:
+        params_dict = params.model_dump(exclude_none=True)
+        for key, value in params_dict.items():
             if value is not None:
-                params[key] = value
+                query_params[key] = value
 
     # 构建请求头
     headers = {"Content-Type": "application/json"}
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=params, headers=headers
+        url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

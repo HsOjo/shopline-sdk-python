@@ -11,9 +11,10 @@ from ...models.category import Category
 from ...models.not_found_error import NotFoundError
 from ...models.server_error import ServerError
 from ...models.unprocessable_entity_error import UnprocessableEntityError
+from ...models.update_category_body import UpdateCategoryBody as Body
 
 async def call(
-    session: aiohttp.ClientSession, id: str, data: Optional[Dict[str, Any]] = None
+    session: aiohttp.ClientSession, id: str, body: Optional[Body] = None
 ) -> Category:
     """
     Update Category
@@ -30,7 +31,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = data if data else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.put(

@@ -7,10 +7,11 @@ from typing_extensions import Literal
 from ...exceptions import ShoplineAPIError
 
 # 导入需要的模型
+from ...models.create_product_review_comment_body import CreateProductReviewCommentBody as Body
 from ...models.product_review_comment import ProductReviewComment
 
 async def call(
-    session: aiohttp.ClientSession, data: Optional[Dict[str, Any]] = None
+    session: aiohttp.ClientSession, body: Optional[Body] = None
 ) -> ProductReviewComment:
     """
     Create Product Review Comments
@@ -27,7 +28,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = data if data else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.post(

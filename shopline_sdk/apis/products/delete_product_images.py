@@ -6,7 +6,7 @@ from typing_extensions import Literal
 # 导入异常类
 from ...exceptions import ShoplineAPIError
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     media_ids: Optional[List[str]] = None
     """Ids of the Images
@@ -17,7 +17,7 @@ class Response(BaseModel):
     result: Optional[str] = None
 
 async def call(
-    session: aiohttp.ClientSession, id: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, id: str, body: Optional[Body] = None
 ) -> Response:
     """
     Delete Product Images
@@ -35,7 +35,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.delete(

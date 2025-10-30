@@ -21,7 +21,7 @@ class ItemsItem(BaseModel):
     user_name: Optional[str] = None
     media_ids: Optional[Any] = None
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     items: Optional[List[ItemsItem]] = None
 
@@ -31,7 +31,7 @@ class Response(BaseModel):
     count: Optional[int] = None
 
 async def call(
-    session: aiohttp.ClientSession, request: Optional[Request] = None
+    session: aiohttp.ClientSession, body: Optional[Body] = None
 ) -> Response:
     """
     Bulk Create Product Review Comments
@@ -48,7 +48,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.post(

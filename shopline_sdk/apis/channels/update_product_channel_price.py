@@ -8,9 +8,10 @@ from ...exceptions import ShoplineAPIError
 
 # 导入需要的模型
 from ...models.price_set import PriceSet
+from ...models.update_channel_price_body import UpdateChannelPriceBody as Body
 
 async def call(
-    session: aiohttp.ClientSession, channel_id: str, product_id: str, id: str, data: Optional[Dict[str, Any]] = None
+    session: aiohttp.ClientSession, channel_id: str, product_id: str, id: str, body: Optional[Body] = None
 ) -> PriceSet:
     """
     Update Product Channel Price
@@ -27,7 +28,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = data if data else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.put(

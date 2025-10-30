@@ -13,7 +13,7 @@ from ...models.server_error import ServerError
 from ...models.unauthorized_error import UnauthorizedError
 from ...models.unprocessable_entity_error import UnprocessableEntityError
 
-class Request(BaseModel):
+class Params(BaseModel):
     """查询参数模型"""
     page: Optional[int] = None
     """Page Number
@@ -23,7 +23,7 @@ class Request(BaseModel):
       每頁顯示 n 筆資料"""
 
 async def call(
-    session: aiohttp.ClientSession, id: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, id: str, params: Optional[Params] = None
 ) -> MemberPoints:
     """
     Get Customer member points History
@@ -37,19 +37,19 @@ async def call(
     url = f"customers/{id}/member_points"
 
     # 构建查询参数
-    params = {}
-    if request:
-        request_dict = request.model_dump(exclude_none=True)
-        for key, value in request_dict.items():
+    query_params = {}
+    if params:
+        params_dict = params.model_dump(exclude_none=True)
+        for key, value in params_dict.items():
             if value is not None:
-                params[key] = value
+                query_params[key] = value
 
     # 构建请求头
     headers = {"Content-Type": "application/json"}
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=params, headers=headers
+        url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

@@ -11,7 +11,7 @@ from ...models.not_found_error import NotFoundError
 from ...models.product_stock import ProductStock
 from ...models.server_error import ServerError
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     warehouse_id: str
     """Warehouse’s id
@@ -36,7 +36,7 @@ class Request(BaseModel):
       增加/減少數量"""
 
 async def call(
-    session: aiohttp.ClientSession, id: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, id: str, body: Optional[Body] = None
 ) -> ProductStock:
     """
     Update Addon Product Stock
@@ -53,7 +53,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.put(

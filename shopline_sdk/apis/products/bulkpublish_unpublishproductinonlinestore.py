@@ -18,7 +18,7 @@ class ProductsItem(BaseModel):
        需要上架/下架的商品id，每次最多只能上架/下架100個商品。"""
     status: Optional[status] = None
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     products: Optional[List[ProductsItem]] = None
 
@@ -28,7 +28,7 @@ class Response(BaseModel):
     errors: Optional[List[Dict[str, Any]]] = None
 
 async def call(
-    session: aiohttp.ClientSession, request: Optional[Request] = None
+    session: aiohttp.ClientSession, body: Optional[Body] = None
 ) -> Response:
     """
     Bulk Publish/Unpublish Product in Online Store
@@ -45,7 +45,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.put(

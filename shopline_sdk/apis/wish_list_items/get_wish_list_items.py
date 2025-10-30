@@ -11,7 +11,7 @@ from ...models.server_error import ServerError
 from ...models.unprocessable_entity_error import UnprocessableEntityError
 from ...models.wish_list_items import WishListItems
 
-class Request(BaseModel):
+class Params(BaseModel):
     """查询参数模型"""
     customer_id: str
     """The ID of the customer.
@@ -33,7 +33,7 @@ class Request(BaseModel):
        依照 created_at 欄位指定排序方式為升冪或降冪"""
 
 async def call(
-    session: aiohttp.ClientSession, request: Optional[Request] = None
+    session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> WishListItems:
     """
     Get wish list items
@@ -47,19 +47,19 @@ async def call(
     url = "wish_list_items"
 
     # 构建查询参数
-    params = {}
-    if request:
-        request_dict = request.model_dump(exclude_none=True)
-        for key, value in request_dict.items():
+    query_params = {}
+    if params:
+        params_dict = params.model_dump(exclude_none=True)
+        for key, value in params_dict.items():
             if value is not None:
-                params[key] = value
+                query_params[key] = value
 
     # 构建请求头
     headers = {"Content-Type": "application/json"}
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=params, headers=headers
+        url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

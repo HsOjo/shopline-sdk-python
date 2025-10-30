@@ -6,12 +6,12 @@ from typing_extensions import Literal
 # 导入异常类
 from ...exceptions import ShoplineAPIError
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     product_ids: List[str]
 
 async def call(
-    session: aiohttp.ClientSession, saleId: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, saleId: str, body: Optional[Body] = None
 ) -> str:
     """
     Delete sale products
@@ -28,7 +28,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.post(

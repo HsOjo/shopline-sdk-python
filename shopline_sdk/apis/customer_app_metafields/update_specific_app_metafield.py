@@ -8,9 +8,10 @@ from ...exceptions import ShoplineAPIError
 
 # 导入需要的模型
 from ...models.app_metafield_value import AppMetafieldValue
+from ...models.update_app_metafield_body import UpdateAppMetafieldBody as Body
 
 async def call(
-    session: aiohttp.ClientSession, customer_id: str, metafield_id: str, data: Optional[Dict[str, Any]] = None
+    session: aiohttp.ClientSession, customer_id: str, metafield_id: str, body: Optional[Body] = None
 ) -> AppMetafieldValue:
     """
     Update specific app metafield
@@ -26,7 +27,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = data if data else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.put(

@@ -9,7 +9,7 @@ from ...exceptions import ShoplineAPIError
 # 导入需要的模型
 from ...models.cart import Cart
 
-class Request(BaseModel):
+class Params(BaseModel):
     """查询参数模型"""
     calculate_all: Optional[bool] = None
     """To calculate info for checkout usage, only turn this option on when you ready to checkout.
@@ -23,7 +23,7 @@ class Response(BaseModel):
     trace_id: Optional[str] = None
 
 async def call(
-    session: aiohttp.ClientSession, id: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, id: str, params: Optional[Params] = None
 ) -> Response:
     """
     Get Cart
@@ -37,19 +37,19 @@ async def call(
     url = f"carts/{id}"
 
     # 构建查询参数
-    params = {}
-    if request:
-        request_dict = request.model_dump(exclude_none=True)
-        for key, value in request_dict.items():
+    query_params = {}
+    if params:
+        params_dict = params.model_dump(exclude_none=True)
+        for key, value in params_dict.items():
             if value is not None:
-                params[key] = value
+                query_params[key] = value
 
     # 构建请求头
     headers = {"Content-Type": "application/json"}
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=params, headers=headers
+        url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

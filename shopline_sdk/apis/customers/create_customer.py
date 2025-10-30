@@ -7,12 +7,13 @@ from typing_extensions import Literal
 from ...exceptions import ShoplineAPIError
 
 # 导入需要的模型
+from ...models.create_customer_body import CreateCustomerBody as Body
 from ...models.customer import Customer
 from ...models.server_error import ServerError
 from ...models.unauthorized_error import UnauthorizedError
 from ...models.unprocessable_entity_error import UnprocessableEntityError
 
-class Request(BaseModel):
+class Params(BaseModel):
     """查询参数模型"""
     excludes: Optional[List[str]] = None
     """Exclude certain parameters in the response
@@ -22,7 +23,7 @@ class Request(BaseModel):
        結果只顯示哪些參數"""
 
 async def call(
-    session: aiohttp.ClientSession, request: Optional[Request] = None
+    session: aiohttp.ClientSession, params: Optional[Params] = None, body: Optional[Body] = None
 ) -> Customer:
     """
     Create Customer
@@ -36,22 +37,22 @@ async def call(
     url = "customers"
 
     # 构建查询参数
-    params = {}
-    if request:
-        request_dict = request.model_dump(exclude_none=True)
-        for key, value in request_dict.items():
+    query_params = {}
+    if params:
+        params_dict = params.model_dump(exclude_none=True)
+        for key, value in params_dict.items():
             if value is not None:
-                params[key] = value
+                query_params[key] = value
 
     # 构建请求头
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.post(
-        url, params=params, json=json_data, headers=headers
+        url, params=query_params, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

@@ -6,7 +6,7 @@ from typing_extensions import Literal
 # 导入异常类
 from ...exceptions import ShoplineAPIError
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     cancelled_reason: Optional[Dict[str, Any]] = None
     revert_credits: Optional[Dict[str, Any]] = None
@@ -34,7 +34,7 @@ class Response(BaseModel):
     order_items_stock_tag: Optional[List[Dict[str, Any]]] = None
 
 async def call(
-    session: aiohttp.ClientSession, orderId: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, orderId: str, body: Optional[Body] = None
 ) -> Response:
     """
     Cancel Order
@@ -51,7 +51,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.patch(

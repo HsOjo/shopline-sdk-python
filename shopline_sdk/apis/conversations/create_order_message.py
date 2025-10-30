@@ -12,7 +12,7 @@ from ...models.order_comment import OrderComment
 from ...models.server_error import ServerError
 from ...models.unprocessable_entity_error import UnprocessableEntityError
 
-class Request(BaseModel):
+class Body(BaseModel):
     """请求体模型"""
     text: Optional[str] = None
     """The message of the comment
@@ -34,7 +34,7 @@ class Request(BaseModel):
     custom_data: Optional[Dict[str, Any]] = None
 
 async def call(
-    session: aiohttp.ClientSession, id: str, request: Optional[Request] = None
+    session: aiohttp.ClientSession, id: str, body: Optional[Body] = None
 ) -> OrderComment:
     """
     Create Order Message
@@ -51,7 +51,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = request.model_dump(exclude_none=True) if request else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.post(

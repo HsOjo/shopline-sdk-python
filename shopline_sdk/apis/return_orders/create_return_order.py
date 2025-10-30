@@ -7,12 +7,13 @@ from typing_extensions import Literal
 from ...exceptions import ShoplineAPIError
 
 # 导入需要的模型
+from ...models.create_return_order_body import CreateReturnOrderBody as Body
 from ...models.return_order import ReturnOrder
 from ...models.server_error import ServerError
 from ...models.unprocessable_entity_error import UnprocessableEntityError
 
 async def call(
-    session: aiohttp.ClientSession, data: Optional[Dict[str, Any]] = None
+    session: aiohttp.ClientSession, body: Optional[Body] = None
 ) -> ReturnOrder:
     """
     Create return order
@@ -29,7 +30,7 @@ async def call(
     headers = {"Content-Type": "application/json"}
 
     # 构建请求体
-    json_data = data if data else None
+    json_data = body.model_dump(exclude_none=True) if body else None
 
     # 发起 HTTP 请求
     async with session.post(
