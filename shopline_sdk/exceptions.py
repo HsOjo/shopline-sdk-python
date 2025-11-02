@@ -11,11 +11,11 @@ class ShoplineAPIError(Exception):
     
     def __init__(
         self, 
-        code: str = "UNKNOWN", 
-        message: str = "Unknown error", 
+        code: str = None, 
+        message: str = None, 
         status_code: int = 500,
         error: Optional[BaseModel] = None,
-        **kwargs
+        **extra
     ):
         """
         初始化 Shopline API 错误
@@ -27,14 +27,11 @@ class ShoplineAPIError(Exception):
             error: 错误响应模型实例
             **kwargs: 其他错误数据
         """
-        self.code = code
-        self.message = message
+        self.code = code or getattr(error, "code", None)
+        self.message = message or getattr(error, "message", None) or getattr(error, "error", None)
         self.status_code = status_code
         self.error = error
-        
-        # 存储额外的错误数据
-        for key, value in kwargs.items():
-            setattr(self, key, value)
+        self.extra = extra
         
         super().__init__(f"[{code}] {message}")
     
@@ -44,5 +41,5 @@ class ShoplineAPIError(Exception):
     def __repr__(self) -> str:
         return (
             f"ShoplineAPIError(code='{self.code}', message='{self.message}', "
-            f"status_code={self.status_code}, error={self.error})"
+            f"status_code={self.status_code}, extra={self.extra})"
         )

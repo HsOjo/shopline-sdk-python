@@ -48,16 +48,16 @@ async def call(
         if response.status >= 400:
             error_data = await response.json()
             if response.status == 404:
-                error_model = NotFoundError(**error_data)
+                error = NotFoundError(**error_data)
                 raise ShoplineAPIError(
                     status_code=404,
-                    error=error_model
+                    error=error
                 )
             if response.status == 500:
-                error_model = ServerError(**error_data)
+                error = ServerError(**error_data)
                 raise ShoplineAPIError(
                     status_code=500,
-                    error=error_model
+                    error=error
                 )
             # 默认错误处理
             raise ShoplineAPIError(
