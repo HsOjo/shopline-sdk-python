@@ -4,11 +4,11 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.price_set import PriceSet
-from ...models.update_channel_price_body import UpdateChannelPriceBody as Body
+from shopline_sdk.models.price_set import PriceSet
+from shopline_sdk.models.update_channel_price_body import UpdateChannelPriceBody as Body
 
 async def call(
     session: aiohttp.ClientSession, channel_id: str, product_id: str, id: str, body: Optional[Body] = None

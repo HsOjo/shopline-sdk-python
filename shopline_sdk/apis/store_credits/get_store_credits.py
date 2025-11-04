@@ -4,11 +4,11 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.paginatable import Paginatable
-from ...models.store_credit import StoreCredit
+from shopline_sdk.models.paginatable import Paginatable
+from shopline_sdk.models.store_credit import StoreCredit
 
 class Params(BaseModel):
     """查询参数模型"""

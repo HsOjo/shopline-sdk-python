@@ -4,12 +4,12 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.server_error import ServerError
-from ...models.theme import Theme
-from ...models.unauthorized_error import UnauthorizedError
+from shopline_sdk.models.server_error import ServerError
+from shopline_sdk.models.theme import Theme
+from shopline_sdk.models.unauthorized_error import UnauthorizedError
 
 class Response(BaseModel):
     """响应体模型"""

@@ -4,11 +4,11 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.create_metafield_body import CreateMetafieldBody as Body
-from ...models.metafield_value import MetafieldValue
+from shopline_sdk.models.create_metafield_body import CreateMetafieldBody as Body
+from shopline_sdk.models.metafield_value import MetafieldValue
 
 async def call(
     session: aiohttp.ClientSession, customer_id: str, body: Optional[Body] = None

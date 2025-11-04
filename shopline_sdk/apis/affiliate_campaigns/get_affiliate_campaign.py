@@ -4,12 +4,12 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.affiliate_campaign import AffiliateCampaign
-from ...models.server_error import ServerError
-from ...models.unprocessable_entity_error import UnprocessableEntityError
+from shopline_sdk.models.affiliate_campaign import AffiliateCampaign
+from shopline_sdk.models.server_error import ServerError
+from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 
 async def call(
     session: aiohttp.ClientSession, id: str

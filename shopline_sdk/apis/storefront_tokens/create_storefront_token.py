@@ -4,12 +4,12 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.limit_exceeded_error import LimitExceededError
-from ...models.storefront_token import StorefrontToken
-from ...models.unprocessable_entity_error import UnprocessableEntityError
+from shopline_sdk.models.limit_exceeded_error import LimitExceededError
+from shopline_sdk.models.storefront_token import StorefrontToken
+from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 
 class Body(BaseModel):
     """请求体模型"""

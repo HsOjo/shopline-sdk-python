@@ -4,12 +4,12 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.server_error import ServerError
-from ...models.unprocessable_entity_error import UnprocessableEntityError
-from ...models.wish_list_items import WishListItems
+from shopline_sdk.models.server_error import ServerError
+from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
+from shopline_sdk.models.wish_list_items import WishListItems
 
 class Params(BaseModel):
     """查询参数模型"""

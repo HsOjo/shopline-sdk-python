@@ -4,13 +4,13 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.category import Category
-from ...models.merchant import Merchant
-from ...models.product import Product
-from ...models.server_error import ServerError
+from shopline_sdk.models.category import Category
+from shopline_sdk.models.merchant import Merchant
+from shopline_sdk.models.product import Product
+from shopline_sdk.models.server_error import ServerError
 
 class Body(BaseModel):
     """请求体模型"""

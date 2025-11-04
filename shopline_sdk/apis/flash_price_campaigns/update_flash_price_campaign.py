@@ -4,11 +4,11 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.create_flash_price_campaign_body import CreateFlashPriceCampaignBody as Body
-from ...models.flash_price_campaign import FlashPriceCampaign
+from shopline_sdk.models.create_flash_price_campaign_body import CreateFlashPriceCampaignBody as Body
+from shopline_sdk.models.flash_price_campaign import FlashPriceCampaign
 
 async def call(
     session: aiohttp.ClientSession, id: str, body: Optional[Body] = None

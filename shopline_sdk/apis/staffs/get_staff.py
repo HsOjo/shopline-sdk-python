@@ -4,12 +4,12 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.not_found_error import NotFoundError
-from ...models.server_error import ServerError
-from ...models.staff import Staff
+from shopline_sdk.models.not_found_error import NotFoundError
+from shopline_sdk.models.server_error import ServerError
+from shopline_sdk.models.staff import Staff
 
 async def call(
     session: aiohttp.ClientSession, id: str

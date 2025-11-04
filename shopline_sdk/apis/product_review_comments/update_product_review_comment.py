@@ -4,11 +4,11 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.product_review_comment import ProductReviewComment
-from ...models.update_product_review_comment_body import UpdateProductReviewCommentBody as Body
+from shopline_sdk.models.product_review_comment import ProductReviewComment
+from shopline_sdk.models.update_product_review_comment_body import UpdateProductReviewCommentBody as Body
 
 async def call(
     session: aiohttp.ClientSession, id: str, body: Optional[Body] = None

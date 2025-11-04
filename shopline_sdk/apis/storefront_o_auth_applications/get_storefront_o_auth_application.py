@@ -4,10 +4,10 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.storefront_o_auth_applications import StorefrontOAuthApplications
+from shopline_sdk.models.storefront_o_auth_applications import StorefrontOAuthApplications
 
 async def call(
     session: aiohttp.ClientSession

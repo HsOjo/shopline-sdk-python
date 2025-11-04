@@ -53,6 +53,7 @@ asyncio.run(main())
 ### 带参数的 API 调用
 
 ```python
+import os
 import asyncio
 from shopline_sdk.client import ShoplineAPIClient
 from shopline_sdk.apis.customers import get_customers
@@ -81,6 +82,7 @@ asyncio.run(get_recent_customers())
 ### 创建资源示例
 
 ```python
+import os
 import asyncio
 from shopline_sdk.client import ShoplineAPIClient
 from shopline_sdk.apis.addon_products import create_addon_product
@@ -112,6 +114,7 @@ asyncio.run(create_addon())
 ### 更新资源示例
 
 ```python
+import os
 import asyncio
 from shopline_sdk.client import ShoplineAPIClient
 from shopline_sdk.apis.customers import update_customer
@@ -186,7 +189,9 @@ SDK 支持 Shopline OpenAPI 的所有主要功能模块：
 SDK 提供了完善的错误处理机制：
 
 ```python
+from shopline_sdk.client import ShoplineAPIClient
 from shopline_sdk.exceptions import ShoplineAPIError
+from shopline_sdk.apis.customers import get_customers
 
 async def handle_errors():
     client = ShoplineAPIClient("invalid_token")
@@ -214,18 +219,11 @@ export SHOPLINE_ACCESS_TOKEN="your_access_token_here"
 ### 自定义基础 URL
 
 ```python
+from shopline_sdk.client import ShoplineAPIClient
 client = ShoplineAPIClient(
     access_token="your_token",
     base_url="https://custom-api.shopline.io/v1"
 )
-```
-
-### 自定义请求头
-
-```python
-async with client.new_session(headers={"Custom-Header": "value"}) as session:
-    # 使用自定义请求头
-    response = await get_customers.call(session)
 ```
 
 ## 许可证

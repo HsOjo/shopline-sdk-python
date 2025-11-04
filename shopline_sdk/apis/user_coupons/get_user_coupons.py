@@ -4,10 +4,10 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.user_coupons import UserCoupons
+from shopline_sdk.models.user_coupons import UserCoupons
 
 class Params(BaseModel):
     """查询参数模型"""

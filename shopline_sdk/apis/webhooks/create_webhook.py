@@ -4,11 +4,11 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.create_webhook_body import CreateWebhookBody as Body
-from ...models.webhook import Webhook
+from shopline_sdk.models.create_webhook_body import CreateWebhookBody as Body
+from shopline_sdk.models.webhook import Webhook
 
 async def call(
     session: aiohttp.ClientSession, body: Optional[Body] = None

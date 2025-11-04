@@ -4,12 +4,12 @@ from pydantic import BaseModel, ValidationError, Field
 from typing_extensions import Literal
 
 # 导入异常类
-from ...exceptions import ShoplineAPIError
+from shopline_sdk.exceptions import ShoplineAPIError
 
 # 导入需要的模型
-from ...models.page_sections import PageSections
-from ...models.server_error import ServerError
-from ...models.unauthorized_error import UnauthorizedError
+from shopline_sdk.models.page_sections import PageSections
+from shopline_sdk.models.server_error import ServerError
+from shopline_sdk.models.unauthorized_error import UnauthorizedError
 
 class Params(BaseModel):
     """查询参数模型"""
