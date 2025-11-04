@@ -11,7 +11,7 @@ from shopline_sdk.models.server_error import ServerError
 
 class Params(BaseModel):
     """查询参数模型"""
-    ids: Optional[str] = None
+    ids: Optional[str] = Field(default=None, alias="ids[]")
 
 async def call(
     session: aiohttp.ClientSession, params: Optional[Params] = None
@@ -30,7 +30,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

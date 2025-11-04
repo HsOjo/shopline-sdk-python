@@ -11,7 +11,7 @@ from shopline_sdk.models.metafield_value import MetafieldValue
 
 class Params(BaseModel):
     """查询参数模型"""
-    filters: Optional[List[str]] = None
+    filters: Optional[List[str]] = Field(default=None, alias="filters[]")
     """Search criteria
        In format of {namespace}.{key}:{value}
        {namespace} - required
@@ -38,7 +38,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

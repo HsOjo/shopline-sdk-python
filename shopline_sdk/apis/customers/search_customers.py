@@ -37,7 +37,7 @@ class Params(BaseModel):
       email
       phones
       mobile_phone"""
-    id: Optional[List[str]] = None
+    id: Optional[List[str]] = Field(default=None, alias="id[]")
     """Customer's ID list
       顧客編號列表"""
     name: Optional[str] = None
@@ -170,7 +170,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

@@ -21,13 +21,13 @@ class Params(BaseModel):
     sort_by: Optional[Union[Literal['asc', 'desc'], str]] = None
     """Setting sorting direction
       設定時間排序"""
-    excludes: Optional[List[str]] = None
+    excludes: Optional[List[str]] = Field(default=None, alias="excludes[]")
     """Could exclude certain parameters in the response
       結果要排除哪些參數"""
-    fields: Optional[List[str]] = None
+    fields: Optional[List[str]] = Field(default=None, alias="fields[]")
     """Could only show certain parameters in the response
       結果只顯示哪些參數"""
-    channel_ids: Optional[List[str]] = None
+    channel_ids: Optional[List[str]] = Field(default=None, alias="channel_ids[]")
     """Show agents include one of channel_ids, length limit is 10
       結果只顯示哪些員工，長度限制10個"""
 
@@ -53,7 +53,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

@@ -89,13 +89,13 @@ class Params(BaseModel):
     tags: Optional[str] = None
     """Product Tag
       產品標籤"""
-    excludes: Optional[str] = None
+    excludes: Optional[str] = Field(default=None, alias="excludes[]")
     """Could exclude certain parameters in the response
       結果要排除哪些參數"""
-    fields: Optional[str] = None
+    fields: Optional[str] = Field(default=None, alias="fields[]")
     """Could only show certain parameters in the response
       結果只顯示哪些參數"""
-    include_fields: Optional[List[Union[Literal['labels'], str]]] = None
+    include_fields: Optional[List[Union[Literal['labels'], str]]] = Field(default=None, alias="include_fields[]")
     """Provide additional attributes in the response
       結果添加哪些參數"""
     retail_status: Optional[Union[Literal['active', 'draft'], str]] = None
@@ -134,7 +134,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

@@ -45,10 +45,10 @@ class Params(BaseModel):
        目標資料的第一個顧客的前一個顧客ID，同作分頁標記。
        * If "previous_id" is provided, this operation will ignore "page" param. 
        * 如果使用param "previous_id"，這次操作會忽略param "page" """
-    include_fields: Optional[List[Union[Literal['metafields'], str]]] = None
+    include_fields: Optional[List[Union[Literal['metafields'], str]]] = Field(default=None, alias="include_fields[]")
     """Provide additional attributes in the response
       結果添加哪些參數"""
-    fields: Optional[List[str]] = None
+    fields: Optional[List[str]] = Field(default=None, alias="fields[]")
     """Only show certain parameters in the response
        This field will have conflicts to the include_fields[]
        To avoid the conflicts
@@ -81,7 +81,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

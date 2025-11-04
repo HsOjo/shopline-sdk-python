@@ -25,7 +25,7 @@ class Params(BaseModel):
     simplified: Optional[bool] = None
     """Is response simplified
       是否簡化回傳結果"""
-    product_ids: Optional[List[str]] = None
+    product_ids: Optional[List[str]] = Field(default=None, alias="product_ids[]")
     """Product IDs
       指定商品ID"""
     order_by: Optional[Union[Literal['desc', 'asc'], str]] = None
@@ -49,7 +49,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

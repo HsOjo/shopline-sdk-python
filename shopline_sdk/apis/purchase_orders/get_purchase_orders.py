@@ -18,7 +18,7 @@ class Params(BaseModel):
     type: Optional[str] = None
     """PurchaseOrder's type
       進貨單類型"""
-    statuses: Optional[List[str]] = None
+    statuses: Optional[List[str]] = Field(default=None, alias="statuses[]")
     """PurchaseOrder's statuses
       進貨單狀態"""
     arrival_statuses: Optional[List[str]] = None
@@ -57,7 +57,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

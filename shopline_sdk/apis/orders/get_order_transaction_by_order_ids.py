@@ -11,7 +11,7 @@ from shopline_sdk.models.order_transaction import OrderTransaction
 
 class Params(BaseModel):
     """查询参数模型"""
-    orderIds: List[str]
+    orderIds: List[str] = Field(alias="orderIds[]")
     """Order Ids"""
 
 class Response(BaseModel):
@@ -34,7 +34,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

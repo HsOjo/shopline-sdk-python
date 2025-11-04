@@ -21,7 +21,7 @@ class Params(BaseModel):
     per_page: Optional[int] = None
     """Numbers of records per Page
       每頁顯示 n 筆資料"""
-    customer_ids: Optional[List[str]] = None
+    customer_ids: Optional[List[str]] = Field(default=None, alias="customer_ids[]")
     """The result only shows the selected customers
       結果只顯示指定的顧客群"""
 
@@ -47,7 +47,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

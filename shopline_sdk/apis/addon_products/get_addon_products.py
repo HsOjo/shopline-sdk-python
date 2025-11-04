@@ -23,7 +23,7 @@ class Params(BaseModel):
     per_page: Optional[int] = None
     """Numbers of Orders per Page
       每頁顯示 n 筆資料"""
-    include_fields: Optional[List[Union[Literal['promotions'], str]]] = None
+    include_fields: Optional[List[Union[Literal['promotions'], str]]] = Field(default=None, alias="include_fields[]")
     """Provide additional attributes in the response
       結果添加哪些參數"""
     main_product_id: Optional[str] = None
@@ -52,7 +52,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

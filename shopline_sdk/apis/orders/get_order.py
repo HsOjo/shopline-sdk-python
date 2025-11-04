@@ -13,10 +13,10 @@ from shopline_sdk.models.server_error import ServerError
 
 class Params(BaseModel):
     """查询参数模型"""
-    include_fields: Optional[List[Union[Literal['affiliate_campaign', 'agent_id', 'auto_reward_credit_summary', 'member_point_summary'], str]]] = None
+    include_fields: Optional[List[Union[Literal['affiliate_campaign', 'agent_id', 'auto_reward_credit_summary', 'member_point_summary'], str]]] = Field(default=None, alias="include_fields[]")
     """Provide additional attributes in the response
       結果添加哪些參數"""
-    fields: Optional[List[str]] = None
+    fields: Optional[List[str]] = Field(default=None, alias="fields[]")
     """Only return the provided fields in the responses
       結果只包含輸入的參數 
        This parameter will override include_fields[]
@@ -39,7 +39,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

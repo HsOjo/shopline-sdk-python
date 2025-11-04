@@ -14,10 +14,10 @@ from shopline_sdk.models.unauthorized_error import UnauthorizedError
 
 class Params(BaseModel):
     """查询参数模型"""
-    excludes: Optional[List[str]] = None
+    excludes: Optional[List[str]] = Field(default=None, alias="excludes[]")
     """Exclude certain parameters in the response
       結果要排除哪些參數"""
-    fields: Optional[List[Union[Literal['membership_tier_gap'], str]]] = None
+    fields: Optional[List[Union[Literal['membership_tier_gap'], str]]] = Field(default=None, alias="fields[]")
     """Only show certain parameters in the response
        This field will have conflicts to the include_fields[]
        To avoid the conflicts
@@ -27,7 +27,7 @@ class Params(BaseModel):
        這個欄位會跟include_fields[]的欄位有衝突
        要避免衝突的話，請輸入所有也包括在include_fields[]內的項目
        否則那些項目將不能被顯示"""
-    include_fields: Optional[List[Union[Literal['metafields'], str]]] = None
+    include_fields: Optional[List[Union[Literal['metafields'], str]]] = Field(default=None, alias="include_fields[]")
     """Provide additional attributes in the response
       結果添加哪些參數"""
 
@@ -48,7 +48,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

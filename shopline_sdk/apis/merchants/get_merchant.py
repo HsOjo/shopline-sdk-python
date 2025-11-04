@@ -11,7 +11,7 @@ from shopline_sdk.models.merchant import Merchant
 
 class Params(BaseModel):
     """查询参数模型"""
-    include_fields: Optional[List[Union[Literal['current_theme_key', 'instagram_username', 'admin_status'], str]]] = None
+    include_fields: Optional[List[Union[Literal['current_theme_key', 'instagram_username', 'admin_status'], str]]] = Field(default=None, alias="include_fields[]")
     """Provide additional attributes in the response
       結果添加哪些參數"""
 
@@ -32,7 +32,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

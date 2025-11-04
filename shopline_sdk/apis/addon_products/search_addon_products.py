@@ -63,7 +63,7 @@ class Params(BaseModel):
       
       Please fill in to the second level. Default value is 00:00:00 if only fill in dates.
       請輸入至秒數，若只輸入日期，則會自動帶入當天00:00:00"""
-    include_fields: Optional[List[Union[Literal['promotions'], str]]] = None
+    include_fields: Optional[List[Union[Literal['promotions'], str]]] = Field(default=None, alias="include_fields[]")
     """Provide additional attributes in the response
       結果添加哪些參數"""
 
@@ -89,7 +89,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

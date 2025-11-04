@@ -196,7 +196,7 @@ class Params(BaseModel):
        confirmed 已確認
       completed 已完成
        cancelled 已取消"""
-    statuses: Optional[List[Union[Literal['pending', 'removed', 'confirmed', 'completed', 'cancelled'], str]]] = None
+    statuses: Optional[List[Union[Literal['pending', 'removed', 'confirmed', 'completed', 'cancelled'], str]]] = Field(default=None, alias="statuses[]")
     """Statuses
       多個訂單狀態
       -
@@ -236,7 +236,7 @@ class Params(BaseModel):
        collected 已取貨
        returned 已退貨
        * returning 退貨中"""
-    delivery_statuses: Optional[List[Union[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning'], str]]] = None
+    delivery_statuses: Optional[List[Union[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning'], str]]] = Field(default=None, alias="delivery_statuses[]")
     """Delivery Statuses
       多個物流狀態 
       -
@@ -248,7 +248,7 @@ class Params(BaseModel):
        collected 已取貨
        returned 已退貨
        returning 退貨中"""
-    affiliate_data_affiliate_source: Optional[str] = None
+    affiliate_data_affiliate_source: Optional[str] = Field(default=None, alias="affiliate_data[affiliate_source]")
     """Keys allow to search:
       * affiliate_source(String)訂單來源
       (第三方夥伴適用)"""
@@ -274,7 +274,7 @@ class Params(BaseModel):
     """Sort responses items by created_at or total.
        訂單按訂單創造日期或商品總價排序。 If order_by is not passed, by default showing records in descending order.
        如果沒有傳入order_by, 則按倒序排序。"""
-    include_fields: Optional[List[Union[Literal['affiliate_campaign'], str]]] = None
+    include_fields: Optional[List[Union[Literal['affiliate_campaign'], str]]] = Field(default=None, alias="include_fields[]")
     """Provide additional attributes in the response
       結果添加哪些參數"""
 
@@ -300,7 +300,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value

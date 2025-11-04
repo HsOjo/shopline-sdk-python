@@ -12,7 +12,7 @@ from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityEr
 
 class Params(BaseModel):
     """查询参数模型"""
-    ids: Optional[str] = None
+    ids: Optional[str] = Field(default=None, alias="ids[]")
     """The id of the product that will be deleted. Max delete 100 products at a time.
        需要刪除的商品id，每次最多只能刪除100個商品。"""
 
@@ -38,7 +38,7 @@ async def call(
     # 构建查询参数
     query_params = {}
     if params:
-        params_dict = params.model_dump(exclude_none=True)
+        params_dict = params.model_dump(exclude_none=True, by_alias=True)
         for key, value in params_dict.items():
             if value is not None:
                 query_params[key] = value
