@@ -12,7 +12,7 @@ from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 
 
-class ProductsItem(BaseModel):
+class ProductsItemSchema(BaseModel):
     """Item model for products"""
     product_id: str
     custom_numbers: Optional[List[str]] = None
@@ -21,7 +21,7 @@ class ProductsItem(BaseModel):
 
 class Body(BaseModel):
     """请求体模型"""
-    products: List[ProductsItem]
+    products: List[ProductsItemSchema]
 
 class Response(BaseModel):
     """响应体模型"""

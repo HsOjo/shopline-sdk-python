@@ -11,7 +11,7 @@ from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 
 
-class DataItem(BaseModel):
+class DataItemSchema(BaseModel):
     """Item model for data"""
     product_id: Optional[str] = None
     """The Product ID
@@ -25,7 +25,7 @@ class DataItem(BaseModel):
 
 class Body(BaseModel):
     """请求体模型"""
-    data: Optional[List[DataItem]] = None
+    data: Optional[List[DataItemSchema]] = None
     """Product ID, Ancestor, Descendant
       批量更新的商品 ID"""
 

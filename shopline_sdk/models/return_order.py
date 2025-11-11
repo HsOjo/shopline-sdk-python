@@ -58,18 +58,18 @@ class ReturnOrder(BaseModel):
     """order payment status 訂單退款狀態"""
     order_delivery_status: Optional[Union[Literal['return_collected', 'returning'], str]] = None
     """order delivery status 訂單退貨狀態"""
-    items: Optional[ReturnOrderItem] = None
-    promotion_items: Optional[OrderPromotionItem] = None
+    items: Optional[List[ReturnOrderItem]] = None
+    promotion_items: Optional[List[OrderPromotionItem]] = None
     order: Optional[OrderConfig] = None
     """order data 訂單信息"""
     returned_by: Optional[Any] = None
     """returned by which channel 訂單被退途徑"""
     max_return_total: Optional[Money] = None
-    return_order_promotion_items: Optional[ReturnOrderPromotionItem] = None
+    return_order_promotion_items: Optional[List[ReturnOrderPromotionItem]] = None
     applied_user_credits: Optional[Money] = None
     applied_member_point_redeem_to_cash: Optional[Money] = None
     applied_member_point: Optional[int] = None
     """applied member point (After return_order_revamp feature key on)<br/> 分攤的折抵會員點數 (啟用「return_order_revamp」功能後)"""
-    custom_discount_items: Optional[ReturnOrderItem] = None
+    custom_discount_items: Optional[List[ReturnOrderItem]] = None
     custom_discount: Optional[Money] = None
     ref_data: Optional[ReturnOrderRefData] = None

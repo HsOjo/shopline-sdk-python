@@ -11,12 +11,12 @@ from shopline_sdk.models.delivery_option import DeliveryOption
 from shopline_sdk.models.translatable import Translatable
 
 
-class StorePickupOption(BaseModel):
+class StorePickupOptionSchema(BaseModel):
     """Model for store_pickup_option"""
     config_fields: Optional[Dict[str, Dict[str, Any]]] = None
 
 
-class AddressesItem(BaseModel):
+class AddressesItemSchema(BaseModel):
     """Item model for addresses"""
     level_1_translations: Optional[Translatable] = None
     level_2_translations: Optional[Translatable] = None
@@ -27,8 +27,8 @@ class AddressesItem(BaseModel):
 
 class Body(BaseModel):
     """请求体模型"""
-    store_pickup_option: Optional[StorePickupOption] = None
-    addresses: Optional[List[AddressesItem]] = None
+    store_pickup_option: Optional[StorePickupOptionSchema] = None
+    addresses: Optional[List[AddressesItemSchema]] = None
 
 class Response(BaseModel):
     """响应体模型"""

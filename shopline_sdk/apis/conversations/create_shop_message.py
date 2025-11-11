@@ -12,7 +12,7 @@ from shopline_sdk.models.shop_conversation import ShopConversation
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 
 
-class RefData(BaseModel):
+class RefDataSchema(BaseModel):
     """Model for ref_data"""
     path: Optional[str] = None
     full_path: Optional[str] = None
@@ -34,7 +34,7 @@ class Body(BaseModel):
     recipient_id: Optional[str] = None
     """The message recipient ID
       訊息接收者ID"""
-    ref_data: Optional[RefData] = None
+    ref_data: Optional[RefDataSchema] = None
 
 async def call(
     session: aiohttp.ClientSession, body: Optional[Body] = None

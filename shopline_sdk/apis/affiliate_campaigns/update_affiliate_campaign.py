@@ -13,7 +13,7 @@ from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 
 
-class PartnerInfo(BaseModel):
+class PartnerInfoSchema(BaseModel):
     """Partner info
     合作夥伴資訊"""
     name: Optional[str] = None
@@ -44,7 +44,7 @@ class Body(BaseModel):
     remarks_translations: Optional[Dict[str, Any]] = None
     """Remarks translations
       顯示於 KOL Hub 的條款說明"""
-    partner_info: Optional[PartnerInfo] = None
+    partner_info: Optional[PartnerInfoSchema] = None
     """Partner info
       合作夥伴資訊"""
     campaign_products: Optional[List[CampaignProduct]] = None

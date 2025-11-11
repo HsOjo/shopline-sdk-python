@@ -49,7 +49,7 @@ class PurchaseOrder(BaseModel):
     """Child ID 子進貨單 ID"""
     group_id: Optional[str] = None
     """Group ID 進貨單群組 ID"""
-    items: Optional[List[PurchaseOrderItem]] = None
+    items: Optional[List[List[PurchaseOrderItem]]] = None
     issuer: Optional[Agent] = None
     executor: Optional[Agent] = None
     channel: Optional[Channel] = None

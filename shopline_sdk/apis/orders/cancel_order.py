@@ -7,13 +7,13 @@ from typing_extensions import Literal
 from shopline_sdk.exceptions import ShoplineAPIError
 
 
-class CancelledReason(BaseModel):
+class CancelledReasonSchema(BaseModel):
     """Model for cancelled_reason"""
     key: Optional[str] = None
     message: Optional[str] = None
 
 
-class RevertCredits(BaseModel):
+class RevertCreditsSchema(BaseModel):
     """revert credits information
     回補購物金資訊"""
     strategy: Optional[Union[Literal['none', 'revert'], str]] = None
@@ -21,7 +21,7 @@ class RevertCredits(BaseModel):
       是否回補購物金，預設不回補"""
 
 
-class RevertMemberPoints(BaseModel):
+class RevertMemberPointsSchema(BaseModel):
     """revert member points information
     回補點數資訊"""
     strategy: Optional[Union[Literal['none', 'revert'], str]] = None
@@ -30,11 +30,11 @@ class RevertMemberPoints(BaseModel):
 
 class Body(BaseModel):
     """请求体模型"""
-    cancelled_reason: Optional[CancelledReason] = None
-    revert_credits: Optional[RevertCredits] = None
+    cancelled_reason: Optional[CancelledReasonSchema] = None
+    revert_credits: Optional[RevertCreditsSchema] = None
     """revert credits information
       回補購物金資訊"""
-    revert_member_points: Optional[RevertMemberPoints] = None
+    revert_member_points: Optional[RevertMemberPointsSchema] = None
     """revert member points information
       回補點數資訊"""
     operated_by: Optional[Union[Literal['merchant', 'customer'], str]] = None

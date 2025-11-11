@@ -11,7 +11,7 @@ from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.translatable import Translatable
 
 
-class DataItem(BaseModel):
+class DataItemSchema(BaseModel):
     """Item model for data"""
     product_ids: Optional[List[str]] = None
     """Maximum allows 1000 product_id per action
@@ -22,7 +22,7 @@ class DataItem(BaseModel):
 
 class Body(BaseModel):
     """请求体模型"""
-    data: Optional[List[DataItem]] = None
+    data: Optional[List[DataItemSchema]] = None
     """One item means one operation on a batch of products. Maximum allows 5 operations per request.
        一個 item 代表對一批商品做相同操作，一次請求上限 5 個操作"""
 

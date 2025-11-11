@@ -12,14 +12,14 @@ from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 
 
-class OrderItemsItem(BaseModel):
+class OrderItemsItemSchema(BaseModel):
     """Item model for order_items"""
     id: str
     quantity: float
 
 class Body(BaseModel):
     """请求体模型"""
-    order_items: List[OrderItemsItem]
+    order_items: List[OrderItemsItemSchema]
     """The order_items of the order would like to be split to a new order.
        想要拆單的訂單項目"""
     updated_at: str

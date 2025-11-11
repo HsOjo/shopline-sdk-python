@@ -11,7 +11,7 @@ from shopline_sdk.models.app_metafield_value import AppMetafieldValue
 from shopline_sdk.models.metafield_value import MetafieldValue
 
 
-class ItemsItem(BaseModel):
+class ItemsItemSchema(BaseModel):
     """Item model for items"""
     id: Optional[str] = None
     resource_id: Optional[str] = None
@@ -21,7 +21,7 @@ class ItemsItem(BaseModel):
 
 class Body(BaseModel):
     """请求体模型"""
-    items: Optional[List[ItemsItem]] = None
+    items: Optional[List[ItemsItemSchema]] = None
 
 class Response(BaseModel):
     """响应体模型"""

@@ -7,7 +7,7 @@ from typing_extensions import Literal
 from shopline_sdk.exceptions import ShoplineAPIError
 
 
-class ProductsItem(BaseModel):
+class ProductsItemSchema(BaseModel):
     """Item model for products"""
     id: Optional[str] = None
     """Product Id
@@ -21,7 +21,7 @@ class Body(BaseModel):
     affiliate_campaign_id: Optional[str] = None
     """Campaign Id
       推薦活動 ID"""
-    products: Optional[List[ProductsItem]] = None
+    products: Optional[List[ProductsItemSchema]] = None
     """Products
       商品資料"""
 

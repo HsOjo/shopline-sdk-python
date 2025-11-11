@@ -24,13 +24,13 @@ class Params(BaseModel):
       此參數會覆蓋include_fields[]。"""
 
 
-class CustomDataItem(BaseModel):
+class CustomDataItemSchema(BaseModel):
     """Item model for custom_data"""
     value: Optional[str] = None
     field_id: Optional[str] = None
 
 
-class DeliveryData(BaseModel):
+class DeliveryDataSchema(BaseModel):
     """Delivery Data
     運送資訊
     
@@ -60,10 +60,10 @@ class Body(BaseModel):
     ref_order_id: Optional[str] = None
     """For third party custom order id
       可供儲存第三方訂單ID"""
-    custom_data: Optional[List[CustomDataItem]] = None
+    custom_data: Optional[List[CustomDataItemSchema]] = None
     """Custom data
       自定義資料"""
-    delivery_data: Optional[DeliveryData] = None
+    delivery_data: Optional[DeliveryDataSchema] = None
     """Delivery Data
       運送資訊
       

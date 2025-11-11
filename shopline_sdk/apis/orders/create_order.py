@@ -24,7 +24,7 @@ class Params(BaseModel):
       此參數會覆蓋include_fields[]。"""
 
 
-class Order(BaseModel):
+class OrderSchema(BaseModel):
     """Model for order"""
     delivery_option_id: str
     """ID of Delivery Option
@@ -105,7 +105,7 @@ class Order(BaseModel):
 
 class Body(BaseModel):
     """请求体模型"""
-    order: Optional[Order] = None
+    order: Optional[OrderSchema] = None
     is_registering_as_member: Optional[bool] = None
     """Do you want to set the customer as a member?
       是否要將此筆訂單顧客設為會員？

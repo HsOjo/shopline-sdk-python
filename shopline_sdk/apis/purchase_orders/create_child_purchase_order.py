@@ -12,14 +12,14 @@ from shopline_sdk.models.purchase_order import PurchaseOrder
 from shopline_sdk.models.server_error import ServerError
 
 
-class PurchaseOrder(BaseModel):
+class PurchaseOrderSchema(BaseModel):
     """Model for purchase_order"""
     scheduled_time: Optional[str] = None
     issuer_id: str
 
 class Body(BaseModel):
     """请求体模型"""
-    purchase_order: Optional[PurchaseOrder] = None
+    purchase_order: Optional[PurchaseOrderSchema] = None
 
 async def call(
     session: aiohttp.ClientSession, PurchaseOrderId: str, body: Optional[Body] = None

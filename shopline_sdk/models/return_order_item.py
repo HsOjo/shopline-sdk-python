@@ -30,4 +30,4 @@ class ReturnOrderItem(BaseModel):
     total: Optional[Money] = None
     total_points: Optional[int] = None
     """Total points cost on same product (item_points * quantity)  此商品的總點數"""
-    order_inspect_items: Optional[OrderInspectItem] = None
+    order_inspect_items: Optional[List[OrderInspectItem]] = None

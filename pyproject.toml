@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "shopline-sdk-python"
-version = "0.2.1"
+version = "0.2.2"
 description = "Shopline OpenAPI on python implement. (From https://open-api.docs.shoplineapp.com)"
 readme = "README.md"
 requires-python = ">=3.10"

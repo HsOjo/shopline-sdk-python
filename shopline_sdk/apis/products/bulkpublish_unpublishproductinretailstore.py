@@ -10,7 +10,7 @@ from shopline_sdk.exceptions import ShoplineAPIError
 from shopline_sdk.models.retail_status import retail_status
 
 
-class ProductsItem(BaseModel):
+class ProductsItemSchema(BaseModel):
     """Item model for products"""
     id: Optional[str] = None
     """The id of the product that will be published/unpublished.
@@ -20,7 +20,7 @@ class ProductsItem(BaseModel):
 
 class Body(BaseModel):
     """请求体模型"""
-    products: Optional[List[ProductsItem]] = None
+    products: Optional[List[ProductsItemSchema]] = None
 
 class Response(BaseModel):
     """响应体模型"""

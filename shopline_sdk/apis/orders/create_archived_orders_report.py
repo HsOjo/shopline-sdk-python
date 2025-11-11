@@ -11,7 +11,7 @@ from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 
 
-class Filters(BaseModel):
+class FiltersSchema(BaseModel):
     """Model for filters"""
     start_date: Optional[str] = None
     """Start time to filter archived orders.
@@ -22,7 +22,7 @@ class Filters(BaseModel):
 
 class Body(BaseModel):
     """请求体模型"""
-    filters: Optional[Filters] = None
+    filters: Optional[FiltersSchema] = None
     callback_url: Optional[str] = None
     """merchant's callback url
       店家提供 callback url"""

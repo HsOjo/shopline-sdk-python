@@ -13,7 +13,7 @@ from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 
 
-class CampaignProducts(BaseModel):
+class CampaignProductsSchema(BaseModel):
     """Model for campaign_products"""
     product_id: Optional[str] = None
     affiliate_percentage: Optional[float] = None
@@ -63,7 +63,7 @@ class Body(BaseModel):
     condition_min_amount: Optional[Dict[str, Any]] = None
     """The threshold amount (for order level)
       門檻金額 (for order level)"""
-    campaign_products: Optional[CampaignProducts] = None
+    campaign_products: Optional[CampaignProductsSchema] = None
 
 async def call(
     session: aiohttp.ClientSession, body: Optional[Body] = None

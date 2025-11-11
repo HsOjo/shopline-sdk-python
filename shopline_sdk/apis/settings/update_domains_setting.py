@@ -14,7 +14,7 @@ from shopline_sdk.models.unauthorized_error import UnauthorizedError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 
 
-class Webmasters(BaseModel):
+class WebmastersSchema(BaseModel):
     """Model for webmasters"""
     google: Optional[str] = None
     """Google Search Console verification code"""
@@ -31,7 +31,7 @@ class Webmasters(BaseModel):
 
 class Body(BaseModel):
     """请求体模型"""
-    webmasters: Webmasters
+    webmasters: WebmastersSchema
 
 async def call(
     session: aiohttp.ClientSession, body: Body

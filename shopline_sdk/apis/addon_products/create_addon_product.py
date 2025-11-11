@@ -12,7 +12,7 @@ from shopline_sdk.models.money import Money
 from shopline_sdk.models.translatable import Translatable
 
 
-class MainProductsItem(BaseModel):
+class MainProductsItemSchema(BaseModel):
     """Item model for main_products"""
     id: Optional[str] = Field(default=None, alias="_id")
     addon_price: Optional[Money] = None
@@ -31,7 +31,7 @@ class Body(BaseModel):
     oversea_tax_type: Optional[str] = None
     product_id: Optional[str] = None
     cost: Optional[Money] = None
-    main_products: Optional[List[MainProductsItem]] = None
+    main_products: Optional[List[MainProductsItemSchema]] = None
 
 async def call(
     session: aiohttp.ClientSession, body: Optional[Body] = None

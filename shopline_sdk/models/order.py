@@ -149,11 +149,11 @@ class Order(BaseModel):
     invoice: Optional[OrderInvoice] = None
     invoices: Optional[List[InvoicesItem]] = None
     """Invoices Info 發票資訊（包含 EC、POS）"""
-    subtotal_items: Optional[OrderItem] = None
-    promotion_items: Optional[OrderPromotionItem] = None
+    subtotal_items: Optional[List[OrderItem]] = None
+    promotion_items: Optional[List[OrderPromotionItem]] = None
     custom_data: Optional[List[Dict[str, Any]]] = None
     """Customized Order Fields 客製化欄位 - *欲使用此欄位請先至商店後台>訂單設定>自訂訂單欄位 進行設定"""
-    custom_discount_items: Optional[OrderItem] = None
+    custom_discount_items: Optional[List[OrderItem]] = None
     ref_order_id: Optional[str] = None
     """For third party custom order id 可供儲存第三方訂單ID"""
     ref_customer_id: Optional[str] = None

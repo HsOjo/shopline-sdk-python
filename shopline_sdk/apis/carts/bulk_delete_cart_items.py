@@ -7,13 +7,13 @@ from typing_extensions import Literal
 from shopline_sdk.exceptions import ShoplineAPIError
 
 
-class ItemsItem(BaseModel):
+class ItemsItemSchema(BaseModel):
     """Item model for items"""
     id: Optional[str] = None
 
 class Body(BaseModel):
     """请求体模型"""
-    items: Optional[List[ItemsItem]] = None
+    items: Optional[List[ItemsItemSchema]] = None
 
 class Response(BaseModel):
     """响应体模型"""

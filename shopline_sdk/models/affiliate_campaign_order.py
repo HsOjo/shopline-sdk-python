@@ -45,9 +45,9 @@ class AffiliateCampaignOrder(BaseModel):
     order_points: Optional[int] = None
     """Points used 會員點數使用"""
     order_points_to_cash: Optional[Money] = None
-    subtotal_items: Optional[OrderItem] = None
-    promotion_items: Optional[OrderPromotionItem] = None
-    custom_discount_items: Optional[OrderItem] = None
+    subtotal_items: Optional[List[OrderItem]] = None
+    promotion_items: Optional[List[OrderPromotionItem]] = None
+    custom_discount_items: Optional[List[OrderItem]] = None
     ref_order_id: Optional[str] = None
     """For third party custom order id 可供儲存第三方訂單ID"""
     ref_customer_id: Optional[str] = None
