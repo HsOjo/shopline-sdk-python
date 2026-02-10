@@ -144,8 +144,8 @@ class Order(BaseModel):
     total: Optional[Money] = None
     order_points: Optional[int] = None
     """Points used 會員點數使用"""
-    order_points_to_cash: Optional[int] = None
-    """Discounted by the points used 會員點數折抵金額"""
+    # order_points_to_cash: Optional[int] = None
+    # """Discounted by the points used 會員點數折抵金額"""
     invoice: Optional[OrderInvoice] = None
     invoices: Optional[List[InvoicesItem]] = None
     """Invoices Info 發票資訊（包含 EC、POS）"""
