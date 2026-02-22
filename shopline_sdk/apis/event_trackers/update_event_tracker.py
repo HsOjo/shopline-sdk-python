@@ -1,11 +1,10 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.event_trackers import EventTrackers
 from shopline_sdk.models.not_found_error import NotFoundError
@@ -14,13 +13,15 @@ from shopline_sdk.models.unauthorized_error import UnauthorizedError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 from shopline_sdk.models.update_event_tracker_body import UpdateEventTrackerBody as Body
 
+
 class Params(BaseModel):
     """查询参数模型"""
     version: Optional[str] = None
     """控制 api version"""
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str, params: Optional[Params] = None, body: Optional[Body] = None
+        session: aiohttp.ClientSession, id: str, params: Optional[Params] = None, body: Optional[Body] = None
 ) -> EventTrackers:
     """
     Update Event Tracker
@@ -49,7 +50,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.put(
-        url, params=query_params, json=json_data, headers=headers
+            url, params=query_params, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

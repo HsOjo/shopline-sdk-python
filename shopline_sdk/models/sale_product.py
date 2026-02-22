@@ -1,15 +1,15 @@
 """Shopline API 数据模型 - SaleProduct"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import List, Optional
 
+from pydantic import BaseModel
 
 
 class VariationsItem(BaseModel):
     """Item model for variations"""
     variation_id: Optional[str] = None
     custom_keys: Optional[List[str]] = None
+
 
 class SaleProduct(BaseModel):
     product_id: Optional[str] = None

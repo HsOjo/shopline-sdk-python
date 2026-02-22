@@ -1,13 +1,11 @@
 """Shopline API 数据模型 - CheckoutSetting"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel
+
 
 # 导入相关模型
-from .category import Category
-from .translatable import Translatable
-
 
 
 class Rounding_SettingConfig(BaseModel):
@@ -21,6 +19,7 @@ class Multi_CheckoutConfig(BaseModel):
     """Configuration model for multi_checkout"""
     enabled: Optional[bool] = None
     cart_tags: Optional[List[Dict[str, Any]]] = None
+
 
 class CheckoutSetting(BaseModel):
     enable_fast_checkout_qty: Optional[bool] = None

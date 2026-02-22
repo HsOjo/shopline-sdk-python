@@ -1,15 +1,15 @@
 """Shopline API 数据模型 - ShopCrmSetting"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Optional
 
+from pydantic import BaseModel
 
 
 class Referral_ProductConfig(BaseModel):
     """Configuration model for referral_product"""
     enabled: Optional[bool] = None
     referral_hours: Optional[float] = None
+
 
 class ShopCrmSetting(BaseModel):
     enable_switch_channel: Optional[bool] = None

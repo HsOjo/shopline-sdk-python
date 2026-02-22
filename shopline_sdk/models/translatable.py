@@ -1,8 +1,8 @@
 """Shopline API 数据模型 - Translatable"""
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional
+
 from pydantic import BaseModel, Field
-from typing_extensions import Literal
 
 
 class Translatable(BaseModel):

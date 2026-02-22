@@ -1,6 +1,7 @@
 """Shopline API 数据模型 - Customer"""
 
 from typing import Any, Dict, List, Optional, Union
+
 from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
@@ -12,7 +13,6 @@ from .money import Money
 from .order_delivery_address import OrderDeliveryAddress
 from .translatable import Translatable
 from .utm_data import UtmData
-
 
 
 class Membership_TierConfig(BaseModel):
@@ -89,6 +89,7 @@ class Member_Info_RewardConfig(BaseModel):
     """The user credits of the rewards.  獎賞的購物金   If the merchant did not choose to offer a shopping credit reward, it will be null.  如果店家沒有選擇提供購物金獎賞，則為 null"""
     member_points: Optional[int] = None
     """The member points of the rewards.  獎賞的會員點數   If the merchant did not choose to offer a member point reward, it will be null.  如果店家沒有選擇提供會員點數獎賞，則為 null"""
+
 
 class Customer(BaseModel):
     id: Optional[str] = None

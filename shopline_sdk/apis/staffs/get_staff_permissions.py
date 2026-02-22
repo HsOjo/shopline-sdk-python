@@ -1,28 +1,30 @@
 from typing import Any, Dict, List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
 
-# 导入需要的模型
-from shopline_sdk.models.channel import Channel
 
 class Params(BaseModel):
     """查询参数模型"""
-    scope: Optional[Union[Literal['open_api', 'admin', 'shop_crm', 'pos', 'one', 'shoplytics', 'sc', 'dash', 'ads', 'payment_center', 'mc', 'form_builder'], str]] = None
+    scope: Optional[Union[Literal[
+        'open_api', 'admin', 'shop_crm', 'pos', 'one', 'shoplytics', 'sc', 'dash', 'ads', 'payment_center', 'mc', 'form_builder'], str]] = None
     """The permissions scope
        獲取權限的範圍。
        If scope is not provided and the staff is the current merchant owner, no permissions will be returned. 
        如果沒有scope，而且管理員是店長，不會返回任何權限。"""
 
+
 class Response(BaseModel):
     """响应体模型"""
     items: Optional[List[Dict[str, Any]]] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, id: Union[str], params: Optional[Params] = None
+        session: aiohttp.ClientSession, id: str, params: Optional[Params] = None
 ) -> Response:
     """
     Get staff permissions
@@ -48,7 +50,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

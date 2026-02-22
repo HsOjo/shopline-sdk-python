@@ -1,18 +1,17 @@
 """Shopline API 数据模型 - Product"""
 
 from typing import Any, Dict, List, Optional, Union
+
 from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
 # 导入相关模型
-from .category import Category
 from .filter_tag import FilterTag
 from .media import Media
 from .money import Money
 from .product_price_tier import ProductPriceTier
 from .product_variation import ProductVariation
 from .translatable import Translatable
-
 
 
 class Flash_Price_SetsItem(BaseModel):
@@ -48,6 +47,16 @@ class Feed_CategoryConfig(BaseModel):
     google_product_category: Optional[str] = None
 
 
+class Feed_VariationsConfig(BaseModel):
+    """Configuration model for feed_variations"""
+    color: Optional[str] = None
+    """Color 產品資訊 - 顏色"""
+    size: Optional[str] = None
+    """Size 產品資訊 - 尺寸"""
+    material: Optional[str] = None
+    """Material 產品資訊 - 材質"""
+
+
 class Bundle_SetConfig(BaseModel):
     """Configuration model for bundle_set"""
     id: Optional[str] = Field(default=None, alias="_id")
@@ -56,6 +65,7 @@ class Bundle_SetConfig(BaseModel):
     discount_value: Optional[float] = None
     """Discount Value 金額折扣  When price_type is 'fixed_amount', example: 20 means price_sale $20  If discount_value is null, its value is taken from the price_sale  當組合售價類型是固定組合價時，20代表组合售價为 $20. 如果該值為空, 金額折扣值取自特價  When price_type is 'discount_percentage', example: 20 for 80% off; 70 for 30% off  當組合售價類型是折扣比例時，20代表八折; 70代表三折  When price_type is 'discount_amount', example: 20 means minus $20; 70 means minus $70  當組合售價類型是金額折扣時，20代表減$20; 70代表減$70"""
     bundle_set_products: Optional[Dict[str, Any]] = None
+
 
 class Product(BaseModel):
     id: Optional[str] = None
@@ -115,12 +125,12 @@ class Product(BaseModel):
     """Product Variations Data 商品規格資訊"""
     variant_options: Optional[List[Variant_OptionsItem]] = None
     """Product Variations 商品規格 -  Maximum 3 types of variant option for a product, type allow (color, size, custom_1, custom_2, custom_3)  最多支援三種不同的 type, type 支援(color, size, custom_1, custom_2, custom_3)"""
-    categories: Optional[List[Category]] = None
-    """Categories Data 商品分類資訊"""
     location_id: Optional[str] = None
     """Stock Unit Number 儲位編號"""
     feed_category: Optional[Feed_CategoryConfig] = None
     """Category for different feed 廣告的分類"""
+    feed_variations: Optional[Feed_VariationsConfig] = None
+    """Feed Variations 產品資訊 - 顏色、尺寸、材質"""
     description_translations: Optional[Translatable] = None
     """Product Description 商品描述"""
     seo_title_translations: Optional[Translatable] = None
@@ -199,3 +209,7 @@ class Product(BaseModel):
     """Oversea tax type 海外稅項"""
     allow_gift: Optional[bool] = None
     """Specifies whether the item can be set as a gift.  是否可以設為贈品  true: the product can be set as a gift.  false: the product cannot be set as a gift."""
+    is_custom: Optional[bool] = None
+    """Specifies whether the item can be set as a customized product. 是否可以設為訂制商品  true: the product is custom product.  false: the product isn't custom product."""
+    sold_out: Optional[bool] = None
+    """Indicates whether the product is sold out.  商品是否售罄.  true: the product is sold out. 已售罄  false: the product is still available. 尚有庫存"""

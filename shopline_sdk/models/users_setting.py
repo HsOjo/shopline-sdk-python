@@ -1,13 +1,13 @@
 """Shopline API 数据模型 - UsersSetting"""
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
 from .member_point_rule import MemberPointRule
 from .user_credit_rule import UserCreditRule
-
 
 
 class Line_LoginConfig(BaseModel):
@@ -34,6 +34,12 @@ class Enable_Facebook_CommentConfig(BaseModel):
     """facebook comment enable status"""
 
 
+class Membership_Promo_BannerConfig(BaseModel):
+    """Configuration model for membership_promo_banner"""
+    text: Optional[Dict[str, Any]] = None
+    image: Optional[Dict[str, Any]] = None
+
+
 class Email_VerificationConfig(BaseModel):
     """Configuration model for email_verification"""
     status: Optional[str] = None
@@ -53,6 +59,7 @@ class Sms_VerificationConfig(BaseModel):
     supported_countries: Optional[List[str]] = None
     """mobile_phone support countries"""
 
+
 class UsersSetting(BaseModel):
     birthday_format: Optional[Union[Literal['YYYY/MM/DD', 'YYYY/MM', 'MM/DD'], str]] = None
     """The birthday format of the user (default: "YYYY/MM/DD")  會員生日格式（預設："YYYY/MM/DD"）"""
@@ -61,6 +68,7 @@ class UsersSetting(BaseModel):
     line_login: Optional[Line_LoginConfig] = None
     facebook_login: Optional[Facebook_LoginConfig] = None
     enable_facebook_comment: Optional[Enable_Facebook_CommentConfig] = None
+    membership_promo_banner: Optional[Membership_Promo_BannerConfig] = None
     pos_apply_credit: Optional[bool] = None
     pos_apply_member_point: Optional[bool] = None
     user_credit_rules: Optional[List[UserCreditRule]] = None

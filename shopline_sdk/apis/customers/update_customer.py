@@ -1,17 +1,17 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel, Field
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.customer import Customer
 from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unauthorized_error import UnauthorizedError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 from shopline_sdk.models.update_customer_body import UpdateCustomerBody as Body
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -22,8 +22,9 @@ class Params(BaseModel):
     """Only show certain parameters in the response
        結果只顯示哪些參數"""
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str, params: Optional[Params] = None, body: Optional[Body] = None
+        session: aiohttp.ClientSession, id: str, body: Body, params: Optional[Params] = None
 ) -> Customer:
     """
     Update Customer
@@ -52,7 +53,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.put(
-        url, params=query_params, json=json_data, headers=headers
+            url, params=query_params, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

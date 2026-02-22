@@ -1,18 +1,20 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
+
 
 class Body(BaseModel):
     """请求体模型"""
     customer_id: str
     locale: Optional[str] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, coupon_code: str, body: Optional[Body] = None
+        session: aiohttp.ClientSession, coupon_code: str, body: Optional[Body] = None
 ) -> Dict[str, Any]:
     """
     Claim User Coupon
@@ -33,7 +35,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.post(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

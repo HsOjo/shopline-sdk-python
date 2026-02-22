@@ -1,14 +1,14 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.sale_customer import SaleCustomer
 from shopline_sdk.models.server_error import ServerError
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -16,12 +16,14 @@ class Params(BaseModel):
     """The ID of the customer in the live room
       直播間中顧客的 ID"""
 
+
 class Response(BaseModel):
     """响应体模型"""
     items: Optional[List[SaleCustomer]] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, saleId: str, params: Optional[Params] = None
+        session: aiohttp.ClientSession, saleId: str, params: Optional[Params] = None
 ) -> Response:
     """
     Get sale customers
@@ -47,7 +49,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

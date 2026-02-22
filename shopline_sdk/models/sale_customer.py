@@ -1,9 +1,8 @@
 """Shopline API 数据模型 - SaleCustomer"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Optional
 
+from pydantic import BaseModel
 
 
 class Customer_InfoConfig(BaseModel):
@@ -16,6 +15,7 @@ class Customer_InfoConfig(BaseModel):
     """Customer Phone 顧客電話"""
     mobile_phone: Optional[str] = None
     """Customer Mobile Phone 顧客手機"""
+
 
 class SaleCustomer(BaseModel):
     post_sales_user_id: Optional[str] = None

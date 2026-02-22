@@ -1,21 +1,22 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.not_found_error import NotFoundError
 from shopline_sdk.models.server_error import ServerError
+
 
 class Response(BaseModel):
     """响应体模型"""
     message: Optional[str] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str
+        session: aiohttp.ClientSession, id: str
 ) -> Response:
     """
     Delete Category
@@ -33,7 +34,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.delete(
-        url, headers=headers
+            url, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

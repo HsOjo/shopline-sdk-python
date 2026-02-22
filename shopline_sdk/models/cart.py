@@ -1,7 +1,8 @@
 """Shopline API 数据模型 - Cart"""
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
@@ -11,7 +12,6 @@ from .coupon_item import CouponItem
 from .money import Money
 from .tax_info import TaxInfo
 from .translatable import Translatable
-
 
 
 class Applied_Tax_InfoConfig(BaseModel):
@@ -44,6 +44,7 @@ class Cart_TagsItem(BaseModel):
     """Priority 優先度"""
     name_translations: Optional[Translatable] = None
     """Name 名稱"""
+
 
 class Cart(BaseModel):
     id: Optional[str] = None

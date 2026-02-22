@@ -1,9 +1,9 @@
 """Shopline API 数据模型 - MembershipTierRule"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Optional, Union
 
+from pydantic import BaseModel
+from typing_extensions import Literal
 
 
 class Condition_IntervalConfig(BaseModel):
@@ -38,6 +38,7 @@ class Total_SpendingConfig(BaseModel):
     """Total Spending Requirement represent in label<br /> 以標籤表示總消費要求"""
     dollars: Optional[float] = None
     """Total Spending Requirement represent in dollars<br /> 以元為單位表示總消費要求"""
+
 
 class MembershipTierRule(BaseModel):
     id: Optional[str] = None

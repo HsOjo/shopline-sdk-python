@@ -1,12 +1,12 @@
 """Shopline API 数据模型 - Category"""
 
 from typing import Any, Dict, List, Optional, Union
+
 from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
 # 导入相关模型
 from .translatable import Translatable
-
 
 
 class Banner_MediasItem(BaseModel):
@@ -16,6 +16,7 @@ class Banner_MediasItem(BaseModel):
     alt_translations: Optional[Dict[str, Any]] = None
     link: Optional[Dict[str, Any]] = None
     new_tab: Optional[Dict[str, Any]] = None
+
 
 class Category(BaseModel):
     id: Optional[str] = None

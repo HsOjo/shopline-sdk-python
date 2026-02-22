@@ -1,15 +1,16 @@
 """Shopline API 数据模型 - Job"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Optional, Union
 
+from pydantic import BaseModel
+from typing_extensions import Literal
 
 
 class Ref_DataConfig(BaseModel):
     """Configuration model for ref_data"""
     result_file: Optional[str] = None
     """URL of file contains the job result"""
+
 
 class Job(BaseModel):
     id: Optional[str] = None

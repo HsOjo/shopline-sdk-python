@@ -1,7 +1,8 @@
 """Shopline API 数据模型 - Promotion"""
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
@@ -36,7 +37,8 @@ class Promotion(BaseModel):
     """Ids of Discounted category 指定商品分類ids"""
     discount_on: Optional[Union[Literal['order', 'item', 'category'], str]] = None
     """Promotion target 優惠套用對象 - order = Entire shop 全店 item = Specific item 指定商品 category = Specific category 指定分類"""
-    discount_type: Optional[Union[Literal['percentage', 'amount', 'gift', 'addon', 'free_shipping', 'bundle_pricing', 'bundle_group', 'member_point_redeem_gift', 'subscription_gift'], str]] = None
+    discount_type: Optional[Union[Literal[
+        'percentage', 'amount', 'gift', 'addon', 'free_shipping', 'bundle_pricing', 'bundle_group', 'member_point_redeem_gift', 'subscription_gift'], str]] = None
     """Discount type 折扣類型 - percentage: 折扣% amount: 固定金額 gift: 贈品 addon: 加購品 free_shipping: 免運 bundle_pricing: 任選優惠 bundle_group: A+B組合優惠（紅配綠） member_point_redeem_gift: 點數兌換贈品 subscription_gift"""
     is_accumulated: Optional[bool] = None
     """Is bundle pricing or bundle pricing accumulated? 任選優惠/A+B組合優惠是否累計"""

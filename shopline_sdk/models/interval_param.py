@@ -1,7 +1,6 @@
 """Shopline API 数据模型 - intervalParam"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 

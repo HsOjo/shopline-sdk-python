@@ -1,7 +1,8 @@
 """Shopline API 数据模型 - AddressPreference"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+from typing import Optional, Union
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
@@ -9,24 +10,29 @@ from .address_preference_layout_data import AddressPreferenceLayoutData
 from .translatable import Translatable
 
 
-
 class LayoutConfig(BaseModel):
     """Configuration model for layout"""
     large: Optional[AddressPreferenceLayoutData] = None
+    """Display location of the single address data value 單一地址資料的顯示位置"""
     medium: Optional[AddressPreferenceLayoutData] = None
+    """Display location of the single address data value 單一地址資料的顯示位置"""
     small: Optional[AddressPreferenceLayoutData] = None
+    """Display location of the single address data value 單一地址資料的顯示位置"""
+
 
 class AddressPreference(BaseModel):
     """The definition of address format.For more information, please refer <a href=https://shopline.atlassian.net/wiki/spaces/EN/pages/3136521533/Address+module+->here</a> 地址格式定義，詳細請參考<a href=https://shopline.atlassian.net/wiki/spaces/EN/pages/3136521533/Address+module+->文件</a>"""
     id: Optional[str] = None
     """Address preference ID 地址格式ID"""
-    country_code: Optional[Union[Literal['TW', 'US', 'VN', 'JP', 'MY', 'PH', 'SG', 'TH', 'CA', 'DE', 'FR', 'GB', 'HK', 'ID', 'DEFAULT'], str]] = None
+    country_code: Optional[Union[Literal[
+        'TW', 'US', 'VN', 'JP', 'MY', 'PH', 'SG', 'TH', 'CA', 'DE', 'FR', 'GB', 'HK', 'ID', 'DEFAULT'], str]] = None
     """Country code 國碼"""
     priority: Optional[int] = None
     """The order in which address information is filled in 地址資料填寫的順序"""
     level: Optional[int] = None
     """The level of address nodes. 地址節點的等級"""
-    field_name: Optional[Union[Literal['address_1', 'address_2', 'city', 'country', 'district', 'postcode', 'state'], str]] = None
+    field_name: Optional[
+        Union[Literal['address_1', 'address_2', 'city', 'country', 'district', 'postcode', 'state'], str]] = None
     """Field name 欄位名稱"""
     display: Optional[bool] = None
     """Display or not 是否需要顯示"""

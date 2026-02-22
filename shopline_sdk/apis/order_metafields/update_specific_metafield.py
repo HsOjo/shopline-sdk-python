@@ -1,17 +1,16 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.metafield_value import MetafieldValue
 from shopline_sdk.models.update_metafield_body import UpdateMetafieldBody as Body
 
+
 async def call(
-    session: aiohttp.ClientSession, order_id: str, metafield_id: str, body: Optional[Body] = None
+        session: aiohttp.ClientSession, order_id: str, metafield_id: str, body: Optional[Body] = None
 ) -> MetafieldValue:
     """
     Update specific metafield
@@ -31,7 +30,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.put(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

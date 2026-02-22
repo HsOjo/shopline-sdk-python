@@ -1,9 +1,9 @@
 """Shopline API 数据模型 - UpdateEventTrackerBody"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Optional, Union
 
+from pydantic import BaseModel
+from typing_extensions import Literal
 
 
 class Config_DataConfig(BaseModel):
@@ -18,6 +18,7 @@ class Config_DataConfig(BaseModel):
     """Single Variation, specific for some kinds of event trackers."""
     unique_ids: Optional[bool] = None
     """Unique IDs, specific for some kinds of event trackers."""
+
 
 class UpdateEventTrackerBody(BaseModel):
     """Payload for updating an event tracker"""

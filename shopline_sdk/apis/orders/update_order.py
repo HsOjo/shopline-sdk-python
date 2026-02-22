@@ -1,20 +1,22 @@
 from typing import Any, Dict, List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.not_found_error import NotFoundError
 from shopline_sdk.models.order import Order
 from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.translatable import Translatable
 
+
 class Params(BaseModel):
     """查询参数模型"""
-    include_fields: Optional[List[Union[Literal['affiliate_campaign'], str]]] = Field(default=None, alias="include_fields[]")
+    include_fields: Optional[List[Union[Literal['affiliate_campaign'], str]]] = Field(default=None,
+                                                                                      alias="include_fields[]")
     """Provide additional attributes in the response
       結果添加哪些參數"""
     fields: Optional[List[str]] = Field(default=None, alias="fields[]")
@@ -47,6 +49,7 @@ class DeliveryDataSchema(BaseModel):
     recipient_name: Optional[str] = None
     recipient_phone: Optional[str] = None
     recipient_phone_country_code: Optional[str] = None
+
 
 class Body(BaseModel):
     """请求体模型"""
@@ -94,8 +97,9 @@ class Body(BaseModel):
     """Order has notes or not
        訂單是否有備註"""
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str, params: Optional[Params] = None, body: Optional[Body] = None
+        session: aiohttp.ClientSession, id: str, params: Optional[Params] = None, body: Optional[Body] = None
 ) -> Order:
     """
     Update Order
@@ -124,7 +128,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.patch(
-        url, params=query_params, json=json_data, headers=headers
+            url, params=query_params, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

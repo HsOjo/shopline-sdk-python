@@ -1,7 +1,8 @@
 """Shopline API 数据模型 - MemberPointRule"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+from typing import List, Optional, Union
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
@@ -23,7 +24,8 @@ class MemberPointRule(BaseModel):
     """The expiry month of points, null if there is no expiry date.<br /> This field will be null if the rule_type is not "earn_from_order".<br /> 點數的到期月份，如規則並沒有設置點數會到期，此欄會是null 如rule_type不是"earn_from_order"，此欄會是null"""
     pending_days: Optional[int] = None
     """The number of days after delivery received (Arrived/ Collected) will the system automatically assign the point to customer.<br /> This field will be null if the rule_type is not "earn_from_order".＜br /> 顧客訂單轉變為 已取貨 / 已到達(宅配) 後幾天自動發送點數<br /> 如rule_type不是"earn_from_order"，此欄會是null"""
-    rule_type: Optional[Union[Literal['earn_from_order', 'max_percentage_per_order', 'max_amount_per_order'], str]] = None
+    rule_type: Optional[
+        Union[Literal['earn_from_order', 'max_percentage_per_order', 'max_amount_per_order'], str]] = None
     """Define the types of rules that the current object is representing.<br /> 定義這個物件正在表示的規則類別"""
     remarks_translations: Optional[Translatable] = None
     membership_tier_id: Optional[str] = None

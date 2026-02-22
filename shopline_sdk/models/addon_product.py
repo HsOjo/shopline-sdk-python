@@ -1,14 +1,14 @@
 """Shopline API 数据模型 - AddonProduct"""
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
 from .media import Media
 from .money import Money
 from .translatable import Translatable
-
 
 
 class PromotionsItem(BaseModel):
@@ -22,6 +22,7 @@ class PromotionsItem(BaseModel):
     """Promotion end time 活動結束時間 - null = no end date 永不過期"""
     conditions: Optional[List[Dict[str, Any]]] = None
     """本階層活動生效條件"""
+
 
 class AddonProduct(BaseModel):
     id: Optional[str] = None

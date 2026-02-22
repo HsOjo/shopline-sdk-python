@@ -1,14 +1,11 @@
 """Shopline API 数据模型 - FlashPriceCampaign"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel
 
 # 导入相关模型
 from .money import Money
-from .product import Product
-from .translatable import Translatable
-
 
 
 class Price_SetsItem(BaseModel):
@@ -21,6 +18,7 @@ class Price_SetsItem(BaseModel):
     """The product that applied this price set 商品限時促銷價活動的商品"""
     price_details: Optional[List[Dict[str, Any]]] = None
     """The price sets of the variations of the product of this event 商品限時促銷價活動的商品規格價錢組"""
+
 
 class FlashPriceCampaign(BaseModel):
     id: Optional[str] = None

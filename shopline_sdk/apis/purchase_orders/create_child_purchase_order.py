@@ -1,11 +1,10 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.not_found_error import NotFoundError
 from shopline_sdk.models.purchase_order import PurchaseOrder
@@ -17,12 +16,14 @@ class PurchaseOrderSchema(BaseModel):
     scheduled_time: Optional[str] = None
     issuer_id: str
 
+
 class Body(BaseModel):
     """请求体模型"""
     purchase_order: Optional[PurchaseOrderSchema] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, PurchaseOrderId: str, body: Optional[Body] = None
+        session: aiohttp.ClientSession, PurchaseOrderId: str, body: Optional[Body] = None
 ) -> PurchaseOrder:
     """
     Create child purchase order
@@ -43,7 +44,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.post(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

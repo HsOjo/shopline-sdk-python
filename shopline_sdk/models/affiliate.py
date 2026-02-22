@@ -1,9 +1,8 @@
 """Shopline API 数据模型 - Affiliate"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Dict, Optional
 
+from pydantic import BaseModel
 
 
 class ConfigurationConfig(BaseModel):
@@ -16,6 +15,7 @@ class ConfigurationConfig(BaseModel):
     shopid: Optional[str] = None
     authkey: Optional[str] = None
     category_mappings: Optional[Dict[str, str]] = None
+
 
 class Affiliate(BaseModel):
     id: Optional[str] = None

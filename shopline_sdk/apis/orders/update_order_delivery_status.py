@@ -1,20 +1,20 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.not_found_error import NotFoundError
-from shopline_sdk.models.order_delivery import OrderDelivery
 from shopline_sdk.models.server_error import ServerError
-from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
+
 
 class Params(BaseModel):
     """查询参数模型"""
-    include_fields: Optional[List[Union[Literal['affiliate_campaign'], str]]] = Field(default=None, alias="include_fields[]")
+    include_fields: Optional[List[Union[Literal['affiliate_campaign'], str]]] = Field(default=None,
+                                                                                      alias="include_fields[]")
     """Provide additional attributes in the response
       結果添加哪些參數"""
     fields: Optional[List[str]] = Field(default=None, alias="fields[]")
@@ -23,9 +23,11 @@ class Params(BaseModel):
        This parameter will override include_fields[]
       此參數會覆蓋include_fields[]。"""
 
+
 class Body(BaseModel):
     """请求体模型"""
-    status: Optional[Union[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning'], str]] = None
+    status: Optional[
+        Union[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning'], str]] = None
     mail_notify: Optional[bool] = None
     """Do you want to notify the customer via email with the change?
       此更新是否要以email通知顧客？
@@ -34,14 +36,17 @@ class Body(BaseModel):
     """To force update delivery status for third party delivery providers
        強制更新第三方物流服務供應商訂單運送狀態"""
 
+
 class Response(BaseModel):
     """响应体模型"""
     order_id: Optional[str] = None
-    status: Optional[Union[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning'], str]] = None
+    status: Optional[
+        Union[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning'], str]] = None
     updated_at: Optional[str] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str, params: Optional[Params] = None, body: Optional[Body] = None
+        session: aiohttp.ClientSession, id: str, params: Optional[Params] = None, body: Optional[Body] = None
 ) -> Response:
     """
     Update Order Delivery Status
@@ -70,7 +75,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.patch(
-        url, params=query_params, json=json_data, headers=headers
+            url, params=query_params, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

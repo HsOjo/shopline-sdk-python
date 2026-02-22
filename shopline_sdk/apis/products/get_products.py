@@ -1,16 +1,17 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.paginatable import Paginatable
 from shopline_sdk.models.product import Product
 from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -36,7 +37,8 @@ class Params(BaseModel):
     id: Optional[str] = None
     """Only show specific products based on IDs
       結果只顯示哪些商品"""
-    include_fields: Optional[List[Union[Literal['labels', 'metafields', 'bundle_set', 'type'], str]]] = Field(default=None, alias="include_fields[]")
+    include_fields: Optional[List[Union[Literal['labels', 'metafields', 'bundle_set', 'type'], str]]] = Field(
+        default=None, alias="include_fields[]")
     """Provide additional attributes in the response
       結果添加哪些參數"""
     with_product_set: Optional[bool] = None
@@ -50,14 +52,22 @@ class Params(BaseModel):
     """Filter products by specific updated_before time.
       取得小於等於指定時間的商品
        *Should use UTC time'"""
+    sorts: Optional[List[str]] = None
+    """Specify sorting rules. Supports up to two levels of sorting.
+       Currently only supports sorting by sold_out and create_at.
+       If sold_out & updated_after are queried, the removed items will be excluded.
+       用於設定資料的排序方式，支援最多兩層排序.
+       若參數帶入 sold_out& updated_after，將不會回覆已刪除的商品"""
+
 
 class Response(BaseModel):
     """响应体模型"""
     items: Optional[List[Product]] = None
     pagination: Optional[Paginatable] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, params: Optional[Params] = None
+        session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> Response:
     """
     Get Products
@@ -83,7 +93,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

@@ -1,17 +1,18 @@
 """Shopline API 数据模型 - UpdateCustomerBody"""
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
-from .customer import Customer
 from .order_delivery_address import OrderDeliveryAddress
 
 
 class UpdateCustomerBody(BaseModel):
     """Payload for updating customer"""
     name: Optional[str] = None
+    """Customer Name 顧客姓名"""
     phones: Optional[List[str]] = None
     """Customer Phones 顧客電話 - *Not verified mobile phone number 請注意，非客戶手機驗證電話"""
     phone: Optional[str] = None
@@ -19,6 +20,7 @@ class UpdateCustomerBody(BaseModel):
     phone_country_code: Optional[str] = None
     """Customer Phone Country Code If phone is input, this field should not be blank  顧客電話國碼 手機號碼國碼, 如已輸入phone，此欄不能是空白"""
     gender: Optional[Union[Literal['male', 'female', 'other'], str]] = None
+    """Customer Gender 顧客性別"""
     birthday: Optional[str] = None
     birth_year: Optional[int] = None
     """Customer's birth year 顧客出生年份 -  *Could not be used with the birthday parameter at the same time."""
@@ -29,7 +31,9 @@ class UpdateCustomerBody(BaseModel):
     email: Optional[str] = None
     """Customer Email 顧客電子郵件"""
     is_member: Optional[bool] = None
+    """Is the customer a member? 顧客是否為會員？"""
     is_blacklisted: Optional[bool] = None
+    """Is the customer in black-list? 顧客是否在黑名單？"""
     is_accept_marketing: Optional[bool] = None
     """Set as True for acceptance of marketing news. 是否接受優惠宣傳？"""
     is_subscribed_marketing_email: Optional[bool] = None
@@ -43,7 +47,9 @@ class UpdateCustomerBody(BaseModel):
     delivery_addresses: Optional[List[OrderDeliveryAddress]] = None
     """Customer's Delivery  顧客送貨地址 - *Maximum for 5 delivery address groups 最多五組"""
     ref_user_id: Optional[str] = None
+    """For third party to put custom user_id 可供儲存第三方顧客ID"""
     memo: Optional[str] = None
+    """Customer memo 顧客備註"""
     tags: Optional[List[str]] = None
     """顧客標籤"""
     custom_fields: Optional[Dict[str, Any]] = None

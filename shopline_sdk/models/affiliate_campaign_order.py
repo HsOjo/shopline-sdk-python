@@ -1,7 +1,8 @@
 """Shopline API 数据模型 - AffiliateCampaignOrder"""
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
@@ -65,7 +66,8 @@ class AffiliateCampaignOrder(BaseModel):
     created_at: Optional[str] = None
     """Order Created Time 訂單創造日期 *UTC Time"""
     utm_data: Optional[UtmData] = None
-    created_by: Optional[Union[Literal['openapi', 'admin', 'shop', 'shop_crm', 'pos', 'sc', 'mc', 'import'], str]] = None
+    created_by: Optional[
+        Union[Literal['openapi', 'admin', 'shop', 'shop_crm', 'pos', 'sc', 'mc', 'import'], str]] = None
     """Channel that created the order 建立訂單的渠道"""
     affiliate_campaign: Optional[OrderCampaignItem] = None
     return_adjustment_amount: Optional[Money] = None

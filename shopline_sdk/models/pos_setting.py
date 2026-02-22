@@ -1,8 +1,8 @@
 """Shopline API 数据模型 - PosSetting"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Optional
+
+from pydantic import BaseModel
 
 
 class PosSetting(BaseModel):
@@ -13,3 +13,9 @@ class PosSetting(BaseModel):
     show_footer_image: Optional[bool] = None
     apply_platform: Optional[str] = None
     footer_image_media_url: Optional[str] = None
+    enable_pos_salesperson_password_required: Optional[bool] = None
+    enable_pos_transaction_password_required: Optional[bool] = None
+    enable_pos_purchase_order_password_required: Optional[bool] = None
+    enable_pos_inventory_count_password_required: Optional[bool] = None
+    enable_pos_inventory_transfer_password_required: Optional[bool] = None
+    enable_pos_settlement_password_required: Optional[bool] = None

@@ -1,13 +1,13 @@
 """Shopline API 数据模型 - DeliveryOption"""
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
 from .money import Money
 from .translatable import Translatable
-
 
 
 class Config_DataConfig(BaseModel):
@@ -35,6 +35,7 @@ class Delivery_RatesItem(BaseModel):
     rate_limit: Optional[Any] = None
     """weight(kg). -1 for infinity. Please supply -1 if delivery_type = flat.  重量(kg)。-1 代表無限。如 fee_type 為 flat ，請輸入 -1。"""
     fee: Optional[Money] = None
+
 
 class DeliveryOption(BaseModel):
     id: Optional[str] = None

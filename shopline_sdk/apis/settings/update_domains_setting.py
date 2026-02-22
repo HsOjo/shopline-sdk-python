@@ -1,11 +1,10 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.bad_request_error import BadRequestError
 from shopline_sdk.models.domains_setting import DomainsSetting
@@ -29,12 +28,14 @@ class WebmastersSchema(BaseModel):
     google_merchant_id: Optional[str] = None
     """Google Merchant Center ID"""
 
+
 class Body(BaseModel):
     """请求体模型"""
     webmasters: WebmastersSchema
 
+
 async def call(
-    session: aiohttp.ClientSession, body: Body
+        session: aiohttp.ClientSession, body: Body
 ) -> DomainsSetting:
     """
     Update Domains Setting
@@ -58,7 +59,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.put(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

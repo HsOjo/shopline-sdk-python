@@ -1,9 +1,9 @@
 """Shopline API 数据模型 - ShopConversationsMessage"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Any, Dict, Optional, Union
 
+from pydantic import BaseModel
+from typing_extensions import Literal
 
 
 class MessageConfig(BaseModel):
@@ -21,6 +21,7 @@ class MessageConfig(BaseModel):
     content: Optional[str] = None
     """Content 文字內容"""
     attachment: Optional[Dict[str, Any]] = None
+
 
 class ShopConversationsMessage(BaseModel):
     id: Optional[str] = None

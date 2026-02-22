@@ -1,13 +1,12 @@
 """Shopline API 数据模型 - CartProduct"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel
 
 # 导入相关模型
 from .money import Money
 from .translatable import Translatable
-
 
 
 class Field_TitlesItem(BaseModel):
@@ -21,6 +20,7 @@ class Flash_Price_SetsItem(BaseModel):
     """Item model for flash_price_sets"""
     start_at: Optional[str] = None
     end_at: Optional[str] = None
+
 
 class CartProduct(BaseModel):
     id: Optional[str] = None

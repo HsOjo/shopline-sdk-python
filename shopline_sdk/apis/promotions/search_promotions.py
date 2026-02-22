@@ -1,14 +1,15 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.paginatable import Paginatable
 from shopline_sdk.models.promotion import Promotion
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -46,7 +47,8 @@ class Params(BaseModel):
        *Should use UTC time'"""
     apply_method: Optional[Union[Literal['auto_apply', 'coupon', 'affiliate_campaign'], str]] = None
     """使用方式"""
-    coupon_type: Optional[List[Union[Literal['draw', 'single', 'multi'], str]]] = Field(default=None, alias="coupon_type[]")
+    coupon_type: Optional[List[Union[Literal['draw', 'single', 'multi'], str]]] = Field(default=None,
+                                                                                        alias="coupon_type[]")
     """優惠券類別"""
     status: Optional[Union[Literal['active', 'draft', 'hidden'], str]] = None
     """狀態"""
@@ -54,8 +56,12 @@ class Params(BaseModel):
     """剩餘可抽取量"""
     discount_on: Optional[Union[Literal['order', 'item', 'category'], str]] = None
     """優惠作用範圍"""
-    discount_type: Optional[List[Union[Literal['percentage', 'amount', 'free_shipping', 'gift', 'addon', 'bundle_pricing', 'bundle_group', 'bundle_percentage', 'bundle_amount', 'bundle_gift', 'bundle_group_percentage', 'bundle_group_amount', 'bundle_group_gift', 'buyandget_free', 'buyandget_pricing', 'buyandget_percentage', 'subscription_gift', 'subscription_percentage', 'subscription_amount', 'member_point_redeem_gift', 'credit_reward', 'point_reward', 'earn_purchase_points'], str]]] = Field(default=None, alias="discount_type[]")
+    discount_type: Optional[List[Union[Literal[
+        'percentage', 'amount', 'free_shipping', 'gift', 'addon', 'bundle_pricing', 'bundle_group', 'bundle_percentage', 'bundle_amount', 'bundle_gift', 'bundle_group_percentage', 'bundle_group_amount', 'bundle_group_gift', 'buyandget_free', 'buyandget_pricing', 'buyandget_percentage', 'subscription_gift', 'subscription_percentage', 'subscription_amount', 'member_point_redeem_gift', 'credit_reward', 'point_reward', 'earn_purchase_points'], str]]] = Field(
+        default=None, alias="discount_type[]")
     """優惠類別"""
+    draw_from: Optional[Union[Literal['coupon_center', 'coupon_code', 'coupon_link'], str]] = None
+    """優惠券的領取方式設定"""
     page: Optional[int] = None
     """Page Number
       頁數"""
@@ -63,13 +69,15 @@ class Params(BaseModel):
     """Numbers of Orders per Page
       每頁顯示 n 筆資料"""
 
+
 class Response(BaseModel):
     """响应体模型"""
     items: Optional[List[Promotion]] = None
     pagination: Optional[Paginatable] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, params: Optional[Params] = None
+        session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> Response:
     """
     Search Promotions
@@ -94,7 +102,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

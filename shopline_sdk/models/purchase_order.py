@@ -1,7 +1,8 @@
 """Shopline API 数据模型 - PurchaseOrder"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+from typing import List, Optional, Union
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
@@ -12,12 +13,15 @@ from .purchase_order_item import PurchaseOrderItem
 from .supplier import Supplier
 
 
-
 class Group_Purchase_OrdersItem(BaseModel):
     """Item model for group_purchase_orders"""
     id: Optional[str] = None
+    """Purchase Order ID 進貨單 ID"""
     purchase_number: Optional[str] = None
+    """PurchaseOrder Number 單號"""
     status: Optional[Union[Literal['pending', 'received', 'completed', 'cancelled', 'removed'], str]] = None
+    """Status 貨單狀態"""
+
 
 class PurchaseOrder(BaseModel):
     id: Optional[str] = None
@@ -30,7 +34,8 @@ class PurchaseOrder(BaseModel):
     """Custom Number 自訂單號"""
     status: Optional[Union[Literal['pending', 'received', 'completed', 'cancelled', 'removed'], str]] = None
     """Status 貨單狀態"""
-    arrival_status: Optional[Union[Literal['pending_to_receive', 'partial', 'all_received', 'all_returned'], str]] = None
+    arrival_status: Optional[
+        Union[Literal['pending_to_receive', 'partial', 'all_received', 'all_returned'], str]] = None
     """Arrival Status 到貨狀態"""
     scheduled_time: Optional[str] = None
     """Time scheduled to arrive at<br預定到貨日期"""

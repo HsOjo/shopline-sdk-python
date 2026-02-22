@@ -1,7 +1,7 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
@@ -32,9 +32,11 @@ class ItemsItemSchema(BaseModel):
       
         購物車物品類型資料"""
 
+
 class Body(BaseModel):
     """请求体模型"""
     items: Optional[List[ItemsItemSchema]] = None
+
 
 class Response(BaseModel):
     """响应体模型"""
@@ -43,8 +45,9 @@ class Response(BaseModel):
     data: Optional[Dict[str, Any]] = None
     trace_id: Optional[str] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str, body: Body
+        session: aiohttp.ClientSession, id: str, body: Body
 ) -> Response:
     """
     Bulk Add Items to Cart
@@ -65,7 +68,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.post(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

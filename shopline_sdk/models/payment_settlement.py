@@ -1,9 +1,9 @@
 """Shopline API 数据模型 - PaymentSettlement"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Any, Dict, Optional, Union
 
+from pydantic import BaseModel
+from typing_extensions import Literal
 
 
 class Sdk_ParamsConfig(BaseModel):
@@ -27,6 +27,7 @@ class ResultConfig(BaseModel):
     status: Optional[str] = None
     paymentError: Optional[Dict[str, Any]] = None
     """Fail of settlement 結帳失敗原因"""
+
 
 class PaymentSettlement(BaseModel):
     id: Optional[str] = None

@@ -1,11 +1,10 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.sale_product import SaleProduct
 from shopline_sdk.models.server_error import ServerError
@@ -19,16 +18,19 @@ class ProductsItemSchema(BaseModel):
     custom_keys: Optional[List[str]] = None
     variations: Optional[List[Dict[str, Any]]] = None
 
+
 class Body(BaseModel):
     """请求体模型"""
     products: List[ProductsItemSchema]
+
 
 class Response(BaseModel):
     """响应体模型"""
     items: Optional[List[SaleProduct]] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, saleId: str, body: Optional[Body] = None
+        session: aiohttp.ClientSession, saleId: str, body: Optional[Body] = None
 ) -> Response:
     """
     Create sale products
@@ -49,7 +51,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.post(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

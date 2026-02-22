@@ -1,7 +1,8 @@
 """Shopline API 数据模型 - Order"""
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
@@ -20,20 +21,30 @@ from .order_source import OrderSource
 from .utm_data import UtmData
 
 
-
 class InvoicesItem(BaseModel):
     """Item model for invoices"""
     tax_id: Optional[str] = None
+    """Tax ID Number 發票統一編號"""
     mailing_address: Optional[str] = None
+    """Mailing Address 發票地址"""
     invoice_type: Optional[Union[Literal['0', '1', '2'], str]] = None
+    """Invoice Type 發票種類 -  0 電子發票  1  捐贈發票  *2 紙本發票（公司戶紙本發票/二聯式發票） -  當 tax_id 有值時，為「公司戶紙本發票」；當 tax_id 沒有值時，則為「二聯式發票」"""
     buyer_name: Optional[str] = None
+    """Buyer Name 發票抬頭"""
     carrier_type: Optional[Union[Literal['0', '1', '2'], str]] = None
+    """Carrier Type 載具類型 -  0 會員載具  1 手機條碼  *2 自然人憑證條碼"""
     carrier_number: Optional[str] = None
+    """Carrier Number 載具號碼"""
     n_p_o_b_a_n: Optional[str] = None
+    """發票捐贈愛心碼"""
     invoice_tax_type: Optional[Union[Literal['1', '2', '5'], str]] = None
+    """Invoice Tax Type 發票税別 -  1 應稅  2 零稅率-非經海關出口  *5 零稅率-經海關出口"""
     invoice_number: Optional[str] = None
+    """Invoice Number 發票號碼"""
     invoice_status: Optional[Union[Literal['active', 'cancel'], str]] = None
+    """Invoice status 發票狀態 -  active 已開立  cancel 已作廢"""
     invoice_date: Optional[str] = None
+    """Invoice Date 發票開立日期"""
 
 
 class Order_CommentsItem(BaseModel):
@@ -105,6 +116,7 @@ class Order_Items_Stock_TagItem(BaseModel):
     stock_tag: Optional[Union[Literal['REDUCE_FAILED', 'INCREASE_FAILED'], str]] = None
     """Stock tag for the order item"""
 
+
 class Order(BaseModel):
     id: Optional[str] = None
     """Order ID 訂單ID"""
@@ -144,12 +156,12 @@ class Order(BaseModel):
     total: Optional[Money] = None
     order_points: Optional[int] = None
     """Points used 會員點數使用"""
-    # order_points_to_cash: Optional[int] = None
-    # """Discounted by the points used 會員點數折抵金額"""
+    order_points_to_cash: Optional[Money] = None
     invoice: Optional[OrderInvoice] = None
     invoices: Optional[List[InvoicesItem]] = None
     """Invoices Info 發票資訊（包含 EC、POS）"""
     subtotal_items: Optional[List[OrderItem]] = None
+    """Order Product Item Data 訂單商品資訊"""
     promotion_items: Optional[List[OrderPromotionItem]] = None
     custom_data: Optional[List[Dict[str, Any]]] = None
     """Customized Order Fields 客製化欄位 - *欲使用此欄位請先至商店後台>訂單設定>自訂訂單欄位 進行設定"""
@@ -184,7 +196,8 @@ class Order(BaseModel):
     """Customer Comments 顧客通訊內容"""
     order_notes: Optional[List[Order_NotesItem]] = None
     """Order Notes 訂單備註"""
-    created_by: Optional[Union[Literal['openapi', 'admin', 'shop', 'shop_crm', 'pos', 'sc', 'mc', 'import'], str]] = None
+    created_by: Optional[
+        Union[Literal['openapi', 'admin', 'shop', 'shop_crm', 'pos', 'sc', 'mc', 'import'], str]] = None
     """Channel that created the order 建立訂單的渠道"""
     agent_id: Optional[str] = None
     """Agent ID that created the order 代理建立訂單的操作者 ID  Only provided when include_fields contains 'agent_id'  僅於include_fields傳入 'agent_id' 時提供"""

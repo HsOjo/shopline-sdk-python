@@ -2,20 +2,21 @@
 Shopline SDK 异常类
 """
 
-from typing import Any, Optional
+from typing import Optional
+
 from pydantic import BaseModel
 
 
 class ShoplineAPIError(Exception):
     """Shopline API 错误异常"""
-    
+
     def __init__(
-        self, 
-        code: str = None, 
-        message: str = None, 
-        status_code: int = 500,
-        error: Optional[BaseModel] = None,
-        **extra
+            self,
+            code: str = None,
+            message: str = None,
+            status_code: int = 500,
+            error: Optional[BaseModel] = None,
+            **extra
     ):
         """
         初始化 Shopline API 错误
@@ -32,12 +33,12 @@ class ShoplineAPIError(Exception):
         self.status_code = status_code
         self.error = error
         self.extra = extra
-        
+
         super().__init__(f"[{code}] {message}")
-    
+
     def __str__(self) -> str:
         return f"ShoplineAPIError({self.status_code}): [{self.code}] {self.message}"
-    
+
     def __repr__(self) -> str:
         return (
             f"ShoplineAPIError(code='{self.code}', message='{self.message}', "

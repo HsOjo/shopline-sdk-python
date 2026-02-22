@@ -1,15 +1,15 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
-from shopline_sdk.models.order_conversations import OrderConversations
 from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.shop_conversations import ShopConversations
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -27,8 +27,9 @@ class Params(BaseModel):
     """Numbers of Conversation per Page
       每頁顯示 n 筆資料"""
 
+
 async def call(
-    session: aiohttp.ClientSession, params: Optional[Params] = None
+        session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> ShopConversations:
     """
     Get Conversations
@@ -54,7 +55,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

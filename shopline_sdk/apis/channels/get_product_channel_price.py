@@ -1,15 +1,15 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.not_found_error import NotFoundError
 from shopline_sdk.models.price_sets import PriceSets
 from shopline_sdk.models.server_error import ServerError
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -19,8 +19,9 @@ class Params(BaseModel):
     """Numbers of PriceSet
       顯示 n 筆商品通路價格"""
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str, params: Optional[Params] = None
+        session: aiohttp.ClientSession, id: str, params: Optional[Params] = None
 ) -> PriceSets:
     """
     Get Product Channel Price
@@ -46,7 +47,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

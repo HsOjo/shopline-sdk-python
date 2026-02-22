@@ -1,15 +1,16 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.channel import Channel
 from shopline_sdk.models.not_found_error import NotFoundError
 from shopline_sdk.models.server_error import ServerError
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -20,8 +21,9 @@ class Params(BaseModel):
     """For mobile logo media, need to add items.mobile_logo_media_url to this field.
        mobile logo media 必須加入 items.mobile_logo_media_url 到此欄位。"""
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str, params: Optional[Params] = None
+        session: aiohttp.ClientSession, id: str, params: Optional[Params] = None
 ) -> Channel:
     """
     Get Channel
@@ -47,7 +49,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

@@ -1,9 +1,8 @@
 """Shopline API 数据模型 - ProductReview"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Optional
 
+from pydantic import BaseModel
 
 
 class RatingConfig(BaseModel):
@@ -13,6 +12,7 @@ class RatingConfig(BaseModel):
     three: Optional[int] = None
     four: Optional[int] = None
     five: Optional[int] = None
+
 
 class ProductReview(BaseModel):
     id: Optional[str] = None

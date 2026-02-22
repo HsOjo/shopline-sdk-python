@@ -1,12 +1,11 @@
 """Shopline API 数据模型 - PurchaseOrderItem"""
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
+
 from pydantic import BaseModel, Field
-from typing_extensions import Literal
 
 # 导入相关模型
 from .money import Money
-
 
 
 class Product_NameConfig(BaseModel):
@@ -25,6 +24,7 @@ class Variation_NameConfig(BaseModel):
     """Configuration model for variation_name"""
     zh_hant: Optional[str] = Field(default=None, alias="zh-hant")
     en: Optional[str] = None
+
 
 class PurchaseOrderItem(BaseModel):
     id: Optional[str] = None

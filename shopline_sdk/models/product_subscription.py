@@ -1,7 +1,8 @@
 """Shopline API 数据模型 - ProductSubscription"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+from typing import Optional, Union
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
@@ -32,3 +33,5 @@ class ProductSubscription(BaseModel):
     """Created date 創建時間"""
     updated_at: Optional[str] = None
     """Updated date 更新時間"""
+    enable_apply_user_credits: Optional[bool] = None
+    """Enable apply user credits 是否開啟子單自動折抵購物金"""

@@ -1,9 +1,9 @@
 """Shopline API 数据模型 - AgentWorkLog"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Optional, Union
 
+from pydantic import BaseModel
+from typing_extensions import Literal
 
 
 class In_LogConfig(BaseModel):
@@ -22,6 +22,7 @@ class Out_LogConfig(BaseModel):
     clock_type: Optional[Union[Literal['in', 'out'], str]] = None
     clocked_at: Optional[str] = None
     created_at: Optional[str] = None
+
 
 class AgentWorkLog(BaseModel):
     in_log: Optional[In_LogConfig] = None

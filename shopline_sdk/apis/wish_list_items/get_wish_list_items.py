@@ -1,15 +1,16 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 from shopline_sdk.models.wish_list_items import WishListItems
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -32,8 +33,9 @@ class Params(BaseModel):
     """Specify the sorting order based on the created_at field as either asc or desc.
        依照 created_at 欄位指定排序方式為升冪或降冪"""
 
+
 async def call(
-    session: aiohttp.ClientSession, params: Optional[Params] = None
+        session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> WishListItems:
     """
     Get wish list items
@@ -59,7 +61,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

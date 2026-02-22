@@ -1,13 +1,11 @@
-from typing import Any, Dict, List, Optional, Union
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str
+        session: aiohttp.ClientSession, id: str
 ) -> str:
     """
     Delete Product Review Comment
@@ -25,7 +23,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.delete(
-        url, headers=headers
+            url, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

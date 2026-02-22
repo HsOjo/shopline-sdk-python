@@ -1,20 +1,22 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.event_trackers import EventTrackers
 from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unauthorized_error import UnauthorizedError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 
+
 class Params(BaseModel):
     """查询参数模型"""
-    event_type: Optional[Union[Literal['loaded_home_page', 'added_product_to_cart', 'loaded_checkout_page', 'placed_an_order', 'loaded_any_page', 'all'], str]] = None
+    event_type: Optional[Union[Literal[
+        'loaded_home_page', 'added_product_to_cart', 'loaded_checkout_page', 'placed_an_order', 'loaded_any_page', 'all'], str]] = None
     """Filter event trackers by their event_type.
        Default: all
        按 event_type 過濾事件追踪資料
@@ -33,8 +35,9 @@ class Params(BaseModel):
     version: Optional[str] = None
     """控制 api version"""
 
+
 async def call(
-    session: aiohttp.ClientSession, params: Optional[Params] = None
+        session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> EventTrackers:
     """
     Get Event Trackers
@@ -61,7 +64,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

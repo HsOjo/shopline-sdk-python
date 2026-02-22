@@ -1,13 +1,13 @@
 """Shopline API 数据模型 - Merchant"""
 
 from typing import Any, Dict, List, Optional, Union
+
 from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
 # 导入相关模型
 from .media import Media
 from .merchant_tax import MerchantTax
-
 
 
 class Whitelisted_Ip_AddressesItem(BaseModel):
@@ -17,6 +17,7 @@ class Whitelisted_Ip_AddressesItem(BaseModel):
     address: Optional[str] = None
     updated_at: Optional[str] = None
     created_at: Optional[str] = None
+
 
 class Merchant(BaseModel):
     id: Optional[str] = None
@@ -44,7 +45,8 @@ class Merchant(BaseModel):
     supported_languages: Optional[List[str]] = None
     """Supported languages 支援的語言"""
     logo_media: Optional[Media] = None
-    kyc_status: Optional[Union[Literal['not_yet_applied', 'basic_account_pending', 'basic_account_verified', 'basic_account_rejected', 'basic_account_reviewed', 'advanced_account_pending', 'advanced_account_verified', 'advanced_account_rejected', 'advanced_account_failed'], str]] = None
+    kyc_status: Optional[Union[Literal[
+        'not_yet_applied', 'basic_account_pending', 'basic_account_verified', 'basic_account_rejected', 'basic_account_reviewed', 'advanced_account_pending', 'advanced_account_verified', 'advanced_account_rejected', 'advanced_account_failed'], str]] = None
     """KYC status KYC審核狀態"""
     admin_status: Optional[Union[Literal['normal', 'suspended'], str]] = None
     """Admin status"""

@@ -1,26 +1,29 @@
 """Shopline API 数据模型 - MetafieldDefinition"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Optional, Union
 
-# 导入相关模型
-from .metafield_value import MetafieldValue
+from pydantic import BaseModel
+from typing_extensions import Literal
 
 
 class MetafieldDefinition(BaseModel):
     id: Optional[str] = None
     """Metafield definition ID"""
     namespace: Optional[str] = None
+    """Namespace"""
     key: Optional[str] = None
+    """Key"""
     name: Optional[str] = None
     """Name"""
     description: Optional[str] = None
     """description"""
-    field_type: Optional[Union[Literal['single_line_text_field', 'multi_line_text_field', 'number_integer', 'number_decimal', 'json', 'boolean', 'url'], str]] = None
+    field_type: Optional[Union[Literal[
+        'single_line_text_field', 'multi_line_text_field', 'number_integer', 'number_decimal', 'json', 'boolean', 'url'], str]] = None
+    """Data type of the metafield value  Type allows:  single_line_text_field - One line of string (max 50 characters)  multi_line_text_field - Multiple line of string (max 1000 characters)  number_integer - Integer  number_decimal - Decimal  json - String of JSON object (max 4000 characters)  boolean - Boolean  url - String of URL"""
     merchant_id: Optional[str] = None
     """Merchant ID"""
-    resource_type: Optional[Union[Literal['product', 'merchant', 'customer', 'order', 'order_item', 'cart_item'], str]] = None
+    resource_type: Optional[
+        Union[Literal['product', 'merchant', 'customer', 'order', 'order_item', 'cart_item'], str]] = None
     """Resource type of the metafield definition"""
     metafield_type: Optional[Union[Literal['merchant', 'app'], str]] = None
     """Type of metafield definition"""

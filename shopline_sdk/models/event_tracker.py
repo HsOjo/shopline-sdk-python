@@ -1,9 +1,9 @@
 """Shopline API 数据模型 - EventTracker"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Optional, Union
 
+from pydantic import BaseModel
+from typing_extensions import Literal
 
 
 class Config_DataConfig(BaseModel):
@@ -19,10 +19,12 @@ class Config_DataConfig(BaseModel):
     access_token: Optional[str] = None
     """for tiktok"""
 
+
 class EventTracker(BaseModel):
     id: Optional[str] = None
     """ID"""
-    event_type: Optional[Union[Literal['loaded_home_page', 'added_product_to_cart', 'loaded_checkout_page', 'placed_an_order', 'loaded_any_page'], str]] = None
+    event_type: Optional[Union[Literal[
+        'loaded_home_page', 'added_product_to_cart', 'loaded_checkout_page', 'placed_an_order', 'loaded_any_page'], str]] = None
     event_key: Optional[Union[Literal['tiktok', 'facebook_standard_pixel'], str]] = None
     """The platform of tracking services"""
     status: Optional[Union[Literal['active'], str]] = None

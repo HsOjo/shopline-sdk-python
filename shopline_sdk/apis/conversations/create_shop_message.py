@@ -1,11 +1,10 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.shop_conversation import ShopConversation
@@ -16,6 +15,7 @@ class RefDataSchema(BaseModel):
     """Model for ref_data"""
     path: Optional[str] = None
     full_path: Optional[str] = None
+
 
 class Body(BaseModel):
     """请求体模型"""
@@ -36,8 +36,9 @@ class Body(BaseModel):
       訊息接收者ID"""
     ref_data: Optional[RefDataSchema] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, body: Optional[Body] = None
+        session: aiohttp.ClientSession, body: Optional[Body] = None
 ) -> ShopConversation:
     """
     Create Shop Message
@@ -58,7 +59,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.post(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

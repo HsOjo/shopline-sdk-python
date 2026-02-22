@@ -1,18 +1,15 @@
-from typing import Any, Dict, List, Optional, Union
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.affiliate_campaign import AffiliateCampaign
 from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str
+        session: aiohttp.ClientSession, id: str
 ) -> AffiliateCampaign:
     """
     Get Affiliate Campaign
@@ -30,7 +27,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, headers=headers
+            url, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

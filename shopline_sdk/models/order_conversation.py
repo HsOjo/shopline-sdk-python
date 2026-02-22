@@ -1,9 +1,9 @@
 """Shopline API 数据模型 - OrderConversation"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Any, Optional, Union
 
+from pydantic import BaseModel
+from typing_extensions import Literal
 
 
 class Last_MessageConfig(BaseModel):
@@ -20,6 +20,7 @@ class Last_MessageConfig(BaseModel):
     """Content 對話內容"""
     type: Optional[Union[Literal['text', 'image'], str]] = None
     """Conversation Type 對話類別"""
+
 
 class OrderConversation(BaseModel):
     id: Optional[str] = None

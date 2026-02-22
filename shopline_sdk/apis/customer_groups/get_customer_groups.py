@@ -1,16 +1,17 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.customer_group import CustomerGroup
 from shopline_sdk.models.paginatable import Paginatable
 from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -47,13 +48,15 @@ class Params(BaseModel):
        Don't use created_before or created_after if the status is given.
        若有設定 status 欄位，則不要同時設定 created_before 或 created_before 參數"""
 
+
 class Response(BaseModel):
     """响应体模型"""
     items: Optional[List[CustomerGroup]] = None
     pagination: Optional[Paginatable] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, params: Optional[Params] = None
+        session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> Response:
     """
     Get Customer Groups
@@ -79,7 +82,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

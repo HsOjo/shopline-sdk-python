@@ -1,7 +1,8 @@
 """Shopline API 数据模型 - CartItem"""
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
@@ -9,8 +10,6 @@ from .cart_product import CartProduct
 from .cart_product_variation import CartProductVariation
 from .cart_promotion import CartPromotion
 from .money import Money
-from .translatable import Translatable
-
 
 
 class Item_DataConfig(BaseModel):
@@ -19,6 +18,7 @@ class Item_DataConfig(BaseModel):
     ref_id: Optional[str] = None
     discount_type: Optional[str] = None
     selected_child_products: Optional[List[Dict[str, Any]]] = None
+
 
 class CartItem(BaseModel):
     id: Optional[str] = None
@@ -29,7 +29,8 @@ class CartItem(BaseModel):
     """Variation ID 購物車內的商品規格品ID"""
     quantity: Optional[float] = None
     """Quantity 購物車內的物品數量"""
-    type: Optional[Union[Literal['product', 'product_set', 'subscription_product', 'manual_gift', 'custom_product', 'custom_discount', 'redeem_gift'], str]] = None
+    type: Optional[Union[Literal[
+        'product', 'product_set', 'subscription_product', 'manual_gift', 'custom_product', 'custom_discount', 'redeem_gift'], str]] = None
     """Type 購物車內的物品類型"""
     created_by: Optional[str] = None
     """The Source of Item  購物車物品加入的來源"""

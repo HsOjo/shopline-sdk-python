@@ -1,9 +1,9 @@
 """Shopline API 数据模型 - ProductReviewSetting"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import List, Optional, Union
 
+from pydantic import BaseModel
+from typing_extensions import Literal
 
 
 class Review_Reward_ConditionConfig(BaseModel):
@@ -14,6 +14,7 @@ class Review_Reward_ConditionConfig(BaseModel):
     """Deadline days for reward 評價在order完成後送出的期限天數"""
     picture_upload: Optional[int] = None
     """Picture upload required 圖片上傳要求"""
+
 
 class ProductReviewSetting(BaseModel):
     hide_review: Optional[bool] = None

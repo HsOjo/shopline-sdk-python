@@ -1,7 +1,8 @@
 """Shopline API 数据模型 - ProductVariation"""
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
@@ -10,12 +11,12 @@ from .money import Money
 from .translatable_array import TranslatableArray
 
 
-
 class Feed_VariationsConfig(BaseModel):
     """Configuration model for feed_variations"""
     color: Optional[Dict[str, Any]] = None
     size: Optional[Dict[str, Any]] = None
     material: Optional[str] = None
+
 
 class ProductVariation(BaseModel):
     id: Optional[str] = None
@@ -40,7 +41,7 @@ class ProductVariation(BaseModel):
     location_id: Optional[str] = None
     """Location ID 儲位編號"""
     feed_variations: Optional[Feed_VariationsConfig] = None
-    """Default variations for product feed 廣告規格"""
+    """Default variations for product feed 廣告規格  當商品為多規格並且規格中有設置color、size時，此时color、size為json。  當商品規格中未設置color、size，但商家有在產品規格摘要頁麵填冩color、size時，此時color、size爲純字串"""
     variant_option_ids: Optional[List[str]] = None
     """ID of the corresponding variant options 對應規格類別 ID"""
     barcode: Optional[str] = None

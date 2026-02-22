@@ -1,6 +1,7 @@
 """Shopline API 数据模型 - ReturnOrder"""
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, List, Optional, Union
+
 from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
@@ -16,7 +17,6 @@ from .return_order_promotion_item import ReturnOrderPromotionItem
 from .return_order_ref_data import ReturnOrderRefData
 
 
-
 class OrderConfig(BaseModel):
     """Configuration model for order"""
     id: Optional[str] = Field(default=None, alias="_id")
@@ -25,6 +25,7 @@ class OrderConfig(BaseModel):
     """Order Number 訂單號碼"""
     merchant_order_number: Optional[str] = None
     """店家自定義訂單號 (會根據rollout_key選擇用哪個order_number)"""
+
 
 class ReturnOrder(BaseModel):
     id: Optional[str] = None

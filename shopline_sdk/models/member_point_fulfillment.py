@@ -1,9 +1,8 @@
 """Shopline API 数据模型 - MemberPointFulfillment"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Any, Dict, List, Optional
 
+from pydantic import BaseModel
 
 
 class Never_Expire_ItemConfig(BaseModel):
@@ -12,6 +11,7 @@ class Never_Expire_ItemConfig(BaseModel):
     """The total value of never expire member points.<br/> 永久有效的會員點數加總"""
     expire_at: Optional[str] = None
     """This field will be null because the member point never expire.<br/> 會員點數為永久有效，此欄位為 null"""
+
 
 class MemberPointFulfillment(BaseModel):
     limit: Optional[float] = None

@@ -1,12 +1,11 @@
 """Shopline API 数据模型 - GlobalSectionSettings"""
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+
+from pydantic import BaseModel
 
 # 导入相关模型
 from .page_block_settings import PageBlockSettings
-
 
 
 class Schema_SettingsConfig(BaseModel):
@@ -17,6 +16,7 @@ class Schema_SettingsConfig(BaseModel):
     """The blocks included in the section Section內包含的blocks"""
     blocks_order: Optional[List[str]] = None
     """The blocks order in the section Section的blocks的排列次序"""
+
 
 class GlobalSectionSettings(BaseModel):
     id: Optional[str] = None

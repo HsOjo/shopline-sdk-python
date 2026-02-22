@@ -1,8 +1,8 @@
 """Shopline API 数据模型 - OrderDeliveryAddress"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import List, Optional
+
+from pydantic import BaseModel
 
 
 class OrderDeliveryAddress(BaseModel):

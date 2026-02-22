@@ -1,17 +1,16 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.bad_request_error import BadRequestError
 from shopline_sdk.models.not_found_error import NotFoundError
-from shopline_sdk.models.product_variation import ProductVariation
 from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
+
 
 class Body(BaseModel):
     """请求体模型"""
@@ -31,6 +30,7 @@ class Body(BaseModel):
        false: increase/decrease the quantity with the number you provided
       增加/減少數量"""
 
+
 class Response(BaseModel):
     """响应体模型"""
     id: Optional[str] = None
@@ -39,8 +39,9 @@ class Response(BaseModel):
     updated_at: Optional[str] = None
     product_id: Optional[str] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, product_id: str, id: str, body: Optional[Body] = None
+        session: aiohttp.ClientSession, product_id: str, id: str, body: Optional[Body] = None
 ) -> Response:
     """
     Update Product Variation Quantity
@@ -61,7 +62,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.put(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

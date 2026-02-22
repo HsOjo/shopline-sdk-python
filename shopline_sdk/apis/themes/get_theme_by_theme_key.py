@@ -1,22 +1,23 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.theme import Theme
 from shopline_sdk.models.unauthorized_error import UnauthorizedError
 
+
 class Response(BaseModel):
     """响应体模型"""
     items: Optional[Theme] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, theme_key: str
+        session: aiohttp.ClientSession, theme_key: str
 ) -> Response:
     """
     Get Theme by theme key
@@ -34,7 +35,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, headers=headers
+            url, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

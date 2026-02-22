@@ -1,9 +1,8 @@
 """Shopline API 数据模型 - UpdateFlashPriceCampaignBody"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Any, Dict, List, Optional
 
+from pydantic import BaseModel
 
 
 class ProductConfig(BaseModel):
@@ -16,6 +15,7 @@ class ProductConfig(BaseModel):
     """Flash price campaign's title 商品限時促銷價活動的名稱"""
     price_sets: Optional[List[Dict[str, Any]]] = None
     """The product price sets of this flash price campaigns.  商品限時促銷價活動的商品限時價格。"""
+
 
 class UpdateFlashPriceCampaignBody(BaseModel):
     """Payload for updating flash price campaign"""

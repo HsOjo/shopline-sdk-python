@@ -1,14 +1,16 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
+from shopline_sdk.models.bad_request_error import BadRequestError
 from shopline_sdk.models.product import Product
 from shopline_sdk.models.server_error import ServerError
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -112,13 +114,20 @@ class Params(BaseModel):
        是否可以設為贈品
        true: the product can be set as a gift.
        false: the product cannot be set as a gift."""
+    sorts: Optional[List[str]] = None
+    """Specify sorting rules. Supports up to two levels of sorting.
+       When sort by, order by, and sorts are requested, sorts takes priority.
+       用於設定資料的排序方式，支援最多兩層排序。sold_out 僅能是第一順位的排序依據
+       當同時傳入 sort by、order by、sorts 時，系統會優先使用 sorts 的設定"""
+
 
 class Response(BaseModel):
     """响应体模型"""
     items: Optional[List[Product]] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, params: Optional[Params] = None
+        session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> Response:
     """
     Search Products
@@ -144,10 +153,16 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()
+            if response.status == 400:
+                error = BadRequestError(**error_data)
+                raise ShoplineAPIError(
+                    status_code=400,
+                    error=error
+                )
             if response.status == 500:
                 error = ServerError(**error_data)
                 raise ShoplineAPIError(

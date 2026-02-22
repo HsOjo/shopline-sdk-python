@@ -1,8 +1,8 @@
 """Shopline API 数据模型 - TokenScopes"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Any, Dict, Optional
+
+from pydantic import BaseModel
 
 
 class TokenScopes(BaseModel):

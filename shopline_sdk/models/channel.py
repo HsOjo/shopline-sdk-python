@@ -1,12 +1,12 @@
 """Shopline API 数据模型 - Channel"""
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
 from .translatable import Translatable
-
 
 
 class PhonesConfig(BaseModel):
@@ -28,6 +28,7 @@ class E_Invoice_SettingConfig(BaseModel):
     """only show this object when invoice_type is cetustek"""
     invoice_tradevan: Optional[Dict[str, Any]] = None
     """only show this object when invoice_type is tradevan"""
+
 
 class Channel(BaseModel):
     id: Optional[str] = None

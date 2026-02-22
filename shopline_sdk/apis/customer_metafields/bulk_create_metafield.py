@@ -1,24 +1,48 @@
 from typing import Any, Dict, List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.metafield_value import MetafieldValue
 
+
+class ItemsItemSchema(BaseModel):
+    """Item model for items"""
+    namespace: Optional[str] = None
+    """Namespace"""
+    key: Optional[str] = None
+    """Key"""
+    field_type: Optional[Union[Literal[
+        'single_line_text_field', 'multi_line_text_field', 'number_integer', 'number_decimal', 'json', 'boolean', 'url'], str]] = None
+    """Data type of the metafield value
+       Type allows:
+       single_line_text_field - One line of string (max 50 characters)
+       multi_line_text_field - Multiple line of string (max 1000 characters)
+       number_integer - Integer
+       number_decimal - Decimal
+       json - String of JSON object (max 4000 characters)
+       boolean - Boolean
+       url - String of URL"""
+    field_value: Optional[Union[str, float, bool, Dict[str, Any]]] = None
+    """Metafield value"""
+
+
 class Body(BaseModel):
     """请求体模型"""
-    items: Optional[List[Any]] = None
+    items: Optional[List[ItemsItemSchema]] = None
+
 
 class Response(BaseModel):
     """响应体模型"""
     items: Optional[List[MetafieldValue]] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, customer_id: str, body: Optional[Body] = None
+        session: aiohttp.ClientSession, customer_id: str, body: Optional[Body] = None
 ) -> Response:
     """
     Bulk create metafield
@@ -38,7 +62,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.post(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

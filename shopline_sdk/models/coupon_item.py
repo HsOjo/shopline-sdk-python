@@ -1,13 +1,12 @@
 """Shopline API 数据模型 - CouponItem"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import List, Optional
+
+from pydantic import BaseModel
 
 # 导入相关模型
 from .money import Money
 from .translatable import Translatable
-
 
 
 class Coupon_ItemConfig(BaseModel):
@@ -16,6 +15,7 @@ class Coupon_ItemConfig(BaseModel):
     """Coupon Code 酷碰券代碼"""
     discounted_amount: Optional[Money] = None
     """Discount Amount 折扣金額"""
+
 
 class CouponItem(BaseModel):
     id: Optional[str] = None

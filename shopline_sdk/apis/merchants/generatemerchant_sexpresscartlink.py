@@ -1,7 +1,7 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
@@ -16,6 +16,7 @@ class ProductsItemSchema(BaseModel):
     """Variation Id
       款式 ID"""
 
+
 class Body(BaseModel):
     """请求体模型"""
     affiliate_campaign_id: Optional[str] = None
@@ -25,12 +26,14 @@ class Body(BaseModel):
     """Products
       商品資料"""
 
+
 class Response(BaseModel):
     """响应体模型"""
     link: Optional[str] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, body: Optional[Body] = None
+        session: aiohttp.ClientSession, body: Optional[Body] = None
 ) -> Response:
     """
     Generate Merchant's express cart link
@@ -51,7 +54,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.post(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

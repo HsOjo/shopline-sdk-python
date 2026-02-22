@@ -1,12 +1,11 @@
 """Shopline API 数据模型 - StoreCreditFulfillment"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel
 
 # 导入相关模型
 from .money import Money
-
 
 
 class Never_Expire_ItemConfig(BaseModel):
@@ -16,6 +15,7 @@ class Never_Expire_ItemConfig(BaseModel):
     total_value_dollar: Optional[Money] = None
     expire_at: Optional[str] = None
     """This field will be null because the store credit never expire.<br/> 購物金為永久有效，此欄位為 null"""
+
 
 class StoreCreditFulfillment(BaseModel):
     limit: Optional[float] = None

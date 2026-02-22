@@ -1,16 +1,15 @@
 """Shopline API 数据模型 - OrderItem"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+from typing import Any, Dict, Optional, Union
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
 from .media import Media
 from .money import Money
-from .product import Product
 from .translatable import Translatable
 from .translatable_array import TranslatableArray
-
 
 
 class Item_DataConfig(BaseModel):
@@ -24,18 +23,29 @@ class Item_DataConfig(BaseModel):
 class Object_DataConfig(BaseModel):
     """Configuration model for object_data"""
     gender: Optional[str] = None
+    """Mapping Product Category: Gender 產品使用類別：性別  male 男性  female 女性 * unisex 男女通用"""
     age_group: Optional[str] = None
+    """Mapping Product Category:Age Group 產品使用類別：年齡層  newborn 新生兒  infant 嬰兒  toddler 幼兒  kids兒童 * Adult 成人"""
     adult: Optional[str] = None
+    """Mapping Product Category:Adult 產品使用類別：成人  yes 是  no 否"""
     condition: Optional[str] = None
+    """Mapping Product Category:Condition 產品使用類別：狀況  used 二手  refurbished 整新品 * new 新品"""
     brand: Optional[str] = None
+    """Brand 商品品牌"""
     supplier: Optional[Any] = None
     """Supplier  供應商  -  Only provided when include_fields contains 'supplier'  僅於include_fields傳入 'supplier' 時提供"""
     weight: Optional[float] = None
+    """Product's Weight (kg) 商品重量 (公斤)"""
     barcode_type: Optional[Union[Literal['Code 128', 'Bookland EAN', 'ISBN'], str]] = None
+    """Barcode type 商品條碼編號類別"""
     location_id: Optional[str] = None
+    """Stock Unit Number 儲位編號"""
     max_order_quantity: Optional[int] = None
+    """set maximum quantity per purchase for this product  商品單次購買上限  *-1 represents there's no quantity limit for each purchase  -1代表無商品單次購買的上限"""
     gtin: Optional[str] = None
+    """Barcode 商品條碼編號"""
     mpn: Optional[str] = None
+    """Manufacturer Part Number 製造編號"""
 
 
 class Child_ProductsConfig(BaseModel):
@@ -50,6 +60,7 @@ class Child_ProductsConfig(BaseModel):
     """Product SKU 商品貨號"""
     price: Optional[Money] = None
     price_sale: Optional[Money] = None
+
 
 class OrderItem(BaseModel):
     id: Optional[str] = None

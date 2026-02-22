@@ -1,11 +1,10 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.delivery_option import DeliveryOption
 from shopline_sdk.models.translatable import Translatable
@@ -25,18 +24,21 @@ class AddressesItemSchema(BaseModel):
     store_address_translations: Optional[Translatable] = None
     instruction_translations: Optional[Translatable] = None
 
+
 class Body(BaseModel):
     """请求体模型"""
     store_pickup_option: Optional[StorePickupOptionSchema] = None
     addresses: Optional[List[AddressesItemSchema]] = None
+
 
 class Response(BaseModel):
     """响应体模型"""
     delivery_option: Optional[DeliveryOption] = None
     errors: Optional[List[str]] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str, body: Optional[Body] = None
+        session: aiohttp.ClientSession, id: str, body: Optional[Body] = None
 ) -> Response:
     """
     Update Delivery Option(Store Pickup)'s Store Information
@@ -57,7 +59,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.put(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

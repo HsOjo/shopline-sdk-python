@@ -1,17 +1,18 @@
 """Shopline API 数据模型 - CreateCustomerBody"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+from typing import List, Optional, Union
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
-from .customer import Customer
 from .order_delivery_address import OrderDeliveryAddress
 
 
 class CreateCustomerBody(BaseModel):
     """Payload for updating customer"""
     name: Optional[str] = None
+    """Customer Name 顧客姓名"""
     email: Optional[str] = None
     """Customer's Email 顧客電子郵件 - *Customers will receive a requirement to reset password by email after creation. 使用open api Create Customer之後顧客將會收到要求重新設定密碼之email"""
     mobile_phone: Optional[str] = None
@@ -29,6 +30,7 @@ class CreateCustomerBody(BaseModel):
     phone_country_code: Optional[str] = None
     """Customer Phone Country Code.<br />顧客電話國碼"""
     gender: Optional[Union[Literal['male', 'female', 'other'], str]] = None
+    """Customer Gender 顧客性別"""
     birthday: Optional[str] = None
     birth_year: Optional[int] = None
     """Customer's birth year 顧客出生年份 -  *Could not be used with the birthday parameter at the same time."""
@@ -57,6 +59,7 @@ class CreateCustomerBody(BaseModel):
     registered_by_channel_id: Optional[str] = None
     """Registration source id 會員註冊來源的id"""
     memo: Optional[str] = None
+    """Customer memo 顧客備註"""
     tags: Optional[List[str]] = None
     """顧客標籤"""
     membership_tier_id: Optional[str] = None

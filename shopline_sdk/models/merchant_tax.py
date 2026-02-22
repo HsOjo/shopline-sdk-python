@@ -1,12 +1,11 @@
 """Shopline API 数据模型 - MerchantTax"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import List, Optional
+
+from pydantic import BaseModel
 
 # 导入相关模型
 from .tax_region import TaxRegion
-
 
 
 class SalesConfig(BaseModel):
@@ -25,6 +24,7 @@ class Service_ChargeConfig(BaseModel):
     """Configuration model for service_charge"""
     general: Optional[TaxRegion] = None
     details: Optional[List[TaxRegion]] = None
+
 
 class MerchantTax(BaseModel):
     id: Optional[str] = None

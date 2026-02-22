@@ -1,7 +1,8 @@
 """Shopline API 数据模型 - OrderPayment"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+from typing import Any, Dict, Optional, Union
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
@@ -14,7 +15,8 @@ class OrderPayment(BaseModel):
     """Payment Method ID 付款方式ID"""
     ref_payment_id: Optional[str] = None
     """3rd party payment reference ID"""
-    payment_type: Optional[Union[Literal['ecpay', 'bank_transfer', 'cash_on_delivery', 'custom tw_711_b2c_pay', 'tw_711_pay', 'sl_logistics_ninjavan_cod', 'sl_logistics_kerry_th_cod', 'sl_logistics_ghtk_cod', 'sl_logistics_janio_cod', 'sl_logistics_poslaju_cod'], str]] = None
+    payment_type: Optional[Union[Literal[
+        'ecpay', 'bank_transfer', 'cash_on_delivery', 'custom tw_711_b2c_pay', 'tw_711_pay', 'sl_logistics_ninjavan_cod', 'sl_logistics_kerry_th_cod', 'sl_logistics_ghtk_cod', 'sl_logistics_janio_cod', 'sl_logistics_poslaju_cod'], str]] = None
     """Payment Method 付款方式"""
     name_translations: Optional[Translatable] = None
     status: Optional[Union[Literal['pending', 'failed', 'expired', 'completed', 'refunding', 'refunded'], str]] = None

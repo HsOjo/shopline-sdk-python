@@ -1,16 +1,17 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.order import Order
 from shopline_sdk.models.paginatable import Paginatable
 from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -196,7 +197,8 @@ class Params(BaseModel):
        confirmed 已確認
       completed 已完成
        cancelled 已取消"""
-    statuses: Optional[List[Union[Literal['pending', 'removed', 'confirmed', 'completed', 'cancelled'], str]]] = Field(default=None, alias="statuses[]")
+    statuses: Optional[List[Union[Literal['pending', 'removed', 'confirmed', 'completed', 'cancelled'], str]]] = Field(
+        default=None, alias="statuses[]")
     """Statuses
       多個訂單狀態
       -
@@ -209,7 +211,8 @@ class Params(BaseModel):
     payment_id: Optional[str] = None
     """Payment Method ID
       付款方式ID"""
-    payment_status: Optional[Union[Literal['pending', 'failed', 'expired', 'completed', 'refunding', 'refunded', 'partially_refunded'], str]] = None
+    payment_status: Optional[Union[Literal[
+        'pending', 'failed', 'expired', 'completed', 'refunding', 'refunded', 'partially_refunded'], str]] = None
     """Payment Status
       付款狀態
       -
@@ -224,7 +227,8 @@ class Params(BaseModel):
     delivery_option_id: Optional[str] = None
     """Delivery Option ID
       物流方式ID"""
-    delivery_status: Optional[Union[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning'], str]] = None
+    delivery_status: Optional[
+        Union[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning'], str]] = None
     """Delivery Status
       物流狀態 
       -
@@ -236,7 +240,9 @@ class Params(BaseModel):
        collected 已取貨
        returned 已退貨
        * returning 退貨中"""
-    delivery_statuses: Optional[List[Union[Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning'], str]]] = Field(default=None, alias="delivery_statuses[]")
+    delivery_statuses: Optional[List[Union[
+        Literal['pending', 'shipping', 'shipped', 'arrived', 'collected', 'returned', 'returning'], str]]] = Field(
+        default=None, alias="delivery_statuses[]")
     """Delivery Statuses
       多個物流狀態 
       -
@@ -274,17 +280,20 @@ class Params(BaseModel):
     """Sort responses items by created_at or total.
        訂單按訂單創造日期或商品總價排序。 If order_by is not passed, by default showing records in descending order.
        如果沒有傳入order_by, 則按倒序排序。"""
-    include_fields: Optional[List[Union[Literal['affiliate_campaign'], str]]] = Field(default=None, alias="include_fields[]")
+    include_fields: Optional[List[Union[Literal['affiliate_campaign'], str]]] = Field(default=None,
+                                                                                      alias="include_fields[]")
     """Provide additional attributes in the response
       結果添加哪些參數"""
+
 
 class Response(BaseModel):
     """响应体模型"""
     items: Optional[List[Order]] = None
     pagination: Optional[Paginatable] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, params: Optional[Params] = None
+        session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> Response:
     """
     Search Orders
@@ -310,7 +319,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

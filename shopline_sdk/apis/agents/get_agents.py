@@ -1,14 +1,15 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.agent import Agent
 from shopline_sdk.models.paginatable import Paginatable
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -31,13 +32,15 @@ class Params(BaseModel):
     """Show agents include one of channel_ids, length limit is 10
       結果只顯示哪些員工，長度限制10個"""
 
+
 class Response(BaseModel):
     """响应体模型"""
     items: Optional[List[Agent]] = None
     pagination: Optional[Paginatable] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, params: Optional[Params] = None
+        session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> Response:
     """
     Get Agents
@@ -63,7 +66,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

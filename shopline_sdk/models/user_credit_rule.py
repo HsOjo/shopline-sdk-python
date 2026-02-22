@@ -1,9 +1,9 @@
 """Shopline API 数据模型 - UserCreditRule"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import List, Optional, Union
 
+from pydantic import BaseModel
+from typing_extensions import Literal
 
 
 class Apply_ConditionsItem(BaseModel):
@@ -13,10 +13,12 @@ class Apply_ConditionsItem(BaseModel):
     apply_threshold: Optional[int] = None
     """Apply Threshold 購物金折抵門檻"""
 
+
 class UserCreditRule(BaseModel):
     id: Optional[str] = None
     status: Optional[Union[Literal['active', 'inactive'], str]] = None
-    rule_type: Optional[Union[Literal['pos_apply_credit', 'auto_reward', 'apply_partial_credit', 'welcome_credit', 'birthday_credit', 'max_amount_per_order', 'max_percentage_per_order', 'apply_user_credit'], str]] = None
+    rule_type: Optional[Union[Literal[
+        'pos_apply_credit', 'auto_reward', 'apply_partial_credit', 'welcome_credit', 'birthday_credit', 'max_amount_per_order', 'max_percentage_per_order', 'apply_user_credit'], str]] = None
     """pos_apply_credit: POS 購物金折抵 auto_reward: 滿額送購物金 apply_partial_credit: 允許顧客自行設定折抵金額 welcome_credit: 新加入會員購物金 birthday_credit: 生日購物金 max_amount_per_order: (舊) 購物金折抵上限 by amount max_percentage_per_order: (舊) 購物金折抵上限 by percentage apply_user_credit: (新) 折抵購物金上限，支援多層級設定"""
     credit_value: Optional[int] = None
     """購物金"""

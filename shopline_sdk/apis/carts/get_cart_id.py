@@ -1,10 +1,12 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -25,6 +27,7 @@ class Params(BaseModel):
     created_by: Optional[str] = None
     """購物車的建立來源"""
 
+
 class Response(BaseModel):
     """响应体模型"""
     code: Optional[str] = None
@@ -32,8 +35,9 @@ class Response(BaseModel):
     data: Optional[Dict[str, Any]] = None
     trace_id: Optional[str] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, params: Optional[Params] = None
+        session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> Response:
     """
     Get Cart Id
@@ -60,7 +64,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

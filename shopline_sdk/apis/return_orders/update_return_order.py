@@ -1,11 +1,9 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.not_found_error import NotFoundError
 from shopline_sdk.models.return_order import ReturnOrder
@@ -13,8 +11,9 @@ from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
 from shopline_sdk.models.update_return_order_body import UpdateReturnOrderBody as Body
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str, body: Optional[Body] = None
+        session: aiohttp.ClientSession, id: str, body: Optional[Body] = None
 ) -> ReturnOrder:
     """
     Update return order
@@ -35,7 +34,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.put(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

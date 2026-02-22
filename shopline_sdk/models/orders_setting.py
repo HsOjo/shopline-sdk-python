@@ -1,14 +1,14 @@
 """Shopline API 数据模型 - OrdersSetting"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Any, Dict, Optional
 
+from pydantic import BaseModel
 
 
 class Facebook_MessengingConfig(BaseModel):
     """Configuration model for facebook_messenging"""
     status: Optional[str] = None
+
 
 class OrdersSetting(BaseModel):
     invoice_activation: Optional[str] = None

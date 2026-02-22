@@ -1,13 +1,12 @@
 """Shopline API 数据模型 - MembershipInfo"""
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
+
 from pydantic import BaseModel, Field
-from typing_extensions import Literal
 
 # 导入相关模型
 from .membership_tier_rule import MembershipTierRule
 from .translatable import Translatable
-
 
 
 class Membership_TierConfig(BaseModel):
@@ -44,6 +43,7 @@ class Membership_Tier_GapConfig(BaseModel):
     """The amount of upgrading to next membership tier.<br /> 升等到下一會員等級所需之消費金額（Admin 設定的升級金額條件）  *若沒有下一級則回傳 null"""
     extend_total_spending: Optional[float] = None
     """The amount of extending in current membership tier.<br /> 續會目前會員等級所需之消費金額（Admin 設定的續會金額條件）  *若沒有設定則回傳 null"""
+
 
 class MembershipInfo(BaseModel):
     id: Optional[str] = None

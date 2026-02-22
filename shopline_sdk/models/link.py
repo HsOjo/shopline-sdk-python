@@ -1,12 +1,11 @@
 """Shopline API 数据模型 - Link"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import List, Optional
+
+from pydantic import BaseModel
 
 # 导入相关模型
 from .translatable import Translatable
-
 
 
 class Seo_ImageConfig(BaseModel):
@@ -15,6 +14,7 @@ class Seo_ImageConfig(BaseModel):
     """Media ID"""
     url: Optional[str] = None
     """Media URL"""
+
 
 class Link(BaseModel):
     id: Optional[str] = None

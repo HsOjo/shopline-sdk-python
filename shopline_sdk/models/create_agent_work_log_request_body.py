@@ -1,9 +1,9 @@
 """Shopline API 数据模型 - CreateAgentWorkLogRequestBody"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Union
 
+from pydantic import BaseModel
+from typing_extensions import Literal
 
 
 class Work_LogConfig(BaseModel):
@@ -12,6 +12,7 @@ class Work_LogConfig(BaseModel):
     """The type of clock action (in or out)"""
     clocked_at: str
     """The timestamp of the clock action"""
+
 
 class CreateAgentWorkLogRequestBody(BaseModel):
     """Payload for create agent's work log"""

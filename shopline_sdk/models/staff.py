@@ -1,9 +1,8 @@
 """Shopline API 数据模型 - Staff"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import List, Optional
 
+from pydantic import BaseModel
 
 
 class Owned_MerchantsItem(BaseModel):
@@ -32,6 +31,7 @@ class Employed_MerchantsItem(BaseModel):
     """Merchant country code"""
     custom_domain: Optional[str] = None
     """Merchant custom domain"""
+
 
 class Staff(BaseModel):
     id: Optional[str] = None

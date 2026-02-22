@@ -1,12 +1,12 @@
 """Shopline API 数据模型 - PageSectionSettings"""
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入相关模型
 from .page_block_settings import PageBlockSettings
-
 
 
 class Schema_SettingsConfig(BaseModel):
@@ -18,10 +18,12 @@ class Schema_SettingsConfig(BaseModel):
     blocks_order: Optional[List[str]] = None
     """The blocks order in the section Section的blocks的排列次序"""
 
+
 class PageSectionSettings(BaseModel):
     id: Optional[str] = None
     """The ID of the section defined by developer 由開發人員定義的Section ID"""
-    type: Optional[Union[Literal['text', 'gallery', 'image-with-text', 'product-list', 'slideshow', 'product-list-slider'], str]] = None
+    type: Optional[Union[
+        Literal['text', 'gallery', 'image-with-text', 'product-list', 'slideshow', 'product-list-slider'], str]] = None
     """The type of the section Section的類別"""
     schema_settings: Optional[Schema_SettingsConfig] = None
     """The schema of the section Section的結構"""

@@ -1,9 +1,8 @@
 """Shopline API 数据模型 - CreateWishListItemBody"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import List, Optional
 
+from pydantic import BaseModel
 
 
 class Product_Set_DatasItem(BaseModel):
@@ -14,6 +13,7 @@ class Product_Set_DatasItem(BaseModel):
     """Child product's variation key 子商品規格key"""
     quantity: Optional[float] = None
     """Child product quantity 子商品數量"""
+
 
 class CreateWishListItemBody(BaseModel):
     """Payload for creating wish list item"""

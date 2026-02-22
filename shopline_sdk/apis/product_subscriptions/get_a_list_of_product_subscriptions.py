@@ -1,14 +1,14 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.paginatable import Paginatable
 from shopline_sdk.models.product_subscription import ProductSubscription
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -25,13 +25,15 @@ class Params(BaseModel):
     """Only show specific products based on IDs
       結果只顯示哪些商品"""
 
+
 class Response(BaseModel):
     """响应体模型"""
     items: Optional[List[ProductSubscription]] = None
     pagination: Optional[Paginatable] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, params: Optional[Params] = None
+        session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> Response:
     """
     Get a list of product subscriptions
@@ -57,7 +59,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

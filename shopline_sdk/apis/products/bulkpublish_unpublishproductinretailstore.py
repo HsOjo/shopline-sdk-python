@@ -1,11 +1,10 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.retail_status import retail_status
 
@@ -17,18 +16,23 @@ class ProductsItemSchema(BaseModel):
        Max delete 100 products at a time.
        需要上架/下架的商品id，每次最多只能上架/下架100個商品。"""
     retail_status: Optional[retail_status] = None
+    """The status that will be applied on the products to the retail store.
+       更新商品狀態至實體店。"""
+
 
 class Body(BaseModel):
     """请求体模型"""
     products: Optional[List[ProductsItemSchema]] = None
+
 
 class Response(BaseModel):
     """响应体模型"""
     updated_product_ids: Optional[List[str]] = None
     errors: Optional[List[Dict[str, Any]]] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, body: Optional[Body] = None
+        session: aiohttp.ClientSession, body: Optional[Body] = None
 ) -> Response:
     """
     Bulk Publish/Unpublish Product in Retail Store
@@ -49,7 +53,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.put(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

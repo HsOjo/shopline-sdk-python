@@ -1,9 +1,8 @@
 """Shopline API 数据模型 - CorporateInfo"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Optional
 
+from pydantic import BaseModel
 
 
 class AddressConfig(BaseModel):
@@ -20,6 +19,7 @@ class AddressConfig(BaseModel):
     """City name 城市"""
     city_code: Optional[str] = None
     """City code 城市代碼"""
+
 
 class CorporateInfo(BaseModel):
     name: Optional[str] = None

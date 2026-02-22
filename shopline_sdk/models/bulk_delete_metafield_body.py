@@ -1,15 +1,15 @@
 """Shopline API 数据模型 - BulkDeleteMetafieldBody"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Optional
 
-# 导入相关模型
-from .metafield_value import MetafieldValue
+from pydantic import BaseModel
 
 
 class BulkDeleteMetafieldBody(BaseModel):
     """Payload for updating metafield"""
     id: Optional[str] = None
+    """Metafield Value ID"""
     namespace: Optional[str] = None
+    """Namespace"""
     key: Optional[str] = None
+    """Key"""

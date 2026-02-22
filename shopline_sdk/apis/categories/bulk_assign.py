@@ -1,16 +1,13 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
-from shopline_sdk.models.category import Category
-from shopline_sdk.models.merchant import Merchant
-from shopline_sdk.models.product import Product
 from shopline_sdk.models.server_error import ServerError
+
 
 class Body(BaseModel):
     """请求体模型"""
@@ -27,12 +24,14 @@ class Body(BaseModel):
     """if products in other categories, unset other categories, default false
        如果商品在其他分類，是否從其他分類刪除，默認為false"""
 
+
 class Response(BaseModel):
     """响应体模型"""
     result: Optional[List[Dict[str, Any]]] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, body: Optional[Body] = None
+        session: aiohttp.ClientSession, body: Optional[Body] = None
 ) -> Response:
     """
     Bulk Assign
@@ -53,7 +52,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.post(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

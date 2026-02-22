@@ -1,6 +1,7 @@
 from typing import Any, Dict, List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 # 导入异常类
@@ -28,6 +29,7 @@ class RevertMemberPointsSchema(BaseModel):
     """determine revert member points or not, default do not revert
       是否回補點數，預設不回補"""
 
+
 class Body(BaseModel):
     """请求体模型"""
     cancelled_reason: Optional[CancelledReasonSchema] = None
@@ -51,12 +53,14 @@ class Body(BaseModel):
       -
       *Default:true"""
 
+
 class Response(BaseModel):
     """响应体模型"""
     order_items_stock_tag: Optional[List[Dict[str, Any]]] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, orderId: str, body: Optional[Body] = None
+        session: aiohttp.ClientSession, orderId: str, body: Optional[Body] = None
 ) -> Response:
     """
     Cancel Order
@@ -77,7 +81,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.patch(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

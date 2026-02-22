@@ -1,14 +1,14 @@
 """Shopline API 数据模型 - ProductRelatedThemeSettings"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Optional
 
+from pydantic import BaseModel
 
 
 class Buy_Now_ButtonConfig(BaseModel):
     """Configuration model for buy_now_button"""
     enabled: Optional[bool] = None
+
 
 class ProductRelatedThemeSettings(BaseModel):
     enabled_quick_cart: Optional[bool] = None

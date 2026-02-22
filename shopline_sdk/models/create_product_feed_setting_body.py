@@ -1,7 +1,8 @@
 """Shopline API 数据模型 - CreateProductFeedSettingBody"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+from typing import List, Optional, Union
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 

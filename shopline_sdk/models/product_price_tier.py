@@ -1,6 +1,7 @@
 """Shopline API 数据模型 - ProductPriceTier"""
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional, Union
+
 from pydantic import BaseModel, Field
 from typing_extensions import Literal
 

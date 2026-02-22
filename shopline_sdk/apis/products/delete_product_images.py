@@ -1,10 +1,11 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
+
 
 class Body(BaseModel):
     """请求体模型"""
@@ -12,12 +13,14 @@ class Body(BaseModel):
     """Ids of the Images
       需要被刪除圖片的IDs"""
 
+
 class Response(BaseModel):
     """响应体模型"""
     result: Optional[str] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str, body: Optional[Body] = None
+        session: aiohttp.ClientSession, id: str, body: Optional[Body] = None
 ) -> Response:
     """
     Delete Product Images
@@ -39,7 +42,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.delete(
-        url, json=json_data, headers=headers
+            url, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

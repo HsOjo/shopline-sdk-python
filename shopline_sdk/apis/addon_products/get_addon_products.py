@@ -1,15 +1,16 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.addon_product import AddonProduct
 from shopline_sdk.models.paginatable import Paginatable
 from shopline_sdk.models.server_error import ServerError
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -30,13 +31,15 @@ class Params(BaseModel):
     """Main Product ID
       主商品ID"""
 
+
 class Response(BaseModel):
     """响应体模型"""
     items: Optional[List[AddonProduct]] = None
     pagination: Optional[Paginatable] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, params: Optional[Params] = None
+        session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> Response:
     """
     Get Addon Products
@@ -62,7 +65,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

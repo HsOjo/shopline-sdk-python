@@ -1,19 +1,20 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.cart import Cart
+
 
 class Params(BaseModel):
     """查询参数模型"""
     calculate_all: Optional[bool] = None
     """To calculate info for checkout usage, only turn this option on when you ready to checkout.
        用於計算結帳相關資訊，僅在準備結帳時啟用此選項"""
+
 
 class Response(BaseModel):
     """响应体模型"""
@@ -22,8 +23,9 @@ class Response(BaseModel):
     data: Optional[Cart] = None
     trace_id: Optional[str] = None
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str, params: Optional[Params] = None
+        session: aiohttp.ClientSession, id: str, params: Optional[Params] = None
 ) -> Response:
     """
     Get Cart
@@ -49,7 +51,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

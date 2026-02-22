@@ -1,6 +1,7 @@
 """Shopline API 数据模型 - CustomerPromotion"""
 
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
+
 from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
@@ -8,11 +9,11 @@ from typing_extensions import Literal
 from .translatable import Translatable
 
 
-
 class Available_ChannelsItem(BaseModel):
     """Item model for available_channels"""
     id: Optional[str] = Field(default=None, alias="_id")
     name: Optional[Translatable] = None
+
 
 class CustomerPromotion(BaseModel):
     id: Optional[str] = None

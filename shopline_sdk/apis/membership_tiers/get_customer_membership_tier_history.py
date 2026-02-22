@@ -1,16 +1,16 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.membership_tier_action_logs import MembershipTierActionLogs
 from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.unauthorized_error import UnauthorizedError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -21,8 +21,9 @@ class Params(BaseModel):
     """Numbers of records per Page
       每頁顯示 n 筆資料"""
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str, params: Optional[Params] = None
+        session: aiohttp.ClientSession, id: str, params: Optional[Params] = None
 ) -> MembershipTierActionLogs:
     """
     Get Customer Membership Tier History
@@ -48,7 +49,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

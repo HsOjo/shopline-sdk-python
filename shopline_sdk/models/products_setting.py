@@ -1,7 +1,8 @@
 """Shopline API 数据模型 - ProductsSetting"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
+from typing import Any, Dict, Optional, Union
+
+from pydantic import BaseModel
 from typing_extensions import Literal
 
 
@@ -26,3 +27,5 @@ class ProductsSetting(BaseModel):
     """Enable pos pinned product. 啟用 POS 釘選商品功能"""
     show_max_discount_rate: Optional[Dict[str, Any]] = None
     """Show max discount rate in the store. 在前台顯示「最低折扣規格」，與折扣的顯示方式"""
+    sold_out_at_last: Optional[bool] = None
+    """Enable Sort Sold-out Products Last on Storefront. 啟用「在前台將售完商品排序於後」"""

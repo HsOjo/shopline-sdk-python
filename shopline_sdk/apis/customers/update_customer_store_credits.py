@@ -1,17 +1,18 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
-
 # 导入需要的模型
 from shopline_sdk.models.not_found_error import NotFoundError
 from shopline_sdk.models.server_error import ServerError
 from shopline_sdk.models.store_credit import StoreCredit
 from shopline_sdk.models.unauthorized_error import UnauthorizedError
 from shopline_sdk.models.unprocessable_entity_error import UnprocessableEntityError
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -21,6 +22,7 @@ class Params(BaseModel):
     fields: Optional[List[str]] = Field(default=None, alias="fields[]")
     """Only show certain parameters in the response
        結果只顯示哪些參數"""
+
 
 class Body(BaseModel):
     """请求体模型"""
@@ -59,7 +61,8 @@ class Body(BaseModel):
     replace: Optional[bool] = None
     """To replace all store credits with the current value
       以此金額替代之前所有購物金"""
-    type: Optional[Union[Literal['manual_credit', 'welcome_credit', 'birthday_credit', 'auto_reward', 'applied_credit', 'user_credit_expired', 'welcome_member_referral_credit', 'member_referral_credit', 'member_info_quick_completion_credit', 'order_split_revert', 'product_review_reward', 'return_order_revert', 'order_edit_revert'], str]] = None
+    type: Optional[Union[Literal[
+        'manual_credit', 'welcome_credit', 'birthday_credit', 'auto_reward', 'applied_credit', 'user_credit_expired', 'welcome_member_referral_credit', 'member_referral_credit', 'member_info_quick_completion_credit', 'order_split_revert', 'product_review_reward', 'return_order_revert', 'order_edit_revert'], str]] = None
     """Store credit type
        購物金類型
        * `manual_credit`
@@ -108,8 +111,9 @@ class Body(BaseModel):
     """Performer Type
       操作者類型"""
 
+
 async def call(
-    session: aiohttp.ClientSession, id: str, params: Optional[Params] = None, body: Optional[Body] = None
+        session: aiohttp.ClientSession, id: str, params: Optional[Params] = None, body: Optional[Body] = None
 ) -> StoreCredit:
     """
     Update Customer Store Credits
@@ -138,7 +142,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.post(
-        url, params=query_params, json=json_data, headers=headers
+            url, params=query_params, json=json_data, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()

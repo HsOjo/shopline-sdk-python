@@ -1,9 +1,8 @@
 """Shopline API 数据模型 - ThirdPartyAdsSetting"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Any, Dict, List, Optional
 
+from pydantic import BaseModel
 
 
 class Facebook_Domain_VerificationConfig(BaseModel):
@@ -30,6 +29,7 @@ class Adwords_DataConfig(BaseModel):
     """Configuration model for adwords_data"""
     adwords_enabled: Optional[str] = None
     credit_orders: Optional[List[Dict[str, Any]]] = None
+
 
 class ThirdPartyAdsSetting(BaseModel):
     facebook_domain_verification: Optional[Facebook_Domain_VerificationConfig] = None

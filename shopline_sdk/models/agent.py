@@ -1,8 +1,8 @@
 """Shopline API 数据模型 - Agent"""
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field
-from typing_extensions import Literal
+from typing import Any, List, Optional
+
+from pydantic import BaseModel
 
 
 class Agent(BaseModel):

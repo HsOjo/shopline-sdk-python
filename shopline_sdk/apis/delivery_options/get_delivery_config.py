@@ -1,10 +1,11 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, Optional
+
 import aiohttp
-from pydantic import BaseModel, ValidationError, Field
-from typing_extensions import Literal
+from pydantic import BaseModel
 
 # 导入异常类
 from shopline_sdk.exceptions import ShoplineAPIError
+
 
 class Params(BaseModel):
     """查询参数模型"""
@@ -12,8 +13,9 @@ class Params(BaseModel):
     """Region Type
       自訂物流種類"""
 
+
 async def call(
-    session: aiohttp.ClientSession, params: Optional[Params] = None
+        session: aiohttp.ClientSession, params: Optional[Params] = None
 ) -> Dict[str, Any]:
     """
     Get Delivery Config
@@ -39,7 +41,7 @@ async def call(
 
     # 发起 HTTP 请求
     async with session.get(
-        url, params=query_params, headers=headers
+            url, params=query_params, headers=headers
     ) as response:
         if response.status >= 400:
             error_data = await response.json()
