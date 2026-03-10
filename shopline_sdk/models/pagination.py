@@ -5,9 +5,6 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-# 导入相关模型
-
-
 class pagination(BaseModel):
     current_page: Optional[int] = None
     """The current page number 當前分頁"""

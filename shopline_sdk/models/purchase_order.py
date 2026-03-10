@@ -5,7 +5,6 @@ from typing import List, Optional, Union
 from pydantic import BaseModel
 from typing_extensions import Literal
 
-# 导入相关模型
 from .agent import Agent
 from .channel import Channel
 from .money import Money

@@ -4,7 +4,6 @@ from typing import List, Optional
 
 from pydantic import BaseModel
 
-# 导入相关模型
 from .membership_tier_action_log import MembershipTierActionLog
 from .paginatable import Paginatable
 

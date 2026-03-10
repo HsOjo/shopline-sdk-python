@@ -1,23 +1,22 @@
 """Shopline API 数据模型 - NetAmountAnalytics"""
 
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from pydantic import BaseModel
 
-# 导入相关模型
 from .money import Money
 
 
 class MetadataConfig(BaseModel):
     """Configuration model for metadata"""
-    total: Optional[Money] = None
+    total: Optional[Union[Money, float]] = None
 
 
 class RecordsItem(BaseModel):
     """Item model for records"""
     label: Optional[str] = None
     """Datetime of the data point 時間"""
-    value: Optional[Money] = None
+    value: Optional[Union[Money, int]] = None
 
 
 class NetAmountAnalytics(BaseModel):

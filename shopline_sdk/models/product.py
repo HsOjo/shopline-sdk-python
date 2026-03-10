@@ -5,7 +5,6 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
-# 导入相关模型
 from .filter_tag import FilterTag
 from .media import Media
 from .money import Money
@@ -49,9 +48,9 @@ class Feed_CategoryConfig(BaseModel):
 
 class Feed_VariationsConfig(BaseModel):
     """Configuration model for feed_variations"""
-    color: Optional[str] = None
+    color: Optional[Union[Dict[str, Any], str]] = None
     """Color 產品資訊 - 顏色"""
-    size: Optional[str] = None
+    size: Optional[Union[Dict[str, Any], str]] = None
     """Size 產品資訊 - 尺寸"""
     material: Optional[str] = None
     """Material 產品資訊 - 材質"""

@@ -10,7 +10,7 @@ class MessageConfig(BaseModel):
     """Configuration model for message"""
     sender_id: Optional[str] = None
     """Sender ID 發送者 ID"""
-    sender_type: Optional[str] = None
+    sender_type: Optional[Union[Union[Literal['User', 'Merchant', 'Bot'], str], str]] = None
     """Sender Type 發送者類型"""
     created_at: Optional[str] = None
     """Created At 訊息建立時間"""

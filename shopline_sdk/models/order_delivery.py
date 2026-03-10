@@ -5,7 +5,6 @@ from typing import Optional, Union
 from pydantic import BaseModel
 from typing_extensions import Literal
 
-# 导入相关模型
 from .translatable import Translatable
 
 

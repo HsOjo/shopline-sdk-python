@@ -4,7 +4,6 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-# 导入相关模型
 from .media import Media
 
 

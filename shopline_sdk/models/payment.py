@@ -5,7 +5,6 @@ from typing import List, Optional, Union
 from pydantic import BaseModel
 from typing_extensions import Literal
 
-# 导入相关模型
 from .payment_config_data import PaymentConfigData
 from .translatable import Translatable
 

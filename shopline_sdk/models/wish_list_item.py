@@ -5,7 +5,6 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel
 from typing_extensions import Literal
 
-# 导入相关模型
 from .money import Money
 from .product_variation import ProductVariation
 from .translatable import Translatable
@@ -18,8 +17,8 @@ class ProductConfig(BaseModel):
     title_translations: Optional[Translatable] = None
     field_titles: Optional[List[Dict[str, Any]]] = None
     """Field Title Data 規格名稱"""
-    price: Optional[Money] = None
-    price_sale: Optional[Money] = None
+    price: Optional[Union[Money, float]] = None
+    price_sale: Optional[Union[Money, float]] = None
     hide_price: Optional[bool] = None
     """Hide Price to customers 隱藏價格 - *Default: false"""
     same_price: Optional[bool] = None
@@ -33,7 +32,7 @@ class ProductConfig(BaseModel):
     """Stock Keeping Unit 商品貨號"""
     flash_price_sets: Optional[List[Dict[str, Any]]] = None
     """price for flash campaign 限時促銷價"""
-    member_price: Optional[Money] = None
+    member_price: Optional[Union[Money, float]] = None
     unlimited_quantity: Optional[bool] = None
     """Unlimited product quantity or not. 商品數量是否無限"""
     quantity: Optional[float] = None

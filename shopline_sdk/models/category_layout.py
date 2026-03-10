@@ -1,10 +1,9 @@
 """Shopline API 数据模型 - CategoryLayout"""
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel
 
-# 导入相关模型
 from .link import Link
 from .translatable import Translatable
 
@@ -19,5 +18,5 @@ class CategoryLayout(BaseModel):
     count: Optional[int] = None
     """Product count 分類商品數量"""
     link: Optional[Link] = None
-    children: Optional[List[Dict[str, Any]]] = None
+    children: Optional[List[Union[Dict[str, Any], str]]] = None
     """Array of Sub Categories Information 子分類資訊序列"""

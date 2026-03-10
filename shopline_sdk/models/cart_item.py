@@ -5,7 +5,6 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel
 from typing_extensions import Literal
 
-# 导入相关模型
 from .cart_product import CartProduct
 from .cart_product_variation import CartProductVariation
 from .cart_promotion import CartPromotion

@@ -3,8 +3,5 @@
 from pydantic import BaseModel
 
 
-# 导入相关模型
-
-
 class MemberPointRules(BaseModel):
     pass

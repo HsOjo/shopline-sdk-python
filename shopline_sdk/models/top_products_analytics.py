@@ -4,7 +4,6 @@ from typing import List, Optional
 
 from pydantic import BaseModel
 
-# 导入相关模型
 from .paginatable import Paginatable
 from .top_products_analytics_record import TopProductsAnalyticsRecord
 

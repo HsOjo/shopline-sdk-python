@@ -4,7 +4,6 @@ from typing import List, Optional
 
 from pydantic import BaseModel
 
-# 导入相关模型
 from .affiliate_campaign import AffiliateCampaign
 from .paginatable import Paginatable
 from .server_error import ServerError

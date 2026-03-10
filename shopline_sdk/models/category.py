@@ -5,7 +5,6 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
-# 导入相关模型
 from .translatable import Translatable
 
 
@@ -40,7 +39,7 @@ class Category(BaseModel):
     """Weight to control sorting 分類權重"""
     created_by: Optional[Union[Literal['admin', 'pos'], str]] = None
     """Created By 創造來自"""
-    children: Optional[List[Dict[str, Any]]] = None
+    children: Optional[List[Union[Dict[str, Any], str]]] = None
     """Array of Sub Categories Information 子分類資訊序列"""
     product_count: Optional[int] = None
     """Product count, only available for /v1/categories with  params include_fields[] have value 'product_count'  商品數目, 只適用於連同參數 include_fields[] 等於 'product_count' 時呼叫 /v1/categories"""

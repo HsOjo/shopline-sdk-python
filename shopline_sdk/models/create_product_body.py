@@ -5,20 +5,20 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel
 from typing_extensions import Literal
 
-# 导入相关模型
+from .money import Money
 from .product_variation import ProductVariation
 from .translatable import Translatable
 
 
 class ProductConfig(BaseModel):
     """Configuration model for product"""
-    price: Optional[float] = None
+    price: Optional[Union[Money, float]] = None
     """Product Price 原價格"""
-    price_sale: Optional[float] = None
+    price_sale: Optional[Union[Money, float]] = None
     """Product Sale Price 特價"""
     retail_price: Optional[float] = None
     """Retail Price 零售價"""
-    member_price: Optional[float] = None
+    member_price: Optional[Union[Money, float]] = None
     """Member Price 會員價"""
     cost: Optional[float] = None
     """Product Cost 成本價"""

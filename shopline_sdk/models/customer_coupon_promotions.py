@@ -4,7 +4,6 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
-# 导入相关模型
 from .customer_promotion import CustomerPromotion
 
 

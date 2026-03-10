@@ -1,8 +1,10 @@
 """Shopline API 数据模型 - TotalSessionsAnalytics"""
 
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from pydantic import BaseModel
+
+from .money import Money
 
 
 class MetadataConfig(BaseModel):
@@ -19,7 +21,7 @@ class RecordsItem(BaseModel):
     """Item model for records"""
     label: Optional[str] = None
     """Datetime of the data point 時間"""
-    value: Optional[int] = None
+    value: Optional[Union[Money, int]] = None
     """Number of storefront views 網店瀏覽量"""
 
 

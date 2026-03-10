@@ -5,7 +5,6 @@ from typing import Any, List, Optional, Union
 from pydantic import BaseModel, Field
 from typing_extensions import Literal
 
-# 导入相关模型
 from .money import Money
 from .order_promotion_item import OrderPromotionItem
 from .return_order_delivery import ReturnOrderDelivery

@@ -4,7 +4,6 @@ from typing import Dict, List, Optional
 
 from pydantic import BaseModel
 
-# 导入相关模型
 from .link import Link
 from .page_section_settings import PageSectionSettings
 from .translatable import Translatable

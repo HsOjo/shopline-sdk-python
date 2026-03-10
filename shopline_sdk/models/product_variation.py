@@ -5,7 +5,6 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel
 from typing_extensions import Literal
 
-# 导入相关模型
 from .media import Media
 from .money import Money
 from .translatable_array import TranslatableArray
@@ -13,8 +12,8 @@ from .translatable_array import TranslatableArray
 
 class Feed_VariationsConfig(BaseModel):
     """Configuration model for feed_variations"""
-    color: Optional[Dict[str, Any]] = None
-    size: Optional[Dict[str, Any]] = None
+    color: Optional[Union[Dict[str, Any], str]] = None
+    size: Optional[Union[Dict[str, Any], str]] = None
     material: Optional[str] = None
 
 

@@ -1,13 +1,15 @@
 """Shopline API 数据模型 - MemberRegistrationAnalytics"""
 
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from pydantic import BaseModel
+
+from .money import Money
 
 
 class MetadataConfig(BaseModel):
     """Configuration model for metadata"""
-    total: Optional[float] = None
+    total: Optional[Union[Money, float]] = None
     """Total number of member registration 新增會員總數"""
 
 
@@ -15,7 +17,7 @@ class RecordsItem(BaseModel):
     """Item model for records"""
     label: Optional[str] = None
     """Datetime of the data point 時間"""
-    value: Optional[int] = None
+    value: Optional[Union[Money, int]] = None
     """Number of member registration 新增會員數"""
 
 

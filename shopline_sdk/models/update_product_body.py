@@ -5,7 +5,6 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel
 from typing_extensions import Literal
 
-# 导入相关模型
 from .product_variation import ProductVariation
 from .translatable import Translatable
 
@@ -27,9 +26,9 @@ class Variant_OptionsItem(BaseModel):
 
 class Feed_VariationsConfig(BaseModel):
     """Configuration model for feed_variations"""
-    color: Optional[str] = None
+    color: Optional[Union[Dict[str, Any], str]] = None
     """Color 產品資訊 - 顏色 -  有規格商品請將請求帶在 variations 欄位中  Requests for products with variants must include them in the variations field.  若為有規格商品且規格類型為顏色，則不允許調整產品資訊 - 顏色  If the type of variant_options is color, feed_variations.color is not allowed to change."""
-    size: Optional[str] = None
+    size: Optional[Union[Dict[str, Any], str]] = None
     """Size 產品資訊 - 尺寸 - 有規格商品請將請求帶在 variations 欄位中  Requests for products with variants must include them in the variations field.  若為有規格商品且規格類型為尺寸，則不允許調整產品資訊 - 尺寸  If the type of variant_options is size, feed_variations.size is not allowed to change."""
     material: Optional[str] = None
     """Material 產品資訊 - 材質 - 有規格商品請將請求帶在 variations 欄位中  Requests for products with variants must include them in the variations field."""
