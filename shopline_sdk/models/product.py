@@ -128,7 +128,7 @@ class Product(BaseModel):
     """Stock Unit Number 儲位編號"""
     feed_category: Optional[Feed_CategoryConfig] = None
     """Category for different feed 廣告的分類"""
-    feed_variations: Optional[Feed_VariationsConfig] = None
+    feed_variations: Optional[Union[Feed_VariationsConfig, List[Feed_VariationsConfig]]] = None
     """Feed Variations 產品資訊 - 顏色、尺寸、材質"""
     description_translations: Optional[Translatable] = None
     """Product Description 商品描述"""

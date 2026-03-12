@@ -39,7 +39,7 @@ class ProductVariation(BaseModel):
     """Stock Keeping Unit 貨號"""
     location_id: Optional[str] = None
     """Location ID 儲位編號"""
-    feed_variations: Optional[Feed_VariationsConfig] = None
+    feed_variations: Optional[Union[Feed_VariationsConfig, List[Feed_VariationsConfig]]] = None
     """Default variations for product feed 廣告規格  當商品為多規格並且規格中有設置color、size時，此时color、size為json。  當商品規格中未設置color、size，但商家有在產品規格摘要頁麵填冩color、size時，此時color、size爲純字串"""
     variant_option_ids: Optional[List[str]] = None
     """ID of the corresponding variant options 對應規格類別 ID"""

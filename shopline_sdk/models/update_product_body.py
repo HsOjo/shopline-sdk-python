@@ -120,5 +120,5 @@ class UpdateProductBody(BaseModel):
     """Product Category:Condition 產品類別：狀況 -  new 新品 (default)  refurbished 整新品  used 二手"""
     mpn: Optional[str] = None
     """Manufacturer Part Number 製造編號 - 有規格商品請將請求帶在 variations 欄位中  Requests for products with variants must include them in the variant_options field."""
-    feed_variations: Optional[Feed_VariationsConfig] = None
+    feed_variations: Optional[Union[Feed_VariationsConfig, List[Feed_VariationsConfig]]] = None
     """Feed Variations 產品資訊 - 顏色、尺寸、材質"""

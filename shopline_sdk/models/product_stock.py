@@ -1,6 +1,6 @@
 """Shopline API 数据模型 - ProductStock"""
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel
 
@@ -27,7 +27,7 @@ class ProductStock(BaseModel):
     title_translations: Optional[Translatable] = None
     unlimited_quantity: Optional[bool] = None
     """Unlimited product quantity or not. 商品數量是否無限"""
-    stocks: Optional[StocksConfig] = None
+    stocks: Optional[Union[StocksConfig, List[StocksConfig]]] = None
     """Product's Stock 庫存"""
-    variations: Optional[VariationsConfig] = None
+    variations: Optional[Union[VariationsConfig, List[VariationsConfig]]] = None
     """Product's Variation 規格品"""

@@ -55,7 +55,7 @@ async def call(
             # 默认错误处理
             raise ShoplineAPIError(
                 status_code=response.status,
-                **error_data
+                error=error_data
             )
         response_data = await response.json()
 

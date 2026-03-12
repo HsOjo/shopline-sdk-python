@@ -1,6 +1,6 @@
 """Shopline API 数据模型 - Tax"""
 
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from pydantic import BaseModel
 
@@ -44,7 +44,7 @@ class Tax(BaseModel):
     """Service charge taxable 服務稅應稅"""
     emoji_flag: Optional[str] = None
     """emoji flag 國家emoji"""
-    sales: Optional[SalesConfig] = None
+    sales: Optional[Union[SalesConfig, List[SalesConfig]]] = None
     """tax of sales 基本消費稅"""
     delivery: Optional[DeliveryConfig] = None
     """tax of delivery 運費稅"""

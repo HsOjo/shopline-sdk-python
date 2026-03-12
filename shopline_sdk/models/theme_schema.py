@@ -1,6 +1,6 @@
 """Shopline API 数据模型 - ThemeSchema"""
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel
 
@@ -15,4 +15,4 @@ class ItemsConfig(BaseModel):
 
 
 class ThemeSchema(BaseModel):
-    items: Optional[ItemsConfig] = None
+    items: Optional[Union[ItemsConfig, List[ItemsConfig]]] = None

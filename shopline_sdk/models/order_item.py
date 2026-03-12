@@ -1,6 +1,6 @@
 """Shopline API 数据模型 - OrderItem"""
 
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel
 from typing_extensions import Literal
@@ -99,5 +99,5 @@ class OrderItem(BaseModel):
     """ID of Product Subscription 定期購的ID"""
     object_data: Optional[Object_DataConfig] = None
     """Object data  商品數據"""
-    child_products: Optional[Child_ProductsConfig] = None
+    child_products: Optional[Union[Child_ProductsConfig, List[Child_ProductsConfig]]] = None
     """The products in a product set 組合商品內的商品  Appear only when item_type is productSet 只有item_type是組合商品才會出現"""

@@ -1,6 +1,6 @@
 """Shopline API 数据模型 - PaymentSettlement"""
 
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel
 from typing_extensions import Literal
@@ -42,7 +42,7 @@ class PaymentSettlement(BaseModel):
     """Created at 建立時間"""
     updated_at: Optional[str] = None
     """Updated at 更新時間"""
-    sdk_params: Optional[Sdk_ParamsConfig] = None
+    sdk_params: Optional[Union[Sdk_ParamsConfig, List[Sdk_ParamsConfig]]] = None
     """SDK Params of applying settlement 申請結帳參數"""
     result: Optional[ResultConfig] = None
     """Settlement Result 結帳結果"""

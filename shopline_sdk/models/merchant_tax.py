@@ -1,6 +1,6 @@
 """Shopline API 数据模型 - MerchantTax"""
 
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from pydantic import BaseModel
 
@@ -44,6 +44,6 @@ class MerchantTax(BaseModel):
     """is service charge taxable or not  服務稅是否應稅"""
     emoji_flag: Optional[str] = None
     """emoji of country flag 國旗emoji"""
-    sales: Optional[SalesConfig] = None
+    sales: Optional[Union[SalesConfig, List[SalesConfig]]] = None
     delivery: Optional[DeliveryConfig] = None
     service_charge: Optional[Service_ChargeConfig] = None

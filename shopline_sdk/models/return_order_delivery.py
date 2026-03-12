@@ -1,6 +1,6 @@
 """Shopline API 数据模型 - ReturnOrderDelivery"""
 
-from typing import Optional, Union
+from typing import List, Optional, Union
 
 from pydantic import BaseModel, Field
 from typing_extensions import Literal
@@ -25,5 +25,5 @@ class ReturnOrderDelivery(BaseModel):
     """Logistic Service Order Status 配送狀態   Status allows:  arrived 已到達  collected 已取貨  expired 已過出貨期限  failed 失敗  pending 未執行  request_accepted 可供出貨  request_authorized 待處理  request_submitted 處理中  returned 已退貨  returning 退貨中  returning_store_closed 退貨門市關轉  shipped 已出貨  * store_closed 門市關閉"""
     delivery_option_id: Optional[str] = None
     """Delivery Option ID 送貨選項ID"""
-    name_translations: Optional[Name_TranslationsConfig] = None
+    name_translations: Optional[Union[Name_TranslationsConfig, List[Name_TranslationsConfig]]] = None
     """Delivery Option Name Translations 送貨選項名稱翻譯"""

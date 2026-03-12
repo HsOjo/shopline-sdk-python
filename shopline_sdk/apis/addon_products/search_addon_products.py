@@ -108,7 +108,7 @@ async def call(
             error_data = await response.json()
             raise ShoplineAPIError(
                 status_code=response.status,
-                **error_data
+                error=error_data
             )
         response_data = await response.json()
 

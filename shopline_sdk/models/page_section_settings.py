@@ -24,7 +24,7 @@ class PageSectionSettings(BaseModel):
     type: Optional[Union[
         Literal['text', 'gallery', 'image-with-text', 'product-list', 'slideshow', 'product-list-slider'], str]] = None
     """The type of the section Section的類別"""
-    schema_settings: Optional[Schema_SettingsConfig] = None
+    schema_settings: Optional[Union[Schema_SettingsConfig, List[Schema_SettingsConfig]]] = None
     """The schema of the section Section的結構"""
     children: Optional[List[str]] = None
     """The children of the section Section的子Section"""

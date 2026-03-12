@@ -41,7 +41,7 @@ class Channel(BaseModel):
     merchant_name: Optional[str] = None
     default_warehouse_id: Optional[str] = None
     identifier: Optional[str] = None
-    phones: Optional[PhonesConfig] = None
+    phones: Optional[Union[PhonesConfig, List[PhonesConfig]]] = None
     address: Optional[Dict[str, Any]] = None
     pin_codes: Optional[List[Pin_CodesItem]] = None
     mobile_logo_media_url: Optional[str] = None

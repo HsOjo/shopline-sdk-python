@@ -22,5 +22,5 @@ class GlobalSectionSettings(BaseModel):
     """The ID of the section defined by developer 由開發人員定義的Section ID"""
     type: Optional[str] = None
     """The type of the section Section的類別"""
-    schema_settings: Optional[Schema_SettingsConfig] = None
+    schema_settings: Optional[Union[Schema_SettingsConfig, List[Schema_SettingsConfig]]] = None
     """The schema of the section Section的結構"""
